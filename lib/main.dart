@@ -1,4 +1,5 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:docdoc_app/core/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,10 +21,14 @@ class DocDocApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      supportedLocales: const [Locale('ar'), Locale('en')],
       locale: DevicePreview.locale(context),
+
       builder: DevicePreview.appBuilder,
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
+      debugShowCheckedModeBanner: false,
+      routerConfig: AppRouter.router,
     );
   }
 }
