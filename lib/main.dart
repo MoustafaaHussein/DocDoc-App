@@ -1,6 +1,8 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:docdoc_app/core/routes/app_routes.dart';
+import 'package:docdoc_app/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(
@@ -23,10 +25,11 @@ class DocDocApp extends StatelessWidget {
     return MaterialApp.router(
       supportedLocales: const [Locale('ar'), Locale('en')],
       locale: DevicePreview.locale(context),
-
       builder: DevicePreview.appBuilder,
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
+      theme: ThemeData.dark().copyWith(
+        textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
+        scaffoldBackgroundColor: AppColors.kDarkModeBackgroundColor,
+      ),
       debugShowCheckedModeBanner: false,
       routerConfig: AppRouter.router,
     );
