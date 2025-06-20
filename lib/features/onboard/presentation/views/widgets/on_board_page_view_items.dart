@@ -25,6 +25,7 @@ class OnBoardPageViewItems extends StatelessWidget {
         ),
         SizedBox(height: 20),
         Text(
+          textAlign: TextAlign.center,
           title,
           style: TextStyle(
             fontSize: 26,
