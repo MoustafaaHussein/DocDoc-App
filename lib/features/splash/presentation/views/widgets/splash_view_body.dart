@@ -29,7 +29,17 @@ class _SplashViewBodyState extends State<SplashViewBody> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: [Center(child: ImageMirrorAnimation())],
+      children: [
+        Center(child: ImageMirrorAnimation()),
+        Text(
+          'مودك',
+          style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 40,
+          ),
+        ),
+      ],
     );
   }
 }
