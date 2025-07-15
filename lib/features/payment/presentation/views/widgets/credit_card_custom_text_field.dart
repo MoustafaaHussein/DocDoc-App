@@ -13,6 +13,7 @@ class CreditCardCustomTextField extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       child: TextFormField(
+        textAlign: TextAlign.center,
         onChanged: onChange,
         onSaved: onSaved,
         validator: (value) {
@@ -27,6 +28,7 @@ class CreditCardCustomTextField extends StatelessWidget {
           FilteringTextInputFormatter.digitsOnly,
           LengthLimitingTextInputFormatter(4),
         ],
+        decoration: InputDecoration(border: InputBorder.none),
       ),
     );
   }

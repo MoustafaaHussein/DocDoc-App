@@ -53,5 +53,13 @@ class Images {
   /// Assets for imagesImagesSplashScreen
   /// assets/images/splash_screen.png
   static const String imagesImagesSplashScreen = "assets/images/splash_screen.png";
+
+  /// Assets for imagesImagesSuccessfulmessage
+  /// assets/images/successfulmessage.png
+  static const String imagesImagesSuccessfulmessage = "assets/images/successfulmessage.png";
+
+  /// Assets for imagesImagesVisa
+  /// assets/images/visa.png
+  static const String imagesImagesVisa = "assets/images/visa.png";
 }
 

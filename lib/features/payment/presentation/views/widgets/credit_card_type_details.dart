@@ -3,8 +3,14 @@ import 'package:docdoc_app/core/styles/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class CreditCardTypeDetails extends StatelessWidget {
-  const CreditCardTypeDetails({super.key});
-
+  const CreditCardTypeDetails({
+    super.key,
+    required this.expiryMonth,
+    required this.expiryYear,
+    required this.cvc,
+    required this.cardType,
+  });
+  final String expiryMonth, expiryYear, cvc, cardType;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -13,7 +19,10 @@ class CreditCardTypeDetails extends StatelessWidget {
           children: [
             Text('Expiry Date', style: AppTextStyles.expiryDateTitle9Normal),
             SizedBox(height: 10),
-            Text('24/2000', style: AppTextStyles.expiryDate13Normal),
+            Text(
+              '$expiryMonth/$expiryYear',
+              style: AppTextStyles.expiryDate13Normal,
+            ),
           ],
         ),
         SizedBox(width: 30),
@@ -21,7 +30,11 @@ class CreditCardTypeDetails extends StatelessWidget {
           children: [
             Text('CCV', style: AppTextStyles.expiryDateTitle9Normal),
             SizedBox(height: 10),
-            Text('120', style: AppTextStyles.expiryDate13Normal),
+            Text(
+              cvc,
+              style: AppTextStyles.expiryDate13Normal,
+              textHeightBehavior: TextHeightBehavior(),
+            ),
           ],
         ),
         Spacer(),

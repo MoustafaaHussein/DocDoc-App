@@ -33,4 +33,11 @@ abstract class AppTextStyles {
 
     fontWeight: FontWeight.w400,
   );
+  static const font14Normal = TextStyle(
+    color: Color(0xFFA2A2A7),
+    fontSize: 14,
+
+    fontWeight: FontWeight.w400,
+    height: 1,
+  );
 }

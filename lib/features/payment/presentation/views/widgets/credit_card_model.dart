@@ -6,8 +6,21 @@ import 'package:docdoc_app/features/payment/presentation/views/widgets/credit_ca
 import 'package:flutter/material.dart';
 
 class CreditCardModel extends StatelessWidget {
-  const CreditCardModel({super.key});
-
+  const CreditCardModel({
+    super.key,
+    required this.creditCardNumber,
+    required this.cvc,
+    required this.expiryMonth,
+    required this.expiryYear,
+    required this.cardType,
+    required this.cardHolderName,
+  });
+  final String creditCardNumber,
+      cvc,
+      expiryMonth,
+      expiryYear,
+      cardType,
+      cardHolderName;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,9 +38,14 @@ class CreditCardModel extends StatelessWidget {
           SizedBox(height: 20),
           CreditCardNumber(),
           SizedBox(height: 10),
-          Text('AR Jonson', style: AppTextStyles.font13Light),
+          Text(cardHolderName, style: AppTextStyles.font14Normal),
           SizedBox(height: 15),
-          CreditCardTypeDetails(),
+          CreditCardTypeDetails(
+            expiryMonth: expiryMonth,
+            expiryYear: expiryYear,
+            cvc: cvc,
+            cardType: cardType,
+          ),
         ],
       ),
     );

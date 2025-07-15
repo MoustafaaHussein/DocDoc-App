@@ -1,8 +1,12 @@
+import 'package:docdoc_app/core/helpers/service_locator.dart';
 import 'package:docdoc_app/features/onboard/presentation/views/on_board_view.dart';
+import 'package:docdoc_app/features/payment/domain/repos/payment_repositry.dart';
+import 'package:docdoc_app/features/payment/presentation/manger/bloc/payment_bloc.dart';
 import 'package:docdoc_app/features/payment/presentation/views/add_payment_method_view.dart';
 import 'package:docdoc_app/features/payment/presentation/views/payment_view.dart';
 import 'package:docdoc_app/features/splash/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 abstract class AppRouter {
@@ -39,7 +43,10 @@ abstract class AppRouter {
         path: kAddNewPaymentMethod,
         pageBuilder: (context, state) {
           return CustomTransitionPage(
-            child: const AddPaymentMethodView(),
+            child: BlocProvider(
+              create: (context) => PaymentBloc(getIt.get<PaymentRepositry>()),
+              child: const AddPaymentMethodView(),
+            ),
             transitionsBuilder: (
               context,
               animation,
@@ -55,7 +62,10 @@ abstract class AppRouter {
         path: kPaymentMethods,
         pageBuilder: (context, state) {
           return CustomTransitionPage(
-            child: const PaymentView(),
+            child: BlocProvider(
+              create: (context) => PaymentBloc(getIt.get<PaymentRepositry>()),
+              child: const PaymentView(),
+            ),
             transitionsBuilder: (
               context,
               animation,
