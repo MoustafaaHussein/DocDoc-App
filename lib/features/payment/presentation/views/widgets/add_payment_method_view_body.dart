@@ -54,7 +54,7 @@ class _AddPaymentMethodViewBodyState extends State<AddPaymentMethodViewBody> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Form(
         key: formKey,
         child: Column(
@@ -143,7 +143,7 @@ class _AddPaymentMethodViewBodyState extends State<AddPaymentMethodViewBody> {
             Text(
               'Cardholder Name',
               style: AppTextStyles.font14Normal.copyWith(
-                decoration: TextDecoration.underline,
+                fontSize: 16,
                 height: 1,
               ),
             ),
@@ -157,7 +157,7 @@ class _AddPaymentMethodViewBodyState extends State<AddPaymentMethodViewBody> {
             Text(
               'Expiration Date',
               style: AppTextStyles.font14Normal.copyWith(
-                decoration: TextDecoration.underline,
+                fontSize: 16,
                 height: 1,
               ),
             ),
@@ -172,7 +172,7 @@ class _AddPaymentMethodViewBodyState extends State<AddPaymentMethodViewBody> {
             Text(
               'CVC',
               style: AppTextStyles.font14Normal.copyWith(
-                decoration: TextDecoration.underline,
+                fontSize: 16,
                 height: 1,
               ),
             ),

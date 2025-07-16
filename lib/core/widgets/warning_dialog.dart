@@ -2,16 +2,18 @@ import 'package:docdoc_app/core/helpers/assets.dart';
 import 'package:docdoc_app/core/styles/app_text_styles.dart';
 import 'package:docdoc_app/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
-class SuccessDialogWidget extends StatelessWidget {
-  final VoidCallback onSubmit;
+class WarningDialog extends StatelessWidget {
+  final VoidCallback onSubmit, onCancel;
   final String titileText, subTittle;
 
-  const SuccessDialogWidget({
+  const WarningDialog({
     super.key,
     required this.onSubmit,
     required this.titileText,
     required this.subTittle,
+    required this.onCancel,
   });
 
   @override
@@ -33,8 +35,8 @@ class SuccessDialogWidget extends StatelessWidget {
                   width: 2,
                 ),
               ),
-              child: Image.asset(
-                Images.imagesImagesSuccessfulmessage,
+              child: SvgPicture.asset(
+                Images.imagesImagesWarning,
                 width: 36,
                 height: 36,
                 fit: BoxFit.contain,
@@ -60,7 +62,7 @@ class SuccessDialogWidget extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: onSubmit,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
+                  backgroundColor: Colors.red,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -68,6 +70,24 @@ class SuccessDialogWidget extends StatelessWidget {
                 ),
                 child: const Text(
                   'Continue',
+                  style: TextStyle(fontSize: 16, color: Colors.white),
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: onCancel,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                ),
+                child: const Text(
+                  'Cancel',
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
               ),

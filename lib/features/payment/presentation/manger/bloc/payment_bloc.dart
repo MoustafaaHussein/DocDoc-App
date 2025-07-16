@@ -19,6 +19,10 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
         var creditCards = await paymentRepositry.getAllCards();
         emit(GetAllPaymentMethodsSuccess(creditCards));
       }
+      if (event is DeleteCreditCardEvent) {
+        await paymentRepositry.deleteCreditCard(cardId: event.cardId);
+        emit(DeleteCreditCardSuccess());
+      }
     });
   }
 }

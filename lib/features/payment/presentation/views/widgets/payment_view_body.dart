@@ -14,22 +14,22 @@ class PaymentViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomizedAppBar(title: 'All Card', onTap: () {}),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        child: Column(
-          children: [
-            Expanded(child: CreditCardList(creditCards: creditCards)),
-            SizedBox(height: 16),
-            CustomButton(
+      body: Column(
+        children: [
+          Expanded(child: CreditCardList(creditCards: creditCards)),
+          SizedBox(height: 16),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: CustomButton(
               onpressed: () {
                 GoRouter.of(context).push(AppRouter.kAddNewPaymentMethod);
               },
               text: 'Add Card +',
               buttonColor: AppColors.kButtonPrimaryColor,
             ),
-            SizedBox(height: 16),
-          ],
-        ),
+          ),
+          SizedBox(height: 16),
+        ],
       ),
     );
   }

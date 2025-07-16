@@ -12,16 +12,22 @@ class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      centerTitle: true,
-      backgroundColor: AppColors.kDarkModeBackgroundColor,
-      title: Text(title, style: AppTextStyles.titile18Normal),
-      leading: IconButton(
-        onPressed: onTap,
-        icon: Container(
-          padding: EdgeInsets.all(6),
-          decoration: AppContainersStyle.backButtonStyle,
-          child: Icon(Icons.arrow_back_ios_new_outlined, fill: 0),
+    return PreferredSize(
+      preferredSize: preferredSize,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: AppBar(
+          centerTitle: true,
+          backgroundColor: AppColors.kDarkModeBackgroundColor,
+          title: Text(title, style: AppTextStyles.titile18Normal),
+          leading: IconButton(
+            onPressed: onTap,
+            icon: Container(
+              padding: EdgeInsets.all(6),
+              decoration: AppContainersStyle.backButtonStyle,
+              child: Icon(Icons.arrow_back_ios_new_outlined, fill: 0),
+            ),
+          ),
         ),
       ),
     );

@@ -15,4 +15,9 @@ class PaymentRepositryImplementation implements PaymentRepositry {
   Future<void> addNewCreditCard({required CreditCardEntity creditCard}) async {
     await paymentLocalDataSource.addCreditCard(creditCard);
   }
+
+  @override
+  Future<void> deleteCreditCard({required String cardId}) async {
+    await paymentLocalDataSource.deleteCreditCard(cardId);
+  }
 }

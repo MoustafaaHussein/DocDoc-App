@@ -1,6 +1,7 @@
 import 'package:docdoc_app/core/helpers/assets.dart';
 import 'package:docdoc_app/core/styles/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CreditCardTypeDetails extends StatelessWidget {
   const CreditCardTypeDetails({
@@ -28,18 +29,17 @@ class CreditCardTypeDetails extends StatelessWidget {
         SizedBox(width: 30),
         Column(
           children: [
-            Text('CCV', style: AppTextStyles.expiryDateTitle9Normal),
+            Text('CCV', style: AppTextStyles.expiryDateTitle9Normal.copyWith()),
             SizedBox(height: 10),
-            Text(
-              cvc,
-              style: AppTextStyles.expiryDate13Normal,
-              textHeightBehavior: TextHeightBehavior(),
-            ),
+            Text(cvc, style: AppTextStyles.expiryDate13Normal),
           ],
         ),
         Spacer(),
-        Image.asset(
-          Images.imagesImagesMasterCard,
+        SvgPicture.asset(
+          cardType == "Mastercard"
+              ? Images.imagesImagesMasterCard
+              : Images.imagesImagesVisa,
+
           fit: BoxFit.scaleDown,
           height: 60,
           width: 60,

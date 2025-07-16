@@ -16,3 +16,5 @@ final class GetAllPaymentMethodsSuccess extends PaymentState {
 }
 
 final class GetAllPaymentMethodLoading extends PaymentState {}
+
+final class DeleteCreditCardSuccess extends PaymentState {}

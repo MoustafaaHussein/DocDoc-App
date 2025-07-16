@@ -10,3 +10,9 @@ final class AddNewPaymentMethodEvent extends PaymentEvent {
 }
 
 final class GetAllCreditCardsEvent extends PaymentEvent {}
+
+final class DeleteCreditCardEvent extends PaymentEvent {
+  final String cardId;
+
+  DeleteCreditCardEvent({required this.cardId});
+}

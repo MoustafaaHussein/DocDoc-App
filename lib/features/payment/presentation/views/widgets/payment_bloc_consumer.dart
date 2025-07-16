@@ -25,7 +25,8 @@ class _PaymentsBlocConsumerState extends State<PaymentsBlocConsumer> {
       listener: (context, state) {
         if (state is GetAllPaymentMethodsSuccess) {
           creditCards = state.creditCards;
-        } else if (state is AddPaymentMethodSuccess) {
+        } else if (state is AddPaymentMethodSuccess ||
+            state is DeleteCreditCardSuccess) {
           BlocProvider.of<PaymentBloc>(context).add(GetAllCreditCardsEvent());
         }
       },

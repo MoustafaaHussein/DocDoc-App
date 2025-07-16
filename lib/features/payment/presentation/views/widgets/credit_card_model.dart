@@ -24,7 +24,8 @@ class CreditCardModel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(12),
+      width: double.infinity,
+      padding: EdgeInsets.all(16),
       decoration: AppContainersStyle.creditCardStyle,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,7 +37,7 @@ class CreditCardModel extends StatelessWidget {
             width: 30,
           ),
           SizedBox(height: 20),
-          CreditCardNumber(),
+          CreditCardNumber(cardNumber: creditCardNumber),
           SizedBox(height: 10),
           Text(cardHolderName, style: AppTextStyles.font14Normal),
           SizedBox(height: 15),

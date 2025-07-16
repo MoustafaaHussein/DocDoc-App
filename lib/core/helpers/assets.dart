@@ -22,6 +22,18 @@ class Images {
   /// assets/fonts/Poppins-SemiBold.ttf
   static const String imagesFontsPoppinsSemiBold = "assets/fonts/Poppins-SemiBold.ttf";
 
+  /// Assets for imagesImagesCreditCard
+  /// assets/images/creditCard.svg
+  static const String imagesImagesCreditCard = "assets/images/creditCard.svg";
+
+  /// Assets for imagesImagesDeleteTrash
+  /// assets/images/deleteTrash.svg
+  static const String imagesImagesDeleteTrash = "assets/images/deleteTrash.svg";
+
+  /// Assets for imagesImagesEditPen
+  /// assets/images/editPen.svg
+  static const String imagesImagesEditPen = "assets/images/editPen.svg";
+
   /// Assets for imagesImagesElectronicChip
   /// assets/images/electronic_chip.png
   static const String imagesImagesElectronicChip = "assets/images/electronic_chip.png";
@@ -31,8 +43,8 @@ class Images {
   static const String imagesImagesEllipse = "assets/images/Ellipse.png";
 
   /// Assets for imagesImagesMasterCard
-  /// assets/images/masterCard.png
-  static const String imagesImagesMasterCard = "assets/images/masterCard.png";
+  /// assets/images/masterCard.svg
+  static const String imagesImagesMasterCard = "assets/images/masterCard.svg";
 
   /// Assets for imagesImagesMastercardBackGround
   /// assets/images/mastercardBackGround.png
@@ -50,6 +62,10 @@ class Images {
   /// assets/images/onboard_image3.png
   static const String imagesImagesOnboardImage3 = "assets/images/onboard_image3.png";
 
+  /// Assets for imagesImagesPerson
+  /// assets/images/person.svg
+  static const String imagesImagesPerson = "assets/images/person.svg";
+
   /// Assets for imagesImagesSplashScreen
   /// assets/images/splash_screen.png
   static const String imagesImagesSplashScreen = "assets/images/splash_screen.png";
@@ -59,7 +75,11 @@ class Images {
   static const String imagesImagesSuccessfulmessage = "assets/images/successfulmessage.png";
 
   /// Assets for imagesImagesVisa
-  /// assets/images/visa.png
-  static const String imagesImagesVisa = "assets/images/visa.png";
+  /// assets/images/visa.svg
+  static const String imagesImagesVisa = "assets/images/visa.svg";
+
+  /// Assets for imagesImagesWarning
+  /// assets/images/warning.svg
+  static const String imagesImagesWarning = "assets/images/warning.svg";
 }
 
