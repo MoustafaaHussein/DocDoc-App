@@ -53,71 +53,34 @@ class _AddPaymentMethodViewBodyState extends State<AddPaymentMethodViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Form(
-        key: formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 30),
-            Text(
-              'Card Number',
-              style: AppTextStyles.font14Normal.copyWith(
-                decoration: TextDecoration.underline,
-                height: 1,
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Form(
+          key: formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 30),
+              Text(
+                'Card Number',
+                style: AppTextStyles.font14Normal.copyWith(
+                  fontSize: 16,
+                  height: 1,
+                ),
               ),
-            ),
-            SizedBox(height: 15),
-            Row(
-              children: [
-                Expanded(
-                  child: CreditCardCustomTextField(
-                    onChange: (value) {
-                      part1 = value!;
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                  child: SizedBox(
-                    height: 12,
-                    width: 12,
-                    child: Divider(
-                      thickness: 3,
-                      color: Colors.grey,
-                      radius: BorderRadius.circular(12),
+              SizedBox(height: 15),
+              Row(
+                children: [
+                  Expanded(
+                    child: CreditCardCustomTextField(
+                      onChange: (value) {
+                        part1 = value!;
+                      },
                     ),
                   ),
-                ),
-                Expanded(
-                  child: CreditCardCustomTextField(
-                    onChange: (p0) {
-                      part2 = p0!;
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                  child: SizedBox(
-                    height: 12,
-                    width: 12,
-                    child: Divider(
-                      thickness: 3,
-                      color: Colors.grey,
-                      radius: BorderRadius.circular(12),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: CreditCardCustomTextField(
-                    onChange: (p0) => part3 = p0!,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                  child: Padding(
+                  Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 4.0),
                     child: SizedBox(
                       height: 12,
@@ -129,77 +92,116 @@ class _AddPaymentMethodViewBodyState extends State<AddPaymentMethodViewBody> {
                       ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: CreditCardCustomTextField(
-                    onChange: (p0) {
-                      part4 = p0!;
-                    },
+                  Expanded(
+                    child: CreditCardCustomTextField(
+                      onChange: (p0) {
+                        part2 = p0!;
+                      },
+                    ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                    child: SizedBox(
+                      height: 12,
+                      width: 12,
+                      child: Divider(
+                        thickness: 3,
+                        color: Colors.grey,
+                        radius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: CreditCardCustomTextField(
+                      onChange: (p0) => part3 = p0!,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      child: SizedBox(
+                        height: 12,
+                        width: 12,
+                        child: Divider(
+                          thickness: 3,
+                          color: Colors.grey,
+                          radius: BorderRadius.circular(12),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: CreditCardCustomTextField(
+                      onChange: (p0) {
+                        part4 = p0!;
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 40),
+              Text(
+                'Cardholder Name',
+                style: AppTextStyles.font14Normal.copyWith(
+                  fontSize: 16,
+                  height: 1,
                 ),
-              ],
-            ),
-            SizedBox(height: 40),
-            Text(
-              'Cardholder Name',
-              style: AppTextStyles.font14Normal.copyWith(
-                fontSize: 16,
-                height: 1,
               ),
-            ),
-            SizedBox(height: 15),
-            CustomTextField(
-              onChange: (value) {
-                cardHolderName = value!;
-              },
-            ),
-            SizedBox(height: 30),
-            Text(
-              'Expiration Date',
-              style: AppTextStyles.font14Normal.copyWith(
-                fontSize: 16,
-                height: 1,
+              SizedBox(height: 15),
+              CustomTextField(
+                onChange: (value) {
+                  cardHolderName = value!;
+                },
               ),
-            ),
-            SizedBox(height: 15),
-            ExpiryDatePicker(
-              onChanged: (month, year) {
-                expiryMonth = month;
-                expiryYear = year;
-              },
-            ),
-            SizedBox(height: 30),
-            Text(
-              'CVC',
-              style: AppTextStyles.font14Normal.copyWith(
-                fontSize: 16,
-                height: 1,
+              SizedBox(height: 30),
+              Text(
+                'Expiration Date',
+                style: AppTextStyles.font14Normal.copyWith(
+                  fontSize: 16,
+                  height: 1,
+                ),
               ),
-            ),
-            SizedBox(height: 10),
-            CVC(
-              onChange: (value) {
-                cvc = value!;
-              },
-            ),
-            Expanded(child: SizedBox()),
-            CustomButton(
-              onpressed: () {
-                if (formKey.currentState!.validate()) {
-                  setState(() {
-                    cardNumber = part1 + part2 + part3 + part4;
-                  });
-                  updateCardType(cardNumber);
-                  BlocProvider.of<PaymentBloc>(
-                    context,
-                  ).add(AddNewPaymentMethodEvent(creditCards: toEntity()));
-                }
-              },
-              text: 'Add Credit Card +',
-              buttonColor: AppColors.kButtonPrimaryColor,
-            ),
-            SizedBox(height: 40),
-          ],
+              SizedBox(height: 15),
+              ExpiryDatePicker(
+                onChanged: (month, year) {
+                  expiryMonth = month;
+                  expiryYear = year;
+                },
+              ),
+              SizedBox(height: 30),
+              Text(
+                'CVC',
+                style: AppTextStyles.font14Normal.copyWith(
+                  fontSize: 16,
+                  height: 1,
+                ),
+              ),
+              SizedBox(height: 10),
+              CVC(
+                onChange: (value) {
+                  cvc = value!;
+                },
+              ),
+              SizedBox(height: 200),
+              CustomButton(
+                onpressed: () {
+                  if (formKey.currentState!.validate()) {
+                    setState(() {
+                      cardNumber = part1 + part2 + part3 + part4;
+                    });
+                    updateCardType(cardNumber);
+                    BlocProvider.of<PaymentBloc>(
+                      context,
+                    ).add(AddNewPaymentMethodEvent(creditCards: toEntity()));
+                  }
+                },
+                text: 'Add Credit Card +',
+                buttonColor: AppColors.kButtonPrimaryColor,
+              ),
+              SizedBox(height: 40),
+            ],
+          ),
         ),
       ),
     );

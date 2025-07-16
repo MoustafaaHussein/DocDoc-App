@@ -50,6 +50,10 @@ class Images {
   /// assets/images/mastercardBackGround.png
   static const String imagesImagesMastercardBackGround = "assets/images/mastercardBackGround.png";
 
+  /// Assets for imagesImagesNoData
+  /// assets/images/noData.svg
+  static const String imagesImagesNoData = "assets/images/noData.svg";
+
   /// Assets for imagesImagesOnboardImage1
   /// assets/images/onboard_image1.png
   static const String imagesImagesOnboardImage1 = "assets/images/onboard_image1.png";
