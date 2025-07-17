@@ -20,7 +20,6 @@ abstract class AppRouter {
   static const kPaymentDetails = '/paymentDetails';
 
   static GoRouter router = GoRouter(
-    initialLocation: kPaymentMethods,
     routes: [
       GoRoute(
         path: kSplashView,

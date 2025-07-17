@@ -24,7 +24,7 @@ class PaymentViewBody extends StatelessWidget {
                 message: 'No Payment Method Added',
                 svgAssetPath: Images.imagesImagesNoData,
               ),
-          Expanded(child: SizedBox(height: 16)),
+          SizedBox(height: 16),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: CustomButton(
