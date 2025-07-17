@@ -1,14 +1,23 @@
+import 'package:camera/camera.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:docdoc_app/core/routes/app_routes.dart';
 import 'package:docdoc_app/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() {
+late List<CameraDescription> cameras;
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+   try {
+    cameras = await availableCameras();
+  } on CameraException catch (e) {
+    print('Error accessing cameras: $e');
+    
+  }
   runApp(
     DevicePreview(
       enabled: true,
-
       builder: (context) {
         return const DocDocApp();
       },
@@ -19,20 +28,25 @@ void main() {
 class DocDocApp extends StatelessWidget {
   const DocDocApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      supportedLocales: const [Locale('ar'), Locale('en')],
-      locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
-      theme: ThemeData.dark().copyWith(
-        textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
-        scaffoldBackgroundColor: AppColors.kDarkModeBackgroundColor,
-      ),
-      debugShowCheckedModeBanner: false,
-      routerConfig: AppRouter.router,
+    return ScreenUtilInit(
+      designSize: const Size(375, 812), 
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp.router(
+          supportedLocales: const [Locale('ar'), Locale('en')],
+          locale: DevicePreview.locale(context),
+          builder: DevicePreview.appBuilder,
+          theme: ThemeData.dark().copyWith(
+            textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
+            scaffoldBackgroundColor: AppColors.kDarkModeBackgroundColor,
+          ),
+          debugShowCheckedModeBanner: false,
+          routerConfig: AppRouter.router,
+        );
+      },
     );
   }
 }
-// This is a simple Flutter application that sets up the main entry point and the root widget.
