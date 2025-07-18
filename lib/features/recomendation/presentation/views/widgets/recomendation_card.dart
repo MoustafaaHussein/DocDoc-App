@@ -5,7 +5,7 @@ import 'package:docdoc_app/features/recomendation/presentation/views/widgets/vie
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class RecomendantionCard extends StatelessWidget {
+class RecomendantionCard extends StatefulWidget {
   const RecomendantionCard({
     super.key,
     required this.titile,
@@ -21,6 +21,14 @@ class RecomendantionCard extends StatelessWidget {
       timeRemaining,
       instructions,
       ratting;
+
+  @override
+  State<RecomendantionCard> createState() => _RecomendantionCardState();
+}
+
+bool isViewed = false;
+
+class _RecomendantionCardState extends State<RecomendantionCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,7 +42,7 @@ class RecomendantionCard extends StatelessWidget {
               FittedBox(
                 fit: BoxFit.scaleDown,
                 child: Text(
-                  titile,
+                  widget.titile,
                   style: AppStyles.styleMedium18(
                     context,
                   ).copyWith(color: Colors.white),
@@ -45,30 +53,34 @@ class RecomendantionCard extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors.green,
+                  color: getDiffcultyLevel(widget.diffucltyLevel),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
-                  diffucltyLevel,
+                  widget.diffucltyLevel,
                   style: AppStyles.styleMedium13(context),
                 ),
               ),
             ],
           ),
           SizedBox(height: 10),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              softWrap: true,
+              maxLines: 2,
+              widget.discreption,
+              style: AppStyles.styleMedium16(
+                context,
+              ).copyWith(color: Colors.grey),
+            ),
+          ),
+          SizedBox(height: 20),
           Row(
             children: [
-              FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Text(
-                  softWrap: true,
-                  maxLines: 2,
-                  discreption,
-                  style: AppStyles.styleMedium16(
-                    context,
-                  ).copyWith(color: Colors.grey),
-                ),
-              ),
+              Icon(Icons.star, color: Colors.amber),
+              SizedBox(width: 10),
+              Text(widget.ratting, style: AppStyles.styleMedium13(context)),
               Spacer(),
               SvgPicture.asset(
                 Images.imagesImagesTime,
@@ -78,7 +90,7 @@ class RecomendantionCard extends StatelessWidget {
               ),
               SizedBox(width: 2),
               Text(
-                "$timeRemaining min",
+                "${widget.timeRemaining} min",
                 style: AppStyles.styleMedium13(
                   context,
                 ).copyWith(color: Colors.grey),
@@ -86,20 +98,38 @@ class RecomendantionCard extends StatelessWidget {
             ],
           ),
           SizedBox(height: 20),
-          Row(
-            children: [
-              Icon(Icons.star, color: Colors.amber),
-              SizedBox(width: 10),
-              Text(ratting, style: AppStyles.styleMedium13(context)),
-            ],
+          Center(
+            child: ViewMoreButton(
+              onPressed: () {
+                setState(() {
+                  isViewed = !isViewed;
+                });
+              },
+            ),
           ),
-          SizedBox(height: 20),
-          Center(child: ViewMoreButton(onPressed: () {})),
-          Text('Instruction'),
-          SizedBox(height: 20),
-          Text(instructions),
+          Visibility(
+            visible: isViewed,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Instruction'),
+                SizedBox(height: 20),
+                Text(widget.instructions),
+              ],
+            ),
+          ),
         ],
       ),
     );
+  }
+
+  Color getDiffcultyLevel(String level) {
+    if (level == 'Easy') {
+      return Colors.green;
+    } else if (level == 'Medium') {
+      return Colors.orange;
+    } else {
+      return Colors.red;
+    }
   }
 }

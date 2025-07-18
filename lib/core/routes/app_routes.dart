@@ -9,6 +9,7 @@ import 'package:docdoc_app/features/payment/presentation/views/payment_view.dart
 import 'package:docdoc_app/features/recomendation/domain/repos/recomendation_repo.dart';
 import 'package:docdoc_app/features/recomendation/presentation/manger/bloc/recomendation_bloc.dart';
 import 'package:docdoc_app/features/recomendation/presentation/views/presonalize_recomendation_view.dart';
+import 'package:docdoc_app/features/recomendation/presentation/views/recomendation_view.dart';
 import 'package:docdoc_app/features/splash/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +23,7 @@ abstract class AppRouter {
   static const kAddNewPaymentMethod = '/addPaymentMethod';
   static const kPaymentDetails = '/paymentDetails';
   static const kPersonalizeRecomendation = '/personalRec';
+  static const kRecomendation = '/recomendation';
 
   static GoRouter router = GoRouter(
     initialLocation: kPersonalizeRecomendation,
@@ -124,6 +126,36 @@ abstract class AppRouter {
               child,
             ) {
               return FadeTransition(opacity: animation, child: child);
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: kRecomendation,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            child: BlocProvider(
+              create:
+                  (context) =>
+                      RecomendationBloc(getIt.get<RecomendationRepo>()),
+              child: const RecomendationView(),
+            ),
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(
+                opacity: animation,
+                child: SlideTransition(
+                  position: Tween<Offset>(
+                    begin: Offset(1, 0),
+                    end: Offset.zero,
+                  ).animate(animation),
+                  child: child,
+                ),
+              );
             },
           );
         },
