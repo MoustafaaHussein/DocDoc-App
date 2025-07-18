@@ -1,13 +1,11 @@
 import 'dart:math' as math;
 
 import 'package:camera/camera.dart';
-
 import 'package:docdoc_app/features/AiModel/Presentation/views/widgets/EmotionResultScreen.dart';
 import 'package:docdoc_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart' as img_lib show Image, copyResize;
-import 'package:image/image.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
 class EmotionDetectorScreen extends StatefulWidget {
@@ -40,13 +38,13 @@ class _EmotionDetectorScreenState extends State<EmotionDetectorScreen>
     await _loadModelAndLabels();
 
     // إعادة تفعيل التنقل التلقائي بعد 7 ثوانٍ
-    Future.delayed(const Duration(seconds: 7), () { // تم التغيير من 5 إلى 7 ثواني
+    Future.delayed(const Duration(seconds: 7), () {
+      // تم التغيير من 5 إلى 7 ثواني
       if (mounted && !_isNavigationInProgress) {
         _navigateToResultScreen();
       }
     });
   }
-
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -73,15 +71,17 @@ class _EmotionDetectorScreenState extends State<EmotionDetectorScreen>
 
     if (cameras.isEmpty) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('لا توجد كاميرات متاحة.')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('لا توجد كاميرات متاحة.')));
       }
       return;
     }
 
     cameraController = CameraController(
-      cameras.length > 1 ? cameras[1] : cameras[0], // محاولة استخدام الكاميرا الأمامية
+      cameras.length > 1
+          ? cameras[1]
+          : cameras[0], // محاولة استخدام الكاميرا الأمامية
       ResolutionPreset.medium,
       enableAudio: false,
     );
@@ -93,7 +93,8 @@ class _EmotionDetectorScreenState extends State<EmotionDetectorScreen>
 
       // ابدأ بث الصور فقط إذا لم يكن هناك انتقال قيد التقدم
       // وهذا سيحدث فقط في البداية
-      if (!cameraController!.value.isStreamingImages && !_isNavigationInProgress) {
+      if (!cameraController!.value.isStreamingImages &&
+          !_isNavigationInProgress) {
         cameraController!.startImageStream((CameraImage image) {
           if (!isDetecting && mounted && !_isNavigationInProgress) {
             isDetecting = true;
@@ -119,24 +120,29 @@ class _EmotionDetectorScreenState extends State<EmotionDetectorScreen>
     try {
       interpreter = await Interpreter.fromAsset('assets/emotions_model.tflite');
       final labelsData = await rootBundle.loadString('assets/labelss.txt');
-      labels = labelsData
-          .split('\n')
-          .map((e) => e.trim())
-          .where((e) => e.isNotEmpty)
-          .toList();
+      labels =
+          labelsData
+              .split('\n')
+              .map((e) => e.trim())
+              .where((e) => e.isNotEmpty)
+              .toList();
     } catch (e) {
       print("خطأ في تحميل النموذج أو اللابلز: $e");
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-              content: Text('خطأ في تحميل نموذج التعرف على التعابير.')),
+            content: Text('خطأ في تحميل نموذج التعرف على التعابير.'),
+          ),
         );
       }
     }
   }
 
   Future<void> _runInference(CameraImage cameraImage) async {
-    if (interpreter == null || labels.isEmpty || !mounted || _isNavigationInProgress) {
+    if (interpreter == null ||
+        labels.isEmpty ||
+        !mounted ||
+        _isNavigationInProgress) {
       isDetecting = false;
       return;
     }
@@ -224,15 +230,15 @@ class _EmotionDetectorScreenState extends State<EmotionDetectorScreen>
     cameraController = null; // إعادة تعيين لـ null
     interpreter = null; // إعادة تعيين لـ null
 
-
     await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => EmotionResultScreen(
-          labels: labels,
-          probabilities: emotionProbabilities,
-          // تمرير دالة لإعادة تهيئة الشاشة الرئيسية
-          onRescan: _resetAndRescan,
-        ),
+        builder:
+            (context) => EmotionResultScreen(
+              labels: labels,
+              probabilities: emotionProbabilities,
+              // تمرير دالة لإعادة تهيئة الشاشة الرئيسية
+              onRescan: _resetAndRescan,
+            ),
       ),
     );
 
@@ -271,12 +277,11 @@ class _EmotionDetectorScreenState extends State<EmotionDetectorScreen>
   Widget build(BuildContext context) {
     if (cameraController == null || !cameraController!.value.isInitialized) {
       // إذا لم يتم تهيئة الكاميرا أو كانت في طور الإعداد
-      return const Scaffold(
-          body: Center(child: CircularProgressIndicator()));
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     if (_isNavigationInProgress) {
-      return  Scaffold(
+      return Scaffold(
         appBar: AppBar(title: Text("جاري معالجة النتائج...")),
         body: Center(child: CircularProgressIndicator()),
       );
@@ -307,4 +312,3 @@ class _EmotionDetectorScreenState extends State<EmotionDetectorScreen>
     );
   }
 }
-

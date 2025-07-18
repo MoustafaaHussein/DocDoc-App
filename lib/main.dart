@@ -1,4 +1,4 @@
-
+import 'package:camera/camera.dart';
 import 'package:docdoc_app/core/helpers/secure_storage.dart';
 import 'package:docdoc_app/core/helpers/service_locator.dart';
 import 'package:docdoc_app/core/routes/app_routes.dart';
@@ -10,22 +10,11 @@ import 'package:google_fonts/google_fonts.dart';
 late List<CameraDescription> cameras;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-   try {
+  try {
     cameras = await availableCameras();
   } on CameraException catch (e) {
     print('Error accessing cameras: $e');
-    
   }
-  runApp(
-    DevicePreview(
-      enabled = true,
-      builder = (context) {
-        return const DocDocApp();
-      },
-    ),
-  );
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
   await SecureStorage.init();
   serviceLocator();
   runApp(const DocDocApp());
@@ -37,7 +26,7 @@ class DocDocApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(375, 812), 
+      designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
@@ -56,5 +45,3 @@ class DocDocApp extends StatelessWidget {
     );
   }
 }
-
-

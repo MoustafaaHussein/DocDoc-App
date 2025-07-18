@@ -18,7 +18,7 @@ class PaymentViewBody extends StatelessWidget {
       appBar: CustomizedAppBar(
         title: 'All Card',
         onTap: () {
-          GoRouter.of(context).push(AppRouter.kPersonalizeRecomendation);
+          GoRouter.of(context).pop();
         },
       ),
       body: Column(

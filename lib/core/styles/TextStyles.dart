@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:docdoc_app/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';

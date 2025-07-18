@@ -10,11 +10,11 @@ class EmotionResultScreen extends StatelessWidget {
   final VoidCallback onRescan;
 
   const EmotionResultScreen({
-    Key? key,
+    super.key,
     required this.labels,
     required this.probabilities,
     required this.onRescan,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

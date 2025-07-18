@@ -2,7 +2,6 @@ import 'package:docdoc_app/core/routes/app_routes.dart';
 import 'package:docdoc_app/core/themes/app_colors.dart';
 import 'package:docdoc_app/features/Profile/presentation/views/widgets/SettingTile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
@@ -143,7 +142,7 @@ class _ProfileHeaderScreenState extends State<ProfileHeaderScreen> {
                   icon: Ionicons.wallet_outline,
                   title: "Your Cards",
                   onTap: () {
-                    GoRouter.of(context).push(AppRouter.kEmojiSwitcherView);
+                    GoRouter.of(context).push(AppRouter.kPaymentMethods);
                   },
                 ),
                 SizedBox(height: 8.h),

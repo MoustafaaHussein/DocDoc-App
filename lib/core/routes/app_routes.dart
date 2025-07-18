@@ -43,7 +43,7 @@ abstract class AppRouter {
   static const kHomePage = '/';
 
   static GoRouter router = GoRouter(
-    initialLocation: kPersonalizeRecomendation,
+    initialLocation: kSplashView,
     routes: [
       GoRoute(path: kHomePage, builder: (context, state) => const HomePage()),
       GoRoute(

@@ -1,6 +1,5 @@
 import 'package:docdoc_app/core/routes/app_routes.dart';
 import 'package:docdoc_app/core/styles/TextStyles.dart';
-import 'package:docdoc_app/features/Home/presentation/views/widgets/MoodScroolSection.dart';
 import 'package:docdoc_app/features/Home/presentation/views/widgets/QuoteCard.dart';
 import 'package:docdoc_app/features/Home/presentation/views/widgets/SpecialAppBar.dart';
 import 'package:docdoc_app/features/Home/presentation/views/widgets/customTypes.dart';
@@ -89,25 +88,30 @@ class _HomeScreenState extends State<HomeScreen> {
 
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  CustomJournalTile(
-                    title: 'Exercise',
-                    icon: IconlyLight.activity,
-                  ),
-                  const CustomJournalTile(
-                    title: 'Meditation',
-                    icon: Icons.self_improvement,
-                  ),
-                  CustomJournalTile(
-                    title: 'Mental',
-                    icon: Ionicons.bonfire_outline,
-                  ),
-                  const CustomJournalTile(
-                    title: 'Self Care',
-                    icon: Ionicons.moon_outline,
-                  ),
-                ],
+              child: GestureDetector(
+                onTap: () {
+                  GoRouter.of(context).push(AppRouter.kRecomendation);
+                },
+                child: Row(
+                  children: [
+                    CustomJournalTile(
+                      title: 'Exercise',
+                      icon: IconlyLight.activity,
+                    ),
+                    const CustomJournalTile(
+                      title: 'Meditation',
+                      icon: Icons.self_improvement,
+                    ),
+                    CustomJournalTile(
+                      title: 'Mental',
+                      icon: Ionicons.bonfire_outline,
+                    ),
+                    const CustomJournalTile(
+                      title: 'Self Care',
+                      icon: Ionicons.moon_outline,
+                    ),
+                  ],
+                ),
               ),
             ),
 

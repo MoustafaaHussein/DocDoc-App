@@ -1,4 +1,3 @@
-import 'package:docdoc_app/core/routes/app_routes.dart';
 import 'package:docdoc_app/core/widgets/custom_app_bar.dart';
 import 'package:docdoc_app/core/widgets/custom_loading.dart';
 import 'package:docdoc_app/core/widgets/customized_error.dart';
@@ -17,7 +16,7 @@ class PresonalizeRecomendationView extends StatelessWidget {
       appBar: CustomizedAppBar(
         title: 'Recomendation',
         onTap: () {
-          GoRouter.of(context).push(AppRouter.kRecomendation);
+          GoRouter.of(context).pop();
         },
       ),
       body: PersonalizeRecomendationBlocConsumer(),

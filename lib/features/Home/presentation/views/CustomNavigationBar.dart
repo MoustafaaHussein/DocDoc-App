@@ -1,8 +1,6 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:docdoc_app/core/themes/app_colors.dart';
 import 'package:docdoc_app/features/Home/presentation/views/Home.dart';
-import 'package:docdoc_app/features/Home/presentation/views/widgets/test.dart'
-    hide HomeScreen;
 import 'package:docdoc_app/features/Profile/presentation/views/Profile.dart';
 import 'package:flutter/material.dart';
 
@@ -30,9 +28,9 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: AppColors.kButtonPrimaryColor,
-        child: const Icon(Icons.add),
         elevation: 4,
         shape: const CircleBorder(),
+        child: const Icon(Icons.add),
       ),
 
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
