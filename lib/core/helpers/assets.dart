@@ -42,6 +42,10 @@ class Images {
   /// assets/images/Ellipse.png
   static const String imagesImagesEllipse = "assets/images/Ellipse.png";
 
+  /// Assets for imagesImagesError
+  /// assets/images/error.svg
+  static const String imagesImagesError = "assets/images/error.svg";
+
   /// Assets for imagesImagesMasterCard
   /// assets/images/masterCard.svg
   static const String imagesImagesMasterCard = "assets/images/masterCard.svg";
@@ -78,6 +82,10 @@ class Images {
   /// assets/images/successfulmessage.png
   static const String imagesImagesSuccessfulmessage = "assets/images/successfulmessage.png";
 
+  /// Assets for imagesImagesTime
+  /// assets/images/time.svg
+  static const String imagesImagesTime = "assets/images/time.svg";
+
   /// Assets for imagesImagesVisa
   /// assets/images/visa.svg
   static const String imagesImagesVisa = "assets/images/visa.svg";
@@ -85,5 +93,9 @@ class Images {
   /// Assets for imagesImagesWarning
   /// assets/images/warning.svg
   static const String imagesImagesWarning = "assets/images/warning.svg";
+
+  /// Assets for imagesImagesYogaLoadingIndicator
+  /// assets/images/yoga_loading_indicator.svg
+  static const String imagesImagesYogaLoadingIndicator = "assets/images/yoga_loading_indicator.svg";
 }
 

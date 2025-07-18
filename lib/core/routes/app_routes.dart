@@ -6,6 +6,9 @@ import 'package:docdoc_app/features/payment/presentation/manger/bloc/payment_blo
 import 'package:docdoc_app/features/payment/presentation/views/add_payment_method_view.dart';
 import 'package:docdoc_app/features/payment/presentation/views/credit_card_details_view.dart';
 import 'package:docdoc_app/features/payment/presentation/views/payment_view.dart';
+import 'package:docdoc_app/features/recomendation/domain/repos/recomendation_repo.dart';
+import 'package:docdoc_app/features/recomendation/presentation/manger/bloc/recomendation_bloc.dart';
+import 'package:docdoc_app/features/recomendation/presentation/views/presonalize_recomendation_view.dart';
 import 'package:docdoc_app/features/splash/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,8 +21,10 @@ abstract class AppRouter {
   static const kPaymentMethods = '/paymentMethods';
   static const kAddNewPaymentMethod = '/addPaymentMethod';
   static const kPaymentDetails = '/paymentDetails';
+  static const kPersonalizeRecomendation = '/personalRec';
 
   static GoRouter router = GoRouter(
+    initialLocation: kPersonalizeRecomendation,
     routes: [
       GoRoute(
         path: kSplashView,
@@ -88,6 +93,29 @@ abstract class AppRouter {
               child: CreditCardDetailsView(
                 creditCardEntity: state.extra as CreditCardEntity,
               ),
+            ),
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(opacity: animation, child: child);
+            },
+          );
+        },
+      ),
+
+      //Personalize Recomendation
+      GoRoute(
+        path: kPersonalizeRecomendation,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            child: BlocProvider(
+              create:
+                  (context) =>
+                      RecomendationBloc(getIt.get<RecomendationRepo>()),
+              child: const PresonalizeRecomendationView(),
             ),
             transitionsBuilder: (
               context,

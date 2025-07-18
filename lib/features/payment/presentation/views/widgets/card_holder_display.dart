@@ -1,6 +1,6 @@
 import 'package:docdoc_app/core/helpers/assets.dart';
-import 'package:docdoc_app/core/styles/app_text_styles.dart';
 import 'package:docdoc_app/core/themes/app_colors.dart';
+import 'package:docdoc_app/core/themes/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -14,7 +14,9 @@ class CardHolderNameDisplay extends StatelessWidget {
       children: [
         Text(
           'Cardholder Name',
-          style: AppTextStyles.font14Normal.copyWith(fontSize: 16, height: 1),
+          style: AppStyles.styleMedium16(
+            context,
+          ).copyWith(fontSize: 16, height: 1),
         ),
         SizedBox(height: 15),
         Row(
@@ -24,10 +26,9 @@ class CardHolderNameDisplay extends StatelessWidget {
             SizedBox(width: 25),
             Text(
               cardHolderName,
-              style: AppTextStyles.font14Normal.copyWith(
-                color: Colors.white,
-                height: 1,
-              ),
+              style: AppStyles.styleRegular14(
+                context,
+              ).copyWith(color: Colors.white, height: 1),
             ),
             Spacer(),
           ],

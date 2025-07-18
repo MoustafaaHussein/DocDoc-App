@@ -1,4 +1,4 @@
-import 'package:docdoc_app/core/styles/app_text_styles.dart';
+import 'package:docdoc_app/core/themes/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class CreditCardNumber extends StatelessWidget {
@@ -13,7 +13,7 @@ class CreditCardNumber extends StatelessWidget {
             fit: BoxFit.scaleDown,
             child: Text(
               cardNumber.substring(0, 4),
-              style: AppTextStyles.font24Light,
+              style: AppStyles.styleMediumLight24(context),
             ),
           ),
         ),
@@ -23,7 +23,7 @@ class CreditCardNumber extends StatelessWidget {
             fit: BoxFit.scaleDown,
             child: Text(
               cardNumber.substring(4, 8),
-              style: AppTextStyles.font24Light,
+              style: AppStyles.styleMediumLight24(context),
             ),
           ),
         ),
@@ -33,7 +33,7 @@ class CreditCardNumber extends StatelessWidget {
             fit: BoxFit.scaleDown,
             child: Text(
               cardNumber.substring(8, 12),
-              style: AppTextStyles.font24Light,
+              style: AppStyles.styleMediumLight24(context),
             ),
           ),
         ),
@@ -42,7 +42,7 @@ class CreditCardNumber extends StatelessWidget {
           child: FittedBox(
             child: Text(
               cardNumber.substring(12, 16),
-              style: AppTextStyles.font24Light,
+              style: AppStyles.styleMediumLight24(context),
             ),
           ),
         ),

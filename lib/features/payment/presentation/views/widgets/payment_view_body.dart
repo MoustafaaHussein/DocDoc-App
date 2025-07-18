@@ -15,7 +15,12 @@ class PaymentViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomizedAppBar(title: 'All Card', onTap: () {}),
+      appBar: CustomizedAppBar(
+        title: 'All Card',
+        onTap: () {
+          GoRouter.of(context).push(AppRouter.kPersonalizeRecomendation);
+        },
+      ),
       body: Column(
         children: [
           creditCards.isNotEmpty

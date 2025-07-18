@@ -14,4 +14,8 @@ abstract class AppContainersStyle {
       image: AssetImage(Images.imagesImagesMastercardBackGround),
     ),
   );
+  static final recomendadtionCardStyle = BoxDecoration(
+    color: Color(0xff24243B),
+    borderRadius: BorderRadius.circular(20),
+  );
 }

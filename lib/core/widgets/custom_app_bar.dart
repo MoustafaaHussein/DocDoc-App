@@ -1,6 +1,6 @@
 import 'package:docdoc_app/core/styles/app_containers_style.dart';
-import 'package:docdoc_app/core/styles/app_text_styles.dart';
 import 'package:docdoc_app/core/themes/app_colors.dart';
+import 'package:docdoc_app/core/themes/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -19,7 +19,7 @@ class CustomizedAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: AppBar(
           centerTitle: true,
           backgroundColor: AppColors.kDarkModeBackgroundColor,
-          title: Text(title, style: AppTextStyles.titile18Normal),
+          title: Text(title, style: AppStyles.styleMedium18(context)),
           leading: IconButton(
             onPressed: onTap,
             icon: Container(

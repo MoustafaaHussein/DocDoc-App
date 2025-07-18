@@ -31,4 +31,5 @@ class DocDocApp extends StatelessWidget {
     );
   }
 }
+
 // This is a simple Flutter application that sets up the main entry point and the root widget.

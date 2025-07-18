@@ -1,5 +1,5 @@
-import 'package:docdoc_app/core/styles/app_text_styles.dart';
 import 'package:docdoc_app/core/themes/app_colors.dart';
+import 'package:docdoc_app/core/themes/app_styles.dart';
 import 'package:docdoc_app/core/widgets/custom_button.dart';
 import 'package:docdoc_app/core/widgets/custom_text_field.dart';
 import 'package:docdoc_app/features/payment/domain/entites/credit_card_entity.dart';
@@ -65,10 +65,9 @@ class _AddPaymentMethodViewBodyState extends State<AddPaymentMethodViewBody> {
               SizedBox(height: 30),
               Text(
                 'Card Number',
-                style: AppTextStyles.font14Normal.copyWith(
-                  fontSize: 16,
-                  height: 1,
-                ),
+                style: AppStyles.styleMedium16(
+                  context,
+                ).copyWith(fontSize: 16, height: 1),
               ),
               SizedBox(height: 15),
               Row(
@@ -143,10 +142,9 @@ class _AddPaymentMethodViewBodyState extends State<AddPaymentMethodViewBody> {
               SizedBox(height: 40),
               Text(
                 'Cardholder Name',
-                style: AppTextStyles.font14Normal.copyWith(
-                  fontSize: 16,
-                  height: 1,
-                ),
+                style: AppStyles.styleRegular14(
+                  context,
+                ).copyWith(fontSize: 16, height: 1),
               ),
               SizedBox(height: 15),
               CustomTextField(
@@ -157,10 +155,9 @@ class _AddPaymentMethodViewBodyState extends State<AddPaymentMethodViewBody> {
               SizedBox(height: 30),
               Text(
                 'Expiration Date',
-                style: AppTextStyles.font14Normal.copyWith(
-                  fontSize: 16,
-                  height: 1,
-                ),
+                style: AppStyles.styleRegular14(
+                  context,
+                ).copyWith(fontSize: 16, height: 1),
               ),
               SizedBox(height: 15),
               ExpiryDatePicker(
@@ -172,10 +169,9 @@ class _AddPaymentMethodViewBodyState extends State<AddPaymentMethodViewBody> {
               SizedBox(height: 30),
               Text(
                 'CVC',
-                style: AppTextStyles.font14Normal.copyWith(
-                  fontSize: 16,
-                  height: 1,
-                ),
+                style: AppStyles.styleRegular14(
+                  context,
+                ).copyWith(fontSize: 16, height: 1),
               ),
               SizedBox(height: 10),
               CVC(

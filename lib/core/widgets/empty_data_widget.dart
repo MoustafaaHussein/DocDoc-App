@@ -1,6 +1,6 @@
 // File: lib/core/widgets/empty_data_widget.dart
 
-import 'package:docdoc_app/core/styles/app_text_styles.dart';
+import 'package:docdoc_app/core/themes/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart'; // Import for SvgPicture
 
@@ -55,7 +55,7 @@ class EmptyDataWidget extends StatelessWidget {
             Text(
               message,
               textAlign: TextAlign.center,
-              style: AppTextStyles.titile18Normal.copyWith(color: Colors.white),
+              style: AppStyles.styleMedium18(context),
             ),
           ],
         ),
