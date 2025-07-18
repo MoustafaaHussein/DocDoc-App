@@ -56,6 +56,7 @@ class _OnBoardViewBodyState extends State<OnBoardViewBody> {
                       context,
                     ).pushReplacement(AppRouter.kPaymentMethods);
               }
+              GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
             },
             text: 'التالي',
             buttonColor: AppColors.kButtonPrimaryColor,

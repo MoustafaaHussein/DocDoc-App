@@ -32,7 +32,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
       children: [
         Center(child: ImageMirrorAnimation()),
         Text(
-          'مودك',
+          'My Mood ',
           style: Theme.of(context).textTheme.headlineLarge?.copyWith(
             color: Colors.white,
             fontWeight: FontWeight.bold,
