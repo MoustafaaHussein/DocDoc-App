@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:docdoc_app/features/recomendation/data/models/personalize_recomendation_model/personalize_recomendation_model.dart';
+import 'package:docdoc_app/features/recomendation/data/models/recomendation/recomendation_by_category_model.dart';
 import 'package:docdoc_app/features/recomendation/domain/repos/recomendation_repo.dart';
 import 'package:equatable/equatable.dart';
 
@@ -24,6 +25,26 @@ class RecomendationBloc extends Bloc<RecomendationEvent, RecomendationState> {
           (recomendations) {
             emit(
               PersonalizeRecomendationSucess(recomendations: recomendations),
+            );
+          },
+        );
+      }
+      // category recomendation
+
+      if (event is CategoryRecomendationEvent) {
+        emit(CategoryRecomendationLoading());
+        var result = await recomendationRepo.getRecomendationByCategory(
+          subCategory: event.subCategory,
+        );
+        result.fold(
+          (failure) {
+            return emit(
+              CategoryRecomendationFailed(errorMessage: failure.errorMessage),
+            );
+          },
+          (recomendation) {
+            return emit(
+              CategoryRecomendationSucess(recomendations: recomendation),
             );
           },
         );

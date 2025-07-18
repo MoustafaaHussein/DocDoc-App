@@ -42,25 +42,26 @@ class ServiceFailure extends RequestFailure {
     }
   }
 
- factory ServiceFailure.fromResponse(int statusCode, dynamic response) {
-  final data = response.data;
+  factory ServiceFailure.fromResponse(int statusCode, dynamic response) {
+    final data = response.data;
 
-  if (data is Map<String, dynamic>) {
-    final message = data['error'] is Map && data['error']['message'] != null
-        ? data['error']['message']
-        : data['message'] ?? 'Oops there was an error';
+    if (data is Map<String, dynamic>) {
+      final message =
+          data['error'] is Map && data['error']['message'] != null
+              ? data['error']['message']
+              : data['message'] ?? 'Oops there was an error';
 
-    if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
-      return ServiceFailure(errorMessage: message);
-    } else if (statusCode == 500) {
-      return ServiceFailure(errorMessage: 'Internal server error');
-    } else {
-      return ServiceFailure(errorMessage: message);
+      if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
+        return ServiceFailure(errorMessage: message);
+      } else if (statusCode == 500) {
+        return ServiceFailure(errorMessage: 'Internal server error');
+      } else {
+        return ServiceFailure(errorMessage: message);
+      }
     }
-  }
 
-  return ServiceFailure(errorMessage: 'Unexpected error');
-}
+    return ServiceFailure(errorMessage: 'Unexpected error');
+  }
 
   // factory ServiceFailure.fromFirebaseAuth(FirebaseAuthException ex) {
   //   switch (ex.code) {

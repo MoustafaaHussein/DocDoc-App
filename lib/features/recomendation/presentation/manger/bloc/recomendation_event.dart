@@ -8,3 +8,9 @@ sealed class RecomendationEvent extends Equatable {
 }
 
 class PersonalizeRecomendationEvent extends RecomendationEvent {}
+
+class CategoryRecomendationEvent extends RecomendationEvent {
+  final String subCategory;
+
+  const CategoryRecomendationEvent({required this.subCategory});
+}

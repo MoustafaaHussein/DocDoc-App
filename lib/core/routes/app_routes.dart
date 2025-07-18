@@ -9,6 +9,7 @@ import 'package:docdoc_app/features/payment/presentation/views/payment_view.dart
 import 'package:docdoc_app/features/recomendation/domain/repos/recomendation_repo.dart';
 import 'package:docdoc_app/features/recomendation/presentation/manger/bloc/recomendation_bloc.dart';
 import 'package:docdoc_app/features/recomendation/presentation/views/presonalize_recomendation_view.dart';
+import 'package:docdoc_app/features/recomendation/presentation/views/recomendation_by_category_view.dart';
 import 'package:docdoc_app/features/recomendation/presentation/views/recomendation_view.dart';
 import 'package:docdoc_app/features/splash/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ abstract class AppRouter {
   static const kPaymentDetails = '/paymentDetails';
   static const kPersonalizeRecomendation = '/personalRec';
   static const kRecomendation = '/recomendation';
+  static const kRecomendationByCategory = '/recomendationByCategory';
 
   static GoRouter router = GoRouter(
     initialLocation: kPersonalizeRecomendation,
@@ -156,6 +158,29 @@ abstract class AppRouter {
                   child: child,
                 ),
               );
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: kRecomendationByCategory,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            child: BlocProvider(
+              create:
+                  (context) =>
+                      RecomendationBloc(getIt.get<RecomendationRepo>()),
+              child: RecomendationByCategoryView(
+                subCategory: state.extra as String,
+              ),
+            ),
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(opacity: animation, child: child);
             },
           );
         },

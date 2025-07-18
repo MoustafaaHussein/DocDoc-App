@@ -1,8 +1,13 @@
 import 'package:docdoc_app/core/helpers/api_service.dart';
+import 'package:docdoc_app/core/helpers/constants.dart';
 import 'package:docdoc_app/features/recomendation/data/models/personalize_recomendation_model/personalize_recomendation_model.dart';
+import 'package:docdoc_app/features/recomendation/data/models/recomendation/recomendation_by_category_model.dart';
 
 abstract class RecomendationRemoteDataSource {
   Future<List<PersonalizeRecomendationModel>> getPersonalizeRecomendation();
+  Future<List<RecomendationByCategoryModel>> getRecomendationByCategory({
+    required String subCategory,
+  });
 }
 
 class RecomendationRemoteDataSourceImpl extends RecomendationRemoteDataSource {
@@ -25,5 +30,21 @@ class RecomendationRemoteDataSourceImpl extends RecomendationRemoteDataSource {
       );
     }
     return personalizeRecomendation;
+  }
+
+  @override
+  Future<List<RecomendationByCategoryModel>> getRecomendationByCategory({
+    required String subCategory,
+  }) async {
+    var response = await apiService.get(
+      endPoint: '/api/recommendation/by-category/$subCategory?limit=10',
+      token: Constants.token,
+    );
+    List<dynamic> list = response as List;
+    List<RecomendationByCategoryModel> recomendations = [];
+    for (var items in list) {
+      recomendations.add(RecomendationByCategoryModel.fromJson(items));
+    }
+    return recomendations;
   }
 }

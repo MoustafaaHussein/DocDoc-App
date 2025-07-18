@@ -9,7 +9,7 @@ class RecomendationView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: RecomendationViewBody(),
-      appBar: CustomizedAppBar(title: 'Choose a Recomendation'),
+      appBar: CustomizedAppBar(title: 'Select Category'),
     );
   }
 }

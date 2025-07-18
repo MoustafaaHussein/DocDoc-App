@@ -24,3 +24,19 @@ final class PersonalizeRecomendationFailed extends RecomendationState {
 
   const PersonalizeRecomendationFailed({required this.errorMessage});
 }
+
+final class CategoryRecomendationInitial extends RecomendationState {}
+
+final class CategoryRecomendationSucess extends RecomendationState {
+  final List<RecomendationByCategoryModel> recomendations;
+
+  const CategoryRecomendationSucess({required this.recomendations});
+}
+
+final class CategoryRecomendationLoading extends RecomendationState {}
+
+final class CategoryRecomendationFailed extends RecomendationState {
+  final String errorMessage;
+
+  const CategoryRecomendationFailed({required this.errorMessage});
+}
