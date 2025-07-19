@@ -94,9 +94,9 @@ class SubCategoryPage extends StatelessWidget {
       ),
       body: ListView.builder(
         padding: const EdgeInsets.all(16),
-        itemCount: category.subCategory.length,
+        itemCount: category.subCategories.length,
         itemBuilder: (context, index) {
-          final sub = category.subCategory[index];
+          final sub = category.subCategories[index];
           return GestureDetector(
             onTap: () {
               GoRouter.of(
@@ -112,7 +112,7 @@ class SubCategoryPage extends StatelessWidget {
                 boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4)],
               ),
               child: Text(
-                sub,
+                sub.name,
                 style: AppStyles.styleMedium18(
                   context,
                 ).copyWith(color: Colors.white),

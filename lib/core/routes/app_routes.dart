@@ -14,9 +14,11 @@ import 'package:docdoc_app/features/payment/presentation/manger/bloc/payment_blo
 import 'package:docdoc_app/features/payment/presentation/views/add_payment_method_view.dart';
 import 'package:docdoc_app/features/payment/presentation/views/credit_card_details_view.dart';
 import 'package:docdoc_app/features/payment/presentation/views/payment_view.dart';
+import 'package:docdoc_app/features/recomendation/data/models/category_model.dart/category_model.dart';
 import 'package:docdoc_app/features/recomendation/domain/repos/recomendation_repo.dart';
 import 'package:docdoc_app/features/recomendation/presentation/manger/bloc/recomendation_bloc.dart';
 import 'package:docdoc_app/features/recomendation/presentation/views/presonalize_recomendation_view.dart';
+import 'package:docdoc_app/features/recomendation/presentation/views/recomendation_by_category_details_view.dart';
 import 'package:docdoc_app/features/recomendation/presentation/views/recomendation_by_category_view.dart';
 import 'package:docdoc_app/features/recomendation/presentation/views/recomendation_view.dart';
 import 'package:docdoc_app/features/splash/presentation/views/splash_view.dart';
@@ -26,7 +28,7 @@ import 'package:go_router/go_router.dart';
 
 abstract class AppRouter {
   static const kOnBoardView = '/onBoardView';
-  static const kSplashView = '/ss';
+  static const kSplashView = '/';
   static const kAiSessionView = '/AiSessionView';
   static const kEmotiomDetectorView = '/EmotiomDetectorView';
   static const kLoginView = '/loginView';
@@ -38,9 +40,10 @@ abstract class AppRouter {
   static const kRecomendationByCategory = '/recomendationByCategory';
   static const kEmojiSwitcherView = '/EmojiSwitcherView';
   static const kSignUpView = '/SignUpView';
-  static const kHomeView = '/homeView';
+  static const kHomeView = '/HomeView';
   static const kPersonInformationView = '/PersonInformationView';
-  static const kHomePage = '/';
+  static const kHomePage = '/Home';
+  static const kRcomendationByCategoryDetailsView = '/RecomendationDetails';
 
   static GoRouter router = GoRouter(
     initialLocation: kSplashView,
@@ -189,16 +192,7 @@ abstract class AppRouter {
               secondaryAnimation,
               child,
             ) {
-              return FadeTransition(
-                opacity: animation,
-                child: SlideTransition(
-                  position: Tween<Offset>(
-                    begin: Offset(1, 0),
-                    end: Offset.zero,
-                  ).animate(animation),
-                  child: child,
-                ),
-              );
+              return FadeTransition(opacity: animation, child: child);
             },
           );
         },
@@ -212,8 +206,26 @@ abstract class AppRouter {
                   (context) =>
                       RecomendationBloc(getIt.get<RecomendationRepo>()),
               child: RecomendationByCategoryView(
-                subCategory: state.extra as String,
+                subCategory: state.extra as SubCategoryModel,
               ),
+            ),
+            transitionsBuilder: (
+              context,
+              animation,
+              secondaryAnimation,
+              child,
+            ) {
+              return FadeTransition(opacity: animation, child: child);
+            },
+          );
+        },
+      ),
+      GoRoute(
+        path: kRcomendationByCategoryDetailsView,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            child: RecomendationByCategoryDetailsView(
+              recomendations: state.extra as RecomendationImageModel,
             ),
             transitionsBuilder: (
               context,

@@ -1,4 +1,5 @@
 import 'package:docdoc_app/core/helpers/assets.dart';
+import 'package:docdoc_app/core/helpers/methods.dart';
 import 'package:docdoc_app/core/styles/app_containers_style.dart';
 import 'package:docdoc_app/core/themes/app_styles.dart';
 import 'package:docdoc_app/features/recomendation/presentation/views/widgets/view_more_button.dart';
@@ -121,15 +122,5 @@ class _RecomendantionCardState extends State<RecomendantionCard> {
         ],
       ),
     );
-  }
-
-  Color getDiffcultyLevel(String level) {
-    if (level == 'Easy') {
-      return Colors.green;
-    } else if (level == 'Medium') {
-      return Colors.orange;
-    } else {
-      return Colors.red;
-    }
   }
 }
