@@ -5,9 +5,9 @@ class QuoteCard extends StatelessWidget {
   final String quote;
 
   const QuoteCard({
-    Key? key,
+    super.key,
     required this.quote,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

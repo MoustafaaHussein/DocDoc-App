@@ -1,12 +1,7 @@
-import 'package:docdoc_app/core/routes/app_routes.dart';
-import 'package:docdoc_app/core/styles/TextStyles.dart';
 import 'package:docdoc_app/core/themes/app_colors.dart';
-import 'package:docdoc_app/features/Login/presentation/views/widgets/customButton.dart';
-import 'package:docdoc_app/features/Login/presentation/views/widgets/customTextFormField.dart';
 import 'package:docdoc_app/features/SignUP/presentation/views/widgets/signupForm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class SignupScreen extends StatefulWidget {

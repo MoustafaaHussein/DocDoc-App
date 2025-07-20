@@ -7,7 +7,6 @@ import 'package:docdoc_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart' as img_lib show Image, copyResize;
-import 'package:image/image.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
 class EmotionDetectorScreen extends StatefulWidget {
@@ -81,7 +80,7 @@ class _EmotionDetectorScreenState extends State<EmotionDetectorScreen>
     }
 
     cameraController = CameraController(
-      cameras.length > 1 ? cameras[1] : cameras[0], // محاولة استخدام الكاميرا الأمامية
+      cameras.length > 1 ? cameras[1] : cameras[0], 
       ResolutionPreset.medium,
       enableAudio: false,
     );
@@ -91,8 +90,7 @@ class _EmotionDetectorScreenState extends State<EmotionDetectorScreen>
       if (!mounted) return;
       setState(() {});
 
-      // ابدأ بث الصور فقط إذا لم يكن هناك انتقال قيد التقدم
-      // وهذا سيحدث فقط في البداية
+    
       if (!cameraController!.value.isStreamingImages && !_isNavigationInProgress) {
         cameraController!.startImageStream((CameraImage image) {
           if (!isDetecting && mounted && !_isNavigationInProgress) {
@@ -117,8 +115,8 @@ class _EmotionDetectorScreenState extends State<EmotionDetectorScreen>
     }
 
     try {
-      interpreter = await Interpreter.fromAsset('assets/emotions_model.tflite');
-      final labelsData = await rootBundle.loadString('assets/labelss.txt');
+      interpreter = await Interpreter.fromAsset('assets/model.tflite');
+      final labelsData = await rootBundle.loadString('assets/labels.txt');
       labels = labelsData
           .split('\n')
           .map((e) => e.trim())

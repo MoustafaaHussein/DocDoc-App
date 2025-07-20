@@ -1,6 +1,5 @@
 import 'package:docdoc_app/core/routes/app_routes.dart';
 import 'package:docdoc_app/core/styles/TextStyles.dart';
-import 'package:docdoc_app/features/Home/presentation/views/widgets/MoodScroolSection.dart';
 import 'package:docdoc_app/features/Home/presentation/views/widgets/QuoteCard.dart';
 import 'package:docdoc_app/features/Home/presentation/views/widgets/SpecialAppBar.dart';
 import 'package:docdoc_app/features/Home/presentation/views/widgets/customTypes.dart';
@@ -9,6 +8,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,11 +18,28 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String? username;
+
+  @override
+  void initState() {
+    super.initState();
+    getUserName();
+  }
+
+  void getUserName() async {
+    final prefs = await SharedPreferences.getInstance();
+    final firstName = prefs.getString("userFirstName") ?? '';
+    final lastName = prefs.getString("userLastName") ?? '';
+    setState(() {
+      username = '$firstName $lastName';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomHeader(
-        userName: "taher",
+        userName: username ?? 'User',
         imageUrl: "assets/images/onboard_image1.png",
       ),
       body: Padding(

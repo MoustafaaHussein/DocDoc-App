@@ -98,7 +98,7 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               spacing: 4,
                               children: [
-                                Container(
+                                SizedBox(
                                   width: 20,
                                   height: 25,
                                   child: Icon(

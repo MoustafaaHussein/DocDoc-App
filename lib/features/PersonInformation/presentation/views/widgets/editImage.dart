@@ -1,12 +1,13 @@
 import 'dart:io';
-
 import 'package:docdoc_app/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EditableProfileImage extends StatefulWidget {
-  const EditableProfileImage({super.key});
+  final String? imageUrl; // من SharedPreferences
+
+  const EditableProfileImage({super.key, this.imageUrl});
 
   @override
   State<EditableProfileImage> createState() => _EditableProfileImageState();
@@ -23,25 +24,30 @@ class _EditableProfileImageState extends State<EditableProfileImage> {
       setState(() {
         _imageFile = File(pickedFile.path);
       });
+
+      // لو حابب تحفظ الصورة الجديدة في SharedPreferences، بلغني أضيفهالك.
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    ImageProvider imageProvider;
+
+    if (_imageFile != null) {
+      imageProvider = FileImage(_imageFile!);
+    } else if (widget.imageUrl != null && widget.imageUrl!.isNotEmpty) {
+      imageProvider = NetworkImage(widget.imageUrl!);
+    } else {
+      imageProvider = const AssetImage('assets/images/DemoImage.png');
+    }
+
     return Stack(
       children: [
-        AnimatedSwitcher(
-          duration: Duration(milliseconds: 300),
-          child: CircleAvatar(
-            radius: 60,
-            backgroundColor: Colors.grey.shade300,
-            backgroundImage:
-                _imageFile != null
-                    ? FileImage(_imageFile!)
-                    : const AssetImage('assets/images/DemoImage.png'),
-          ),
+        CircleAvatar(
+          radius: 60,
+          backgroundColor: Colors.grey.shade300,
+          backgroundImage: imageProvider,
         ),
-
         Positioned(
           bottom: 0,
           right: 4,

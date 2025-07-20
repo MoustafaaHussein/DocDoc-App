@@ -3,6 +3,9 @@ import 'package:docdoc_app/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class EmotionResultScreen extends StatelessWidget {
   final List<String> labels;
@@ -10,11 +13,55 @@ class EmotionResultScreen extends StatelessWidget {
   final VoidCallback onRescan;
 
   const EmotionResultScreen({
-    Key? key,
+    super.key,
     required this.labels,
     required this.probabilities,
     required this.onRescan,
-  }) : super(key: key);
+  });
+
+  Future<void> submitEmotionToApi(
+    BuildContext context,
+    String emotion,
+    double probability,
+  ) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final token = prefs.getString("token");
+      print("------------------------------------------------------------");
+      print(token);
+
+      if (token == null) {
+        throw Exception("Token not found in SharedPreferences");
+      }
+
+      int intensity = (probability * 10).clamp(1, 10).round();
+
+      final response = await http.post(
+        Uri.parse("https://mood-api-8urg.onrender.com/api/mood"),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: json.encode({
+          'emotionType': emotion,
+          'intensityLevel': intensity,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("✅ تم إرسال الشعور بنجاح")),
+        );
+      } else {
+        debugPrint("❌ Error Body: ${response.body}");
+        throw Exception("فشل في إرسال الشعور. Status: ${response.statusCode}");
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("❌ خطأ: $e")));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +80,8 @@ class EmotionResultScreen extends StatelessWidget {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pop(); // العودة من شاشة النتائج
-                  onRescan(); // استدعاء دالة إعادة المسح
+                  Navigator.of(context).pop();
+                  onRescan();
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 15),
@@ -133,7 +180,7 @@ class EmotionResultScreen extends StatelessWidget {
               ),
             ),
             const Text(
-              " All Propabilities",
+              " All Probabilities",
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -178,8 +225,8 @@ class EmotionResultScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pop(); // العودة إلى شاشة الكاميرا
-                onRescan(); // استدعاء دالة إعادة المسح
+                Navigator.of(context).pop();
+                onRescan();
               },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 15),
@@ -189,7 +236,28 @@ class EmotionResultScreen extends StatelessWidget {
                 ),
               ),
               child: const Text(
-                "Scaan Again ",
+                "Scan Again",
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ),
+            ),
+            const SizedBox(height: 12),
+            ElevatedButton(
+              onPressed: () async {
+                await submitEmotionToApi(
+                  context,
+                  dominantEmotion,
+                  maxProbability,
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                backgroundColor: Colors.green,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              child: const Text(
+                "Select This Scan",
                 style: TextStyle(fontSize: 18, color: Colors.white),
               ),
             ),

@@ -30,9 +30,9 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: AppColors.kButtonPrimaryColor,
-        child: const Icon(Icons.add),
         elevation: 4,
         shape: const CircleBorder(),
+        child: const Icon(Icons.add),
       ),
 
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
