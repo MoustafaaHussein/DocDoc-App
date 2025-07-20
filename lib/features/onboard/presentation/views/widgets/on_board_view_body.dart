@@ -45,10 +45,17 @@ class _OnBoardViewBodyState extends State<OnBoardViewBody> {
           ),
           child: CustomButton(
             onpressed: () {
-              pageController.nextPage(
-                duration: const Duration(milliseconds: 300),
-                curve: currentPage == 2 ? Curves.slowMiddle : Curves.easeIn,
-              );
+              if (currentPage >= 2) {
+                currentPage != 2
+                    ? pageController.nextPage(
+                      duration: const Duration(milliseconds: 300),
+                      curve:
+                          currentPage == 2 ? Curves.slowMiddle : Curves.easeIn,
+                    )
+                    : GoRouter.of(
+                      context,
+                    ).pushReplacement(AppRouter.kPaymentMethods);
+              }
               GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
             },
             text: 'التالي',

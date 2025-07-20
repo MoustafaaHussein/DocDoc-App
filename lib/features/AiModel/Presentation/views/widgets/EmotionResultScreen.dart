@@ -19,50 +19,6 @@ class EmotionResultScreen extends StatelessWidget {
     required this.onRescan,
   });
 
-  Future<void> submitEmotionToApi(
-    BuildContext context,
-    String emotion,
-    double probability,
-  ) async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString("token");
-      print("------------------------------------------------------------");
-      print(token);
-
-      if (token == null) {
-        throw Exception("Token not found in SharedPreferences");
-      }
-
-      int intensity = (probability * 10).clamp(1, 10).round();
-
-      final response = await http.post(
-        Uri.parse("https://mood-api-8urg.onrender.com/api/mood"),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token',
-        },
-        body: json.encode({
-          'emotionType': emotion,
-          'intensityLevel': intensity,
-        }),
-      );
-
-      if (response.statusCode == 200) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("✅ تم إرسال الشعور بنجاح")),
-        );
-      } else {
-        debugPrint("❌ Error Body: ${response.body}");
-        throw Exception("فشل في إرسال الشعور. Status: ${response.statusCode}");
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text("❌ خطأ: $e")));
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     if (probabilities.isEmpty || labels.isEmpty) {

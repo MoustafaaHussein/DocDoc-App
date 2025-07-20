@@ -3,4 +3,7 @@ import 'package:flutter/widgets.dart';
 abstract class Constants {
   static double kButtonPadding(BuildContext context) =>
       MediaQuery.of(context).size.width * 0.1;
+  static const cardsKey = 'credit_cards';
+  static String token =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjYiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJ0ZXN0QGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJNb3N0YWZhIEh1c3NlaW4iLCJGaXJzdE5hbWUiOiJNb3N0YWZhIiwiTGFzdE5hbWUiOiJIdXNzZWluIiwiVXNlcklkIjoiNiIsImV4cCI6MTc1MzQ0OTQzMiwiaXNzIjoiTW9vZE1pcnJvckFQSSIsImF1ZCI6Ik1vb2RNaXJyb3JDbGllbnQifQ.hGlOHvF3pzucH0OZ_46_laqQksQb_VF7_gQVvzCy_ro';
 }

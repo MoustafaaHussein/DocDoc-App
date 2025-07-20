@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
-import 'package:device_preview/device_preview.dart';
+import 'package:docdoc_app/core/helpers/secure_storage.dart';
+import 'package:docdoc_app/core/helpers/service_locator.dart';
 import 'package:dio/dio.dart';
 import 'package:docdoc_app/core/routes/app_routes.dart';
 import 'package:docdoc_app/core/themes/app_colors.dart';
@@ -22,6 +23,10 @@ void main() async {
     cameras = await availableCameras();
   } on CameraException catch (e) {
     print('Error accessing cameras: $e');
+  }
+  await SecureStorage.init();
+  serviceLocator();
+  runApp(const DocDocApp());
   }
 
   final prefs = await SharedPreferences.getInstance();
@@ -58,8 +63,8 @@ class DocDocApp extends StatelessWidget {
           ],
           child: MaterialApp.router(
             supportedLocales: const [Locale('ar'), Locale('en')],
-            locale: DevicePreview.locale(context),
-            builder: DevicePreview.appBuilder,
+            // locale: DevicePreview.locale(context),
+            // builder: DevicePreview.appBuilder,
             theme: ThemeData.dark().copyWith(
               textTheme: GoogleFonts.poppinsTextTheme(
                 ThemeData.dark().textTheme,

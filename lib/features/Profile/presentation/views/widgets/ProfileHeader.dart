@@ -166,7 +166,7 @@ class _ProfileHeaderScreenState extends State<ProfileHeaderScreen> {
                   icon: Ionicons.wallet_outline,
                   title: "Your Cards",
                   onTap: () {
-                    GoRouter.of(context).push(AppRouter.kEmojiSwitcherView);
+                    GoRouter.of(context).push(AppRouter.kPaymentMethods);
                   },
                 ),
                 SizedBox(height: 8.h),

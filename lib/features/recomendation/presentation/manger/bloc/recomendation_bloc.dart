@@ -1,0 +1,54 @@
+import 'package:bloc/bloc.dart';
+import 'package:docdoc_app/features/recomendation/data/models/personalize_recomendation_model/personalize_recomendation_model.dart';
+import 'package:docdoc_app/features/recomendation/data/models/recomendation/recomendation_by_category_model.dart';
+import 'package:docdoc_app/features/recomendation/domain/repos/recomendation_repo.dart';
+import 'package:equatable/equatable.dart';
+
+part 'recomendation_event.dart';
+part 'recomendation_state.dart';
+
+class RecomendationBloc extends Bloc<RecomendationEvent, RecomendationState> {
+  final RecomendationRepo recomendationRepo;
+  RecomendationBloc(this.recomendationRepo) : super(RecomendationInitial()) {
+    on<RecomendationEvent>((event, emit) async {
+      if (event is PersonalizeRecomendationEvent) {
+        emit(PersonalizeRecomendationLoading());
+        var result = await recomendationRepo.getPersonalizeRecomendation();
+        result.fold(
+          (failure) {
+            return emit(
+              PersonalizeRecomendationFailed(
+                errorMessage: failure.errorMessage,
+              ),
+            );
+          },
+          (recomendations) {
+            emit(
+              PersonalizeRecomendationSucess(recomendations: recomendations),
+            );
+          },
+        );
+      }
+      // category recomendation
+
+      if (event is CategoryRecomendationEvent) {
+        emit(CategoryRecomendationLoading());
+        var result = await recomendationRepo.getRecomendationByCategory(
+          subCategory: event.subCategory,
+        );
+        result.fold(
+          (failure) {
+            return emit(
+              CategoryRecomendationFailed(errorMessage: failure.errorMessage),
+            );
+          },
+          (recomendation) {
+            return emit(
+              CategoryRecomendationSucess(recomendations: recomendation),
+            );
+          },
+        );
+      }
+    });
+  }
+}
