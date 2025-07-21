@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:dio/dio.dart';
 import 'package:docdoc_app/core/helpers/secure_storage.dart';
 import 'package:docdoc_app/core/helpers/service_locator.dart';
@@ -10,6 +11,7 @@ import 'package:docdoc_app/features/SignUP/presentation/data/repo/SignUpRepo.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,14 +27,23 @@ void main() async {
   } on CameraException catch (e) {
     print('Error accessing cameras: $e');
   }
+
   await SecureStorage.init();
   serviceLocator();
-  runApp(DocDocApp());
+
+  final router = AppRouter.initRouter(isLoggedIn: token != null);
+
+  runApp(
+    DevicePreview(
+      enabled: false,
+      builder: (context) => DocDocApp(router: router),
+    ),
+  );
 }
 
 class DocDocApp extends StatelessWidget {
-  const DocDocApp({super.key, String? token});
-
+  const DocDocApp({super.key, required this.router});
+  final GoRouter router;
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -49,8 +60,6 @@ class DocDocApp extends StatelessWidget {
           ],
           child: MaterialApp.router(
             supportedLocales: const [Locale('ar'), Locale('en')],
-            // locale: DevicePreview.locale(context),
-            // builder: DevicePreview.appBuilder,
             theme: ThemeData.dark().copyWith(
               textTheme: GoogleFonts.poppinsTextTheme(
                 ThemeData.dark().textTheme,
@@ -58,8 +67,7 @@ class DocDocApp extends StatelessWidget {
               scaffoldBackgroundColor: AppColors.kDarkModeBackgroundColor,
             ),
             debugShowCheckedModeBanner: false,
-
-            routerConfig: AppRouter.router,
+            routerConfig: router,
           ),
         );
       },
