@@ -49,8 +49,6 @@ class LoginForm extends StatelessWidget {
 
           CustomButton(
             onpressed: () {
-              
-
               GoRouter.of(context).pushReplacement(AppRouter.kHomePage);
             },
             text: "Sign In",

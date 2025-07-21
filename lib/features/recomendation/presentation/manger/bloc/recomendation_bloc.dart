@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:docdoc_app/features/recomendation/data/models/personalize_recomendation_model/personalize_recomendation_model.dart';
-import 'package:docdoc_app/features/recomendation/data/models/recomendation/recomendation_by_category_model.dart';
+import 'package:docdoc_app/features/recomendation/data/models/recomendation_by_category_model/recomendation_by_category_model.dart';
+import 'package:docdoc_app/features/recomendation/data/models/recomendation_by_emoitions_model/recomendation_by_emoitions_model.dart';
 import 'package:docdoc_app/features/recomendation/domain/repos/recomendation_repo.dart';
 import 'package:equatable/equatable.dart';
 
@@ -46,6 +47,22 @@ class RecomendationBloc extends Bloc<RecomendationEvent, RecomendationState> {
             return emit(
               CategoryRecomendationSucess(recomendations: recomendation),
             );
+          },
+        );
+      } else if (event is CompleteExcerciseEvent) {
+        emit(CompleteExcerciseLoading());
+        var result = await recomendationRepo.completeExcersice(
+          excersiceId: event.excersiceId,
+          feedBack: event.feedBack,
+        );
+        result.fold(
+          (failure) {
+            return emit(
+              CompleteExcerciseFailed(errorMessage: failure.errorMessage),
+            );
+          },
+          (sucess) {
+            return emit(CompleteExcerciseSuccessful(sucessMessage: sucess));
           },
         );
       }

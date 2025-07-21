@@ -2,14 +2,15 @@ import 'package:docdoc_app/core/helpers/assets.dart';
 import 'package:docdoc_app/core/themes/app_colors.dart';
 import 'package:docdoc_app/core/themes/app_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class RatingDialogWidget extends StatefulWidget {
-  final VoidCallback onSubmit;
+class CompleteExerciseDialog extends StatefulWidget {
+  final void Function({required String timeTaken, required String feedback})
+  onSubmit;
   final VoidCallback onCancel;
   final String titleText;
 
-  const RatingDialogWidget({
+  const CompleteExerciseDialog({
     super.key,
     required this.onSubmit,
     required this.onCancel,
@@ -17,12 +18,20 @@ class RatingDialogWidget extends StatefulWidget {
   });
 
   @override
-  State<RatingDialogWidget> createState() => _RatingDialogWidgetState();
+  State<CompleteExerciseDialog> createState() => _CompleteExerciseDialogState();
 }
 
-class _RatingDialogWidgetState extends State<RatingDialogWidget> {
-  bool? isHelpful;
+class _CompleteExerciseDialogState extends State<CompleteExerciseDialog> {
+  bool? isCompleted;
   final TextEditingController feedbackController = TextEditingController();
+  String selectedTime = 'Less than 5 min';
+
+  final List<String> timeOptions = [
+    'Less than 5 min',
+    '5 - 10 min',
+    '10 - 20 min',
+    'More than 20 min',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -43,15 +52,10 @@ class _RatingDialogWidgetState extends State<RatingDialogWidget> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // Image in the center
+                    // SVG Image
                     Container(
-                      margin: EdgeInsets.all(12),
+                      margin: const EdgeInsets.all(12),
                       padding: const EdgeInsets.all(20),
-                      decoration: ShapeDecoration(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadiusGeometry.circular(10),
-                        ),
-                      ),
                       child: SvgPicture.asset(
                         Images.imagesImagesRatting,
                         height: 100,
@@ -59,9 +63,10 @@ class _RatingDialogWidgetState extends State<RatingDialogWidget> {
                         fit: BoxFit.scaleDown,
                       ),
                     ),
+
                     const SizedBox(height: 20),
 
-                    // Title text
+                    // Title
                     Text(
                       widget.titleText,
                       style: AppStyles.styleRegular14(
@@ -72,65 +77,97 @@ class _RatingDialogWidgetState extends State<RatingDialogWidget> {
 
                     const SizedBox(height: 12),
 
-                    // Helpful / Not Helpful Options
+                    // Completed / Not Completed
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ChoiceChip(
-                          label: const Text("Helpful"),
+                          label: const Text("Completed"),
                           labelStyle: AppStyles.styleMedium18(context).copyWith(
                             color:
-                                isHelpful == true ? Colors.white : Colors.green,
+                                isCompleted == true
+                                    ? Colors.white
+                                    : Colors.green,
                           ),
-                          selected: isHelpful == true,
+                          selected: isCompleted == true,
                           selectedColor: Colors.green,
                           backgroundColor: Colors.transparent,
-                          side: BorderSide(color: Colors.green),
-                          onSelected: (selected) {
-                            setState(() => isHelpful = true);
-                          },
+                          side: const BorderSide(color: Colors.green),
+                          onSelected:
+                              (selected) => setState(() => isCompleted = true),
                         ),
                         const SizedBox(width: 12),
                         ChoiceChip(
-                          label: const Text("Not Helpful"),
+                          label: const Text("Not Completed"),
                           labelStyle: AppStyles.styleMedium18(context).copyWith(
                             color:
-                                isHelpful == false ? Colors.white : Colors.red,
+                                isCompleted == false
+                                    ? Colors.white
+                                    : Colors.red,
                           ),
-                          selected: isHelpful == false,
+                          selected: isCompleted == false,
                           selectedColor: Colors.red,
                           backgroundColor: Colors.transparent,
-                          side: BorderSide(color: Colors.red),
-                          onSelected: (selected) {
-                            setState(() => isHelpful = false);
-                          },
+                          side: const BorderSide(color: Colors.red),
+                          onSelected:
+                              (selected) => setState(() => isCompleted = false),
                         ),
                       ],
                     ),
 
                     const SizedBox(height: 16),
 
-                    // Feedback TextField
+                    // Time taken selector
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF1C1C1E),
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: Colors.green),
+                      ),
+                      child: DropdownButton<String>(
+                        isExpanded: true,
+                        value: selectedTime,
+                        dropdownColor: const Color(0xFF1C1C1E),
+                        underline: const SizedBox(),
+                        iconEnabledColor: Colors.white,
+                        items:
+                            timeOptions
+                                .map(
+                                  (time) => DropdownMenuItem(
+                                    value: time,
+                                    child: Text(
+                                      time,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                        onChanged:
+                            (value) => setState(() => selectedTime = value!),
+                      ),
+                    ),
+
+                    const SizedBox(height: 16),
+
+                    // Feedback field
                     TextField(
                       controller: feedbackController,
                       maxLines: 3,
                       style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
-                        hintText: 'Please provide us with more details',
+                        hintText: 'Please share your thoughts or feedback',
                         hintStyle: const TextStyle(color: Color(0xFF98A2B3)),
                         filled: true,
                         fillColor: const Color(0xFF1C1C1E),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
-                          borderSide: const BorderSide(
-                            color: Colors.transparent,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          borderSide: const BorderSide(
-                            color: Colors.transparent,
-                          ),
+                          borderSide: BorderSide.none,
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
@@ -141,11 +178,18 @@ class _RatingDialogWidgetState extends State<RatingDialogWidget> {
 
                     const SizedBox(height: 20),
 
-                    // Submit Button
+                    // Submit button
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: widget.onSubmit,
+                        onPressed: () {
+                          if (isCompleted != null) {
+                            widget.onSubmit(
+                              timeTaken: selectedTime,
+                              feedback: feedbackController.text.trim(),
+                            );
+                          }
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
                           shape: RoundedRectangleBorder(
@@ -163,7 +207,7 @@ class _RatingDialogWidgetState extends State<RatingDialogWidget> {
                 ),
               ),
 
-              // Cancel Icon (X) at top-right
+              // Cancel icon
               Positioned(
                 top: 8,
                 right: 8,

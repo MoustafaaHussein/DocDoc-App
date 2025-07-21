@@ -3,7 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:docdoc_app/core/errors/failure.dart';
 import 'package:docdoc_app/features/recomendation/data/data_source/remote_data_source/recomendation_remote_data_source.dart';
 import 'package:docdoc_app/features/recomendation/data/models/personalize_recomendation_model/personalize_recomendation_model.dart';
-import 'package:docdoc_app/features/recomendation/data/models/recomendation/recomendation_by_category_model.dart';
+import 'package:docdoc_app/features/recomendation/data/models/recomendation_by_category_model/recomendation_by_category_model.dart';
+import 'package:docdoc_app/features/recomendation/data/models/recomendation_by_emoitions_model/recomendation_by_emoitions_model.dart';
 import 'package:docdoc_app/features/recomendation/domain/repos/recomendation_repo.dart';
 
 class RecomendationRepoImplementation implements RecomendationRepo {
@@ -34,6 +35,42 @@ class RecomendationRepoImplementation implements RecomendationRepo {
     try {
       var response = await recomendationRemoteDataSource
           .getRecomendationByCategory(subCategory: subCategory);
+      return right(response);
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServiceFailure.fromDioError(e));
+      } else {
+        return Left(ServiceFailure(errorMessage: e.toString()));
+      }
+    }
+  }
+
+  @override
+  Future<Either<RequestFailure, String>> completeExcersice({
+    required int excersiceId,
+    required String feedBack,
+  }) async {
+    try {
+      var response = await recomendationRemoteDataSource.completeExcercise(
+        excersiceId: excersiceId,
+        feedBack: feedBack,
+      );
+      return right(response);
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServiceFailure.fromDioError(e));
+      } else {
+        return Left(ServiceFailure(errorMessage: e.toString()));
+      }
+    }
+  }
+
+  @override
+  Future<Either<RequestFailure, List<RecomendationByEmoitionsModel>>>
+  getRecomendationsByEmotions({required String selectedEmotion}) async {
+    try {
+      var response = await recomendationRemoteDataSource
+          .getRecomendationsByEmotions(selectedEmotion: selectedEmotion);
       return right(response);
     } catch (e) {
       if (e is DioException) {

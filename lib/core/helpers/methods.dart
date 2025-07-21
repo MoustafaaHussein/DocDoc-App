@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 Color getDiffcultyLevel(String level) {
@@ -8,4 +10,12 @@ Color getDiffcultyLevel(String level) {
   } else {
     return Colors.red;
   }
+}
+
+Map<String, dynamic> convertToMap(String feedBack, String timeTaken) {
+  return {'feedBack': feedBack, "durationMinutes": timeTaken};
+}
+
+String convertMapToJson(Map<String, dynamic> data) {
+  return jsonEncode(data);
 }

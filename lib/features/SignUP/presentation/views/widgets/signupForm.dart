@@ -7,7 +7,6 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-
 class SignupForm extends StatelessWidget {
   const SignupForm({super.key});
 

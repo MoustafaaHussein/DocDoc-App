@@ -7,7 +7,6 @@ import 'package:image/image.dart' as img_lib;
 
 import 'package:docdoc_app/features/AiModel/Model/EmotionData.dart'; // مسار الـ EmotionData
 
-
 class EmotionDetectorController {
   CameraController? _cameraController;
   Interpreter? _interpreter;
@@ -30,7 +29,6 @@ class EmotionDetectorController {
   List<EmotionData> get emotionProbabilities => _emotionProbabilities;
   bool get isModelLoaded => _isModelLoaded;
 
-
   Future<void> initialize() async {
     await _loadModelAndLabels();
     await _initializeCamera();
@@ -44,7 +42,9 @@ class EmotionDetectorController {
 
     if (availableCameras.isEmpty) {
       debugPrint('No cameras available.');
-      onError?.call('No cameras found on this device.'); // <--- استخدم الـ callback
+      onError?.call(
+        'No cameras found on this device.',
+      ); // <--- استخدم الـ callback
       return;
     }
 
@@ -59,7 +59,9 @@ class EmotionDetectorController {
       _startImageStream();
     } on CameraException catch (e) {
       debugPrint("Camera initialization error: $e");
-      onError?.call("Failed to initialize camera: ${e.description ?? e.code}"); // <--- استخدم الـ callback
+      onError?.call(
+        "Failed to initialize camera: ${e.description ?? e.code}",
+      ); // <--- استخدم الـ callback
     }
   }
 
@@ -70,18 +72,23 @@ class EmotionDetectorController {
     }
 
     try {
-      _interpreter = await Interpreter.fromAsset('assets/emotions_model.tflite');
+      _interpreter = await Interpreter.fromAsset(
+        'assets/emotions_model.tflite',
+      );
       final labelsData = await rootBundle.loadString('assets/labelss.txt');
-      _labels = labelsData
-          .split('\n')
-          .map((e) => e.trim())
-          .where((e) => e.isNotEmpty)
-          .toList();
+      _labels =
+          labelsData
+              .split('\n')
+              .map((e) => e.trim())
+              .where((e) => e.isNotEmpty)
+              .toList();
       _isModelLoaded = true;
     } catch (e) {
       debugPrint("Error loading model or labels: $e");
       _isModelLoaded = false;
-      onError?.call("Failed to load AI model or labels. Please check assets."); // <--- استخدم الـ callback
+      onError?.call(
+        "Failed to load AI model or labels. Please check assets.",
+      ); // <--- استخدم الـ callback
     }
   }
 
@@ -101,7 +108,8 @@ class EmotionDetectorController {
   }
 
   Future<void> stopDetection() async {
-    if (_cameraController != null && _cameraController!.value.isStreamingImages) {
+    if (_cameraController != null &&
+        _cameraController!.value.isStreamingImages) {
       await _cameraController!.stopImageStream();
     }
     _isDetecting = false;
@@ -115,7 +123,9 @@ class EmotionDetectorController {
 
     if (cameraImage.format.group != ImageFormatGroup.yuv420) {
       debugPrint("Unsupported image format: ${cameraImage.format.group}");
-      onError?.call("Unsupported camera image format."); // <--- استخدم الـ callback
+      onError?.call(
+        "Unsupported camera image format.",
+      ); // <--- استخدم الـ callback
       _isDetecting = false;
       return;
     }
@@ -136,24 +146,28 @@ class EmotionDetectorController {
       }),
     );
 
-    var output = ReshapeList(List.filled(_labels.length, 0.0) as List).reshape([1, _labels.length]);
+    var output = ReshapeList(
+      List.filled(_labels.length, 0.0) as List,
+    ).reshape([1, _labels.length]);
 
     try {
       _interpreter!.run([input], output);
       final List<double> rawProbabilities = output[0].cast<double>();
-      _emotionProbabilities = List.generate(_labels.length, (index) {
-        return EmotionData(_labels[index], rawProbabilities[index]);
-      }).toList();
+      _emotionProbabilities =
+          List.generate(_labels.length, (index) {
+            return EmotionData(_labels[index], rawProbabilities[index]);
+          }).toList();
 
       onProbabilitiesUpdate?.call();
     } catch (e) {
       debugPrint("Error during inference: $e");
-      onError?.call("Error processing image for emotion detection."); // <--- استخدم الـ callback
+      onError?.call(
+        "Error processing image for emotion detection.",
+      ); // <--- استخدم الـ callback
     } finally {
       _isDetecting = false;
     }
   }
-
 
   void dispose() {
     _cameraController?.dispose();

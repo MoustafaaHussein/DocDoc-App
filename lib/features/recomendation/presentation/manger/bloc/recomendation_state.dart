@@ -40,3 +40,28 @@ final class CategoryRecomendationFailed extends RecomendationState {
 
   const CategoryRecomendationFailed({required this.errorMessage});
 }
+
+final class CompleteExcerciseFailed extends RecomendationState {
+  final String errorMessage;
+
+  const CompleteExcerciseFailed({required this.errorMessage});
+}
+
+final class CompleteExcerciseSuccessful extends RecomendationState {
+  final String sucessMessage;
+
+  const CompleteExcerciseSuccessful({required this.sucessMessage});
+}
+
+final class CompleteExcerciseLoading extends RecomendationState {}
+
+final class GetRecomendationBySelectedEmotionLoading
+    extends RecomendationState {}
+
+final class GetRecomendationBySelectedEmotionFailed extends RecomendationState {
+  late final String errorMessage;
+}
+
+final class GetRecomendationBySelectedEmotionLoaded extends RecomendationState {
+  late final List<RecomendationByEmoitionsModel> emotionsRecomendations;
+}

@@ -2,7 +2,7 @@ import 'package:docdoc_app/core/helpers/assets.dart';
 import 'package:docdoc_app/core/routes/app_routes.dart';
 import 'package:docdoc_app/core/widgets/empty_data_widget.dart';
 import 'package:docdoc_app/features/recomendation/data/models/category_model.dart/category_model.dart';
-import 'package:docdoc_app/features/recomendation/data/models/recomendation/recomendation_by_category_model.dart';
+import 'package:docdoc_app/features/recomendation/data/models/recomendation_by_category_model/recomendation_by_category_model.dart';
 import 'package:docdoc_app/features/recomendation/presentation/views/widgets/recomendation_card.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

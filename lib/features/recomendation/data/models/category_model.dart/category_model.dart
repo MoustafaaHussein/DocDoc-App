@@ -1,5 +1,5 @@
 import 'package:docdoc_app/core/helpers/assets.dart';
-import 'package:docdoc_app/features/recomendation/data/models/recomendation/recomendation_by_category_model.dart';
+import 'package:docdoc_app/features/recomendation/data/models/recomendation_by_category_model/recomendation_by_category_model.dart';
 
 class SubCategoryModel {
   final String name;

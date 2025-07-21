@@ -1,12 +1,20 @@
 import 'package:docdoc_app/core/helpers/api_service.dart';
 import 'package:docdoc_app/core/helpers/constants.dart';
 import 'package:docdoc_app/features/recomendation/data/models/personalize_recomendation_model/personalize_recomendation_model.dart';
-import 'package:docdoc_app/features/recomendation/data/models/recomendation/recomendation_by_category_model.dart';
+import 'package:docdoc_app/features/recomendation/data/models/recomendation_by_category_model/recomendation_by_category_model.dart';
+import 'package:docdoc_app/features/recomendation/data/models/recomendation_by_emoitions_model/recomendation_by_emoitions_model.dart';
 
 abstract class RecomendationRemoteDataSource {
   Future<List<PersonalizeRecomendationModel>> getPersonalizeRecomendation();
   Future<List<RecomendationByCategoryModel>> getRecomendationByCategory({
     required String subCategory,
+  });
+  Future<String> completeExcercise({
+    required int excersiceId,
+    required String feedBack,
+  });
+  Future<List<RecomendationByEmoitionsModel>> getRecomendationsByEmotions({
+    required String selectedEmotion,
   });
 }
 
@@ -19,8 +27,7 @@ class RecomendationRemoteDataSourceImpl extends RecomendationRemoteDataSource {
   getPersonalizeRecomendation() async {
     var response = await apiService.get(
       endPoint: '/api/recommendation/personalized',
-      token:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJtb2FtZW5AZXhhbXBsZS5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTW9hbWVuIEhhc3NhbiIsIkZpcnN0TmFtZSI6Ik1vYW1lbiIsIkxhc3ROYW1lIjoiSGFzc2FuIiwiVXNlcklkIjoiMSIsImV4cCI6MTc1MzQwMTY3NSwiaXNzIjoiTW9vZE1pcnJvckFQSSIsImF1ZCI6Ik1vb2RNaXJyb3JDbGllbnQifQ.us-Cf_C9KW12b2cE1gAqzi4zMJLZ0FnFJ8-X4gTBjX0',
+      token: Constants.token,
     );
     List<dynamic> list = response as List;
     List<PersonalizeRecomendationModel> personalizeRecomendation = [];
@@ -45,6 +52,36 @@ class RecomendationRemoteDataSourceImpl extends RecomendationRemoteDataSource {
     for (var items in list) {
       recomendations.add(RecomendationByCategoryModel.fromJson(items));
     }
+
     return recomendations;
+  }
+
+  @override
+  Future<String> completeExcercise({
+    required int excersiceId,
+    required String feedBack,
+  }) async {
+    var response = await apiService.post(
+      endPoint: '/api/recommendation/exercises/$excersiceId/complete',
+      token: Constants.token,
+      data: feedBack,
+    );
+    return response['message'];
+  }
+
+  @override
+  Future<List<RecomendationByEmoitionsModel>> getRecomendationsByEmotions({
+    required String selectedEmotion,
+  }) async {
+    var response = await apiService.get(
+      endPoint: '/api/recommendation/by-emotion/$selectedEmotion?limit=10',
+      token: Constants.token,
+    );
+    List<RecomendationByEmoitionsModel> emotionsRecomendations = [];
+    List<dynamic> list = response as List;
+    for (var items in list) {
+      emotionsRecomendations.add(RecomendationByEmoitionsModel.fromJson(items));
+    }
+    return emotionsRecomendations;
   }
 }

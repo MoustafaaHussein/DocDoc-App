@@ -224,8 +224,13 @@ abstract class AppRouter {
         path: kRcomendationByCategoryDetailsView,
         pageBuilder: (context, state) {
           return CustomTransitionPage(
-            child: RecomendationByCategoryDetailsView(
-              recomendations: state.extra as RecomendationImageModel,
+            child: BlocProvider(
+              create:
+                  (context) =>
+                      RecomendationBloc(getIt.get<RecomendationRepo>()),
+              child: RecomendationByCategoryDetailsView(
+                recomendations: state.extra as RecomendationImageModel,
+              ),
             ),
             transitionsBuilder: (
               context,

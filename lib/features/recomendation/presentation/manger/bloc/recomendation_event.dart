@@ -14,3 +14,10 @@ class CategoryRecomendationEvent extends RecomendationEvent {
 
   const CategoryRecomendationEvent({required this.subCategory});
 }
+
+class CompleteExcerciseEvent extends RecomendationEvent {
+  final String feedBack;
+  final int excersiceId;
+
+  const CompleteExcerciseEvent(this.feedBack, this.excersiceId);
+}

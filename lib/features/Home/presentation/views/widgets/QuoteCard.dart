@@ -4,10 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class QuoteCard extends StatelessWidget {
   final String quote;
 
-  const QuoteCard({
-    super.key,
-    required this.quote,
-  });
+  const QuoteCard({super.key, required this.quote});
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +15,7 @@ class QuoteCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xFFF8F6F6),
         borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(
-          color: const Color(0xFFF4F4F4),
-          width: 1.w,
-        ),
+        border: Border.all(color: const Color(0xFFF4F4F4), width: 1.w),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,11 +36,7 @@ class QuoteCard extends StatelessWidget {
           SizedBox(width: 8.w),
           Transform.rotate(
             angle: 3.14, // 180 درجة
-            child: Icon(
-              Icons.format_quote,
-              size: 20.sp,
-              color: Colors.grey,
-            ),
+            child: Icon(Icons.format_quote, size: 20.sp, color: Colors.grey),
           ),
         ],
       ),

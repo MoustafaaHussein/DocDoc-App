@@ -2,7 +2,6 @@ import 'package:camera/camera.dart';
 import 'package:image/image.dart' as img_lib;
 import 'dart:math' as math;
 
-
 extension ReshapeList on List {
   List<List<T>> reshape<T>(List<int> shape) {
     if (shape.length != 2) {

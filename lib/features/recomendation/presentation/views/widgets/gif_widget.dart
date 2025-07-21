@@ -58,16 +58,7 @@ class _GifWidgetState extends State<GifWidget>
     // The 'gif' package is designed to derive the duration from the GIF itself.
     // However, if it fails to do so for some reason (e.g., malformed GIF or specific platform issues),
     // or if you want to override it, you can provide a default or a custom one.
-    _controller = GifController(
-      vsync: this,
-      // If widget.duration is provided, use it. Otherwise, rely on the gif package
-      // to extract it, or use a reasonable fallback default.
-      // The `gif` package often automatically sets the duration internally when the GIF is loaded.
-      // But if `repeat()` is called *before* that internal duration is set, this error occurs.
-      // So, we'll try to set a duration explicitly if the widget provides one,
-      // otherwise, we trust the `gif` package to handle it *after* the image loads.
-      // The `addPostFrameCallback` ensures we only call play methods after loading.
-    );
+    _controller = GifController(vsync: this);
 
     // This listener attempts to play the GIF once it's actually loaded and its duration
     // has been potentially set by the `gif` package internally.
@@ -83,15 +74,8 @@ class _GifWidgetState extends State<GifWidget>
       }
     });
 
-    // We can also trigger the play/repeat command immediately after the widget
-    // has been laid out. This often works because by this time, the GIF's
-    // duration might have already been parsed and set by the Gif widget internally.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
-        // Only attempt to play if duration is available.
-        // If it's still null here, the listener should eventually pick it up.
-        // Or you might need to add a default duration to the controller constructor
-        // if the GIF metadata extraction is consistently failing.
         if (_controller.duration != null) {
           if (widget.loop) {
             _controller.repeat(min: 0, max: 1);
@@ -122,6 +106,7 @@ class _GifWidgetState extends State<GifWidget>
       controller: _controller,
       image: imageProvider,
       width: widget.width,
+      repeat: ImageRepeat.repeat,
 
       fit: BoxFit.contain,
       // onFetchCompleted: (duration) {
