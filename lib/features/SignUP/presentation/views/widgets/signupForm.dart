@@ -4,20 +4,15 @@ import 'package:docdoc_app/features/Login/presentation/views/widgets/customButto
 import 'package:docdoc_app/features/Login/presentation/views/widgets/customTextFormField.dart';
 import 'package:docdoc_app/features/SignUP/presentation/data/Cubit/SignUpCubit.dart';
 import 'package:docdoc_app/features/SignUP/presentation/data/Cubit/SignUpState.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-<<<<<<< HEAD
-class SignupForm extends StatelessWidget {
-=======
 import '../../data/model/SignUpModel.dart' show SignUpRequestModel;
 
 class SignupForm extends StatefulWidget {
->>>>>>> origin/t2-branch
   const SignupForm({super.key});
 
   @override

@@ -1,5 +1,4 @@
 import 'package:docdoc_app/core/helpers/service_locator.dart';
-import 'package:docdoc_app/features/AiModel/Presentation/views/EmotionDetectorScreen.dart';
 import 'package:docdoc_app/features/AiSession/presentation/views/Ai_View.dart';
 import 'package:docdoc_app/features/Home/presentation/views/CustomNavigationBar.dart';
 import 'package:docdoc_app/features/Home/presentation/views/Home.dart';
@@ -49,10 +48,10 @@ abstract class AppRouter {
     initialLocation: kSplashView,
     routes: [
       GoRoute(path: kHomePage, builder: (context, state) => const HomePage()),
-      GoRoute(
-        path: kEmotiomDetectorView,
-        builder: (context, state) => const EmotionDetectorScreen(),
-      ),
+      // GoRoute(
+      //   path: kEmotiomDetectorView,
+      //   builder: (context, state) => const EmotionDetectorScreen(),
+      // ),
       GoRoute(
         path: kAiSessionView,
         builder: (context, state) => const AiView(),

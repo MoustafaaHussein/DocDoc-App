@@ -1,7 +1,7 @@
 import 'package:camera/camera.dart';
+import 'package:dio/dio.dart';
 import 'package:docdoc_app/core/helpers/secure_storage.dart';
 import 'package:docdoc_app/core/helpers/service_locator.dart';
-import 'package:dio/dio.dart';
 import 'package:docdoc_app/core/routes/app_routes.dart';
 import 'package:docdoc_app/core/themes/app_colors.dart';
 import 'package:docdoc_app/features/Login/Data/Cubit/LoginCubit.dart';
@@ -10,7 +10,6 @@ import 'package:docdoc_app/features/SignUP/presentation/data/repo/SignUpRepo.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,7 +17,9 @@ late List<CameraDescription> cameras;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  final prefs = await SharedPreferences.getInstance();
+  final token = prefs.getString("token");
+  // final router = AppRouter.initRouter(isLoggedIn: token != null);
   try {
     cameras = await availableCameras();
   } on CameraException catch (e) {
@@ -26,26 +27,11 @@ void main() async {
   }
   await SecureStorage.init();
   serviceLocator();
-  runApp(const DocDocApp());
-  }
-
-  final prefs = await SharedPreferences.getInstance();
-  final token = prefs.getString("token");
-
-  final router = AppRouter.initRouter(isLoggedIn: token != null);
-
-  runApp(
-    DevicePreview(
-      enabled: true,
-      builder: (context) => DocDocApp(router: router),
-    ),
-  );
+  runApp(DocDocApp());
 }
 
 class DocDocApp extends StatelessWidget {
-  final GoRouter router;
-
-  const DocDocApp({super.key, required this.router, String? token});
+  const DocDocApp({super.key, String? token});
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +59,7 @@ class DocDocApp extends StatelessWidget {
             ),
             debugShowCheckedModeBanner: false,
 
-            routerConfig: router,
+            routerConfig: AppRouter.router,
           ),
         );
       },
