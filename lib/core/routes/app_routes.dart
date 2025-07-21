@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:docdoc_app/core/helpers/service_locator.dart';
 import 'package:docdoc_app/features/AiModel/Presentation/views/EmotionDetectorScreen.dart';
 import 'package:docdoc_app/features/AiSession/presentation/views/Ai_View.dart';
@@ -22,11 +26,9 @@ import 'package:docdoc_app/features/recomendation/presentation/views/recomendati
 import 'package:docdoc_app/features/recomendation/presentation/views/recomendation_by_category_view.dart';
 import 'package:docdoc_app/features/recomendation/presentation/views/recomendation_view.dart';
 import 'package:docdoc_app/features/splash/presentation/views/splash_view.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
-abstract class AppRouter {
+
+class AppRouter {
   static const kOnBoardView = '/onBoardView';
   static const kSplashView = '/';
   static const kAiSessionView = '/AiSessionView';
@@ -45,199 +47,114 @@ abstract class AppRouter {
   static const kHomePage = '/Home';
   static const kRcomendationByCategoryDetailsView = '/RecomendationDetails';
 
-  static GoRouter router = GoRouter(
-    initialLocation: kSplashView,
-    routes: [
-      GoRoute(path: kHomePage, builder: (context, state) => const HomePage()),
-      GoRoute(
-        path: kEmotiomDetectorView,
-        builder: (context, state) => const EmotionDetectorScreen(),
-      ),
-      GoRoute(
-        path: kAiSessionView,
-        builder: (context, state) => const AiView(),
-      ),
-      GoRoute(
-        path: kEmojiSwitcherView,
-        builder: (context, state) => const EmojiSwitchScreen(),
-      ),
-      GoRoute(
-        path: kSplashView,
-        builder: (context, state) => const SplashView(),
-      ),
-      GoRoute(
-        path: kPersonInformationView,
-        builder: (context, state) => const Personinformation(),
-      ),
-      GoRoute(path: kHomeView, builder: (context, state) => const HomeScreen()),
-      GoRoute(
-        path: kLoginView,
-        builder: (context, state) => const Loginscreen(),
-      ),
-      GoRoute(
-        path: kSignUpView,
-        builder: (context, state) => const SignupScreen(),
-      ),
-      GoRoute(
-        path: kOnBoardView,
-        pageBuilder: (context, state) {
-          return CustomTransitionPage(
+  static GoRouter initRouter({required bool isLoggedIn}) {
+    return GoRouter(
+      initialLocation: isLoggedIn ? kHomePage : kLoginView,
+      routes: [
+        GoRoute(path: kHomePage, builder: (context, state) => const HomePage()),
+        GoRoute(path: kEmotiomDetectorView, builder: (context, state) => const EmotionDetectorScreen()),
+        GoRoute(path: kAiSessionView, builder: (context, state) => const AiView()),
+        GoRoute(path: kEmojiSwitcherView, builder: (context, state) => const EmojiSwitchScreen()),
+        GoRoute(path: kSplashView, builder: (context, state) => const SplashView()),
+        GoRoute(path: kPersonInformationView, builder: (context, state) => const Personinformation()),
+        GoRoute(path: kHomeView, builder: (context, state) => const HomeScreen()),
+        GoRoute(path: kLoginView, builder: (context, state) => const Loginscreen()),
+        GoRoute(path: kSignUpView, builder: (context, state) => const SignupScreen()),
+
+       
+        GoRoute(
+          path: kOnBoardView,
+          pageBuilder: (context, state) => CustomTransitionPage(
             child: const OnBoardView(),
-            transitionsBuilder: (
-              context,
-              animation,
-              secondaryAnimation,
-              child,
-            ) {
-              return FadeTransition(opacity: animation, child: child);
-            },
-          );
-        },
-      ),
-      GoRoute(
-        path: kAddNewPaymentMethod,
-        pageBuilder: (context, state) {
-          return CustomTransitionPage(
+            transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+                FadeTransition(opacity: animation, child: child),
+          ),
+        ),
+
+       
+        GoRoute(
+          path: kAddNewPaymentMethod,
+          pageBuilder: (context, state) => CustomTransitionPage(
             child: BlocProvider(
               create: (context) => PaymentBloc(getIt.get<PaymentRepositry>()),
               child: const AddPaymentMethodView(),
             ),
-            transitionsBuilder: (
-              context,
-              animation,
-              secondaryAnimation,
-              child,
-            ) {
-              return FadeTransition(opacity: animation, child: child);
-            },
-          );
-        },
-      ),
-      GoRoute(
-        path: kPaymentMethods,
-        pageBuilder: (context, state) {
-          return CustomTransitionPage(
+            transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+                FadeTransition(opacity: animation, child: child),
+          ),
+        ),
+        GoRoute(
+          path: kPaymentMethods,
+          pageBuilder: (context, state) => CustomTransitionPage(
             child: BlocProvider(
               create: (context) => PaymentBloc(getIt.get<PaymentRepositry>()),
               child: const PaymentView(),
             ),
-            transitionsBuilder: (
-              context,
-              animation,
-              secondaryAnimation,
-              child,
-            ) {
-              return FadeTransition(opacity: animation, child: child);
-            },
-          );
-        },
-      ),
-      GoRoute(
-        path: kPaymentDetails,
-        pageBuilder: (context, state) {
-          return CustomTransitionPage(
+            transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+                FadeTransition(opacity: animation, child: child),
+          ),
+        ),
+        GoRoute(
+          path: kPaymentDetails,
+          pageBuilder: (context, state) => CustomTransitionPage(
             child: BlocProvider(
               create: (context) => PaymentBloc(getIt.get<PaymentRepositry>()),
               child: CreditCardDetailsView(
                 creditCardEntity: state.extra as CreditCardEntity,
               ),
             ),
-            transitionsBuilder: (
-              context,
-              animation,
-              secondaryAnimation,
-              child,
-            ) {
-              return FadeTransition(opacity: animation, child: child);
-            },
-          );
-        },
-      ),
+            transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+                FadeTransition(opacity: animation, child: child),
+          ),
+        ),
 
-      //Personalize Recomendation
-      GoRoute(
-        path: kPersonalizeRecomendation,
-        pageBuilder: (context, state) {
-          return CustomTransitionPage(
+      
+        GoRoute(
+          path: kPersonalizeRecomendation,
+          pageBuilder: (context, state) => CustomTransitionPage(
             child: BlocProvider(
-              create:
-                  (context) =>
-                      RecomendationBloc(getIt.get<RecomendationRepo>()),
+              create: (context) => RecomendationBloc(getIt.get<RecomendationRepo>()),
               child: const PresonalizeRecomendationView(),
             ),
-            transitionsBuilder: (
-              context,
-              animation,
-              secondaryAnimation,
-              child,
-            ) {
-              return FadeTransition(opacity: animation, child: child);
-            },
-          );
-        },
-      ),
-      GoRoute(
-        path: kRecomendation,
-        pageBuilder: (context, state) {
-          return CustomTransitionPage(
+            transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+                FadeTransition(opacity: animation, child: child),
+          ),
+        ),
+        GoRoute(
+          path: kRecomendation,
+          pageBuilder: (context, state) => CustomTransitionPage(
             child: BlocProvider(
-              create:
-                  (context) =>
-                      RecomendationBloc(getIt.get<RecomendationRepo>()),
+              create: (context) => RecomendationBloc(getIt.get<RecomendationRepo>()),
               child: const RecomendationView(),
             ),
-            transitionsBuilder: (
-              context,
-              animation,
-              secondaryAnimation,
-              child,
-            ) {
-              return FadeTransition(opacity: animation, child: child);
-            },
-          );
-        },
-      ),
-      GoRoute(
-        path: kRecomendationByCategory,
-        pageBuilder: (context, state) {
-          return CustomTransitionPage(
+            transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+                FadeTransition(opacity: animation, child: child),
+          ),
+        ),
+        GoRoute(
+          path: kRecomendationByCategory,
+          pageBuilder: (context, state) => CustomTransitionPage(
             child: BlocProvider(
-              create:
-                  (context) =>
-                      RecomendationBloc(getIt.get<RecomendationRepo>()),
+              create: (context) => RecomendationBloc(getIt.get<RecomendationRepo>()),
               child: RecomendationByCategoryView(
                 subCategory: state.extra as SubCategoryModel,
               ),
             ),
-            transitionsBuilder: (
-              context,
-              animation,
-              secondaryAnimation,
-              child,
-            ) {
-              return FadeTransition(opacity: animation, child: child);
-            },
-          );
-        },
-      ),
-      GoRoute(
-        path: kRcomendationByCategoryDetailsView,
-        pageBuilder: (context, state) {
-          return CustomTransitionPage(
+            transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+                FadeTransition(opacity: animation, child: child),
+          ),
+        ),
+        GoRoute(
+          path: kRcomendationByCategoryDetailsView,
+          pageBuilder: (context, state) => CustomTransitionPage(
             child: RecomendationByCategoryDetailsView(
               recomendations: state.extra as RecomendationImageModel,
             ),
-            transitionsBuilder: (
-              context,
-              animation,
-              secondaryAnimation,
-              child,
-            ) {
-              return FadeTransition(opacity: animation, child: child);
-            },
-          );
-        },
-      ),
-    ],
-  );
+            transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+                FadeTransition(opacity: animation, child: child),
+          ),
+        ),
+      ],
+    );
+  }
 }

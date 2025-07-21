@@ -13,6 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:device_preview/device_preview.dart';
 
 late List<CameraDescription> cameras;
 
@@ -24,10 +25,9 @@ void main() async {
   } on CameraException catch (e) {
     print('Error accessing cameras: $e');
   }
+
   await SecureStorage.init();
   serviceLocator();
-  runApp(const DocDocApp());
-  }
 
   final prefs = await SharedPreferences.getInstance();
   final token = prefs.getString("token");
@@ -36,7 +36,7 @@ void main() async {
 
   runApp(
     DevicePreview(
-      enabled: true,
+      enabled: false,
       builder: (context) => DocDocApp(router: router),
     ),
   );
@@ -45,7 +45,7 @@ void main() async {
 class DocDocApp extends StatelessWidget {
   final GoRouter router;
 
-  const DocDocApp({super.key, required this.router, String? token});
+  const DocDocApp({super.key, required this.router});
 
   @override
   Widget build(BuildContext context) {
@@ -57,22 +57,15 @@ class DocDocApp extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(create: (_) => LoginCubit(AuthRepository(dio: Dio()))),
-            BlocProvider(
-              create: (_) => SignUpCubit(AuthRepository(dio: Dio())),
-            ),
+            BlocProvider(create: (_) => SignUpCubit(AuthRepository(dio: Dio()))),
           ],
           child: MaterialApp.router(
             supportedLocales: const [Locale('ar'), Locale('en')],
-            // locale: DevicePreview.locale(context),
-            // builder: DevicePreview.appBuilder,
             theme: ThemeData.dark().copyWith(
-              textTheme: GoogleFonts.poppinsTextTheme(
-                ThemeData.dark().textTheme,
-              ),
+              textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
               scaffoldBackgroundColor: AppColors.kDarkModeBackgroundColor,
             ),
             debugShowCheckedModeBanner: false,
-
             routerConfig: router,
           ),
         );
