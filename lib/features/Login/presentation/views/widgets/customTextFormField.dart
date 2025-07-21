@@ -5,7 +5,8 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 class CustomTextFormField extends StatefulWidget {
   final String label;
   final TextEditingController controller;
-  final IconData icon;
+  final IconData? icon;
+
   final bool obscureText;
   final TextInputType keyboardType;
   final String? Function(String?)? validator;
@@ -15,7 +16,7 @@ class CustomTextFormField extends StatefulWidget {
     super.key,
     required this.label,
     required this.controller,
-    this.icon = IconlyLight.message,
+    this.icon,
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
     this.validator,
@@ -67,11 +68,15 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             decoration: InputDecoration(
               hintText: widget.hinttext,
               hintStyle: TextStyle(color: Colors.grey),
-              prefixIcon: Icon(
-                widget.icon,
-                color: const Color(0xFFA2A2A7),
-                size: 20.sp,
-              ),
+              prefixIcon:
+                  widget.icon != null
+                      ? Icon(
+                        widget.icon,
+                        color: const Color(0xFFA2A2A7),
+                        size: 20.sp,
+                      )
+                      : null,
+
               suffixIcon:
                   widget.obscureText
                       ? IconButton(

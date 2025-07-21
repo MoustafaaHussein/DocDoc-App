@@ -3,6 +3,9 @@ import 'package:docdoc_app/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class EmotionResultScreen extends StatelessWidget {
   final List<String> labels;
@@ -33,8 +36,8 @@ class EmotionResultScreen extends StatelessWidget {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pop(); // العودة من شاشة النتائج
-                  onRescan(); // استدعاء دالة إعادة المسح
+                  Navigator.of(context).pop();
+                  onRescan();
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 15),
@@ -133,7 +136,7 @@ class EmotionResultScreen extends StatelessWidget {
               ),
             ),
             const Text(
-              " All Propabilities",
+              " All Probabilities",
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -178,8 +181,8 @@ class EmotionResultScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pop(); // العودة إلى شاشة الكاميرا
-                onRescan(); // استدعاء دالة إعادة المسح
+                Navigator.of(context).pop();
+                onRescan();
               },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 15),
@@ -189,7 +192,28 @@ class EmotionResultScreen extends StatelessWidget {
                 ),
               ),
               child: const Text(
-                "Scaan Again ",
+                "Scan Again",
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ),
+            ),
+            const SizedBox(height: 12),
+            ElevatedButton(
+              onPressed: () async {
+                await submitEmotionToApi(
+                  context,
+                  dominantEmotion,
+                  maxProbability,
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                backgroundColor: Colors.green,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              child: const Text(
+                "Select This Scan",
                 style: TextStyle(fontSize: 18, color: Colors.white),
               ),
             ),

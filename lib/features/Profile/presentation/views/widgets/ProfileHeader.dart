@@ -1,10 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:docdoc_app/core/routes/app_routes.dart';
 import 'package:docdoc_app/core/themes/app_colors.dart';
 import 'package:docdoc_app/features/Profile/presentation/views/widgets/SettingTile.dart';
+import 'package:docdoc_app/features/SignUP/presentation/data/repo/SignUpRepo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileHeaderScreen extends StatefulWidget {
   const ProfileHeaderScreen({super.key});
@@ -15,6 +18,24 @@ class ProfileHeaderScreen extends StatefulWidget {
 
 class _ProfileHeaderScreenState extends State<ProfileHeaderScreen> {
   bool isDarkMode = false;
+
+  String? username;
+
+  @override
+  void initState() {
+    super.initState();
+    getUserName();
+  }
+
+  void getUserName() async {
+    final prefs = await SharedPreferences.getInstance();
+    final firstName = prefs.getString("userFirstName") ?? '';
+    final lastName = prefs.getString("userLastName") ?? '';
+    setState(() {
+      username = '$firstName $lastName';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -85,9 +106,12 @@ class _ProfileHeaderScreenState extends State<ProfileHeaderScreen> {
                 SizedBox(height: 16.h),
 
                 // الاسم
-                const Text(
-                  'Taher Farh',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                Text(
+                  username ?? 'User',
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 SizedBox(height: 4.h),
 
@@ -157,7 +181,43 @@ class _ProfileHeaderScreenState extends State<ProfileHeaderScreen> {
                   ),
                 ),
                 SizedBox(height: 8.h),
-                SettingsTile(icon: Ionicons.log_out_outline, title: "Log Out"),
+                SettingsTile(
+                  icon: Ionicons.log_out_outline,
+                  title: "Log Out",
+                  onTap: () async {
+                    final shouldLogout = await showDialog<bool>(
+                      context: context,
+                      builder:
+                          (context) => AlertDialog(
+                            title: const Text("Confirm Logout"),
+                            content: const Text(
+                              "Are you sure you want to log out?",
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed:
+                                    () => Navigator.of(context).pop(false),
+                                child: const Text("No"),
+                              ),
+                              TextButton(
+                                onPressed:
+                                    () => Navigator.of(context).pop(true),
+                                child: const Text("Yes"),
+                              ),
+                            ],
+                          ),
+                    );
+
+                    if (shouldLogout == true) {
+                      final repo = AuthRepository(dio: Dio());
+                      await repo.logout();
+
+                      if (context.mounted) {
+                        context.go(AppRouter.kLoginView);
+                      }
+                    }
+                  },
+                ),
               ],
             ),
           ),

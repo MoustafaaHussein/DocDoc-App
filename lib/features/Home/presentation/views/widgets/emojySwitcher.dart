@@ -14,32 +14,67 @@ class _EmojiSwitchScreenState extends State<EmojiSwitchScreen> {
     {
       'imagePath': 'assets/images/neutral.png',
       'name': 'Neutral',
-      'color': Colors.blueGrey,
+      'color': Colors.grey, // حيادي
     },
     {
       'imagePath': 'assets/images/angry.png',
       'name': 'Angry',
-      'color': Colors.redAccent,
+      'color': Colors.redAccent, // غضب
     },
     {
       'imagePath': 'assets/images/happiness.png',
       'name': 'Happy',
-      'color': Colors.amber,
+      'color': Colors.amber, // سعادة
     },
     {
       'imagePath': 'assets/images/sad-face.png',
       'name': 'Sad',
-      'color': Colors.indigo,
+      'color': Colors.blue, // حزن
     },
     {
       'imagePath': 'assets/images/fear.png',
       'name': 'Fear',
-      'color': Colors.purple,
+      'color': Colors.deepPurple, // خوف
     },
     {
       'imagePath': 'assets/images/disgusted.png',
       'name': 'Disgusted',
-      'color': Colors.green,
+      'color': Colors.teal, // اشمئزاز
+    },
+    {
+      'imagePath': 'assets/images/anxiety.png',
+      'name': 'Anxiety',
+      'color': Colors.orangeAccent, // قلق
+    },
+    {
+      'imagePath': 'assets/images/banicked.png',
+      'name': 'Panicked',
+      'color': Colors.deepOrange, // ذعر
+    },
+    {
+      'imagePath': 'assets/images/bored.png',
+      'name': 'Bored',
+      'color': Colors.brown, // ملل
+    },
+    {
+      'imagePath': 'assets/images/confused.png',
+      'name': 'Confused',
+      'color': Colors.indigoAccent, // ارتباك
+    },
+    {
+      'imagePath': 'assets/images/hopeless.png',
+      'name': 'Hopeless',
+      'color': Colors.black54, // يأس
+    },
+    {
+      'imagePath': 'assets/images/streesed.png',
+      'name': 'Stressed',
+      'color': Colors.pinkAccent, // توتر
+    },
+    {
+      'imagePath': 'assets/images/worried.png',
+      'name': 'Worried',
+      'color': Colors.lightBlue, // قلق
     },
   ];
 
@@ -214,7 +249,7 @@ class _EmojiSwitchScreenState extends State<EmojiSwitchScreen> {
                   print('Selected Emotion: $selectedEmotionName');
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('تم اختيار: $selectedEmotionName'),
+                      content: Text(' $selectedEmotionName Selected'),
                       duration: const Duration(seconds: 1),
                     ),
                   );

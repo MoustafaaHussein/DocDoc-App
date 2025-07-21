@@ -2,79 +2,340 @@ import 'package:docdoc_app/core/routes/app_routes.dart';
 import 'package:docdoc_app/core/styles/TextStyles.dart';
 import 'package:docdoc_app/features/Login/presentation/views/widgets/customButton.dart';
 import 'package:docdoc_app/features/Login/presentation/views/widgets/customTextFormField.dart';
+import 'package:docdoc_app/features/SignUP/presentation/data/Cubit/SignUpCubit.dart';
+import 'package:docdoc_app/features/SignUP/presentation/data/Cubit/SignUpState.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+<<<<<<< HEAD
 class SignupForm extends StatelessWidget {
+=======
+import '../../data/model/SignUpModel.dart' show SignUpRequestModel;
+
+class SignupForm extends StatefulWidget {
+>>>>>>> origin/t2-branch
   const SignupForm({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final NameController = TextEditingController();
-    final PhoneController = TextEditingController();
-    final EmailController = TextEditingController();
-    final PasswordController = TextEditingController();
+  State<SignupForm> createState() => _SignupFormState();
+}
 
+class _SignupFormState extends State<SignupForm> {
+  final _formKey = GlobalKey<FormState>();
+
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final phoneController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
+
+  DateTime? selectedDate;
+  String? selectedGender;
+
+  @override
+  void dispose() {
+    firstNameController.dispose();
+    lastNameController.dispose();
+    phoneController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime(1990),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<SignUpCubit, SignUpState>(
+      listener: (context, state) {
+        if (state is SignUpSuccess) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(const SnackBar(content: Text('Sign Up Successful')));
+          GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
+        } else if (state is SignUpFailure) {
+          print(state.errorMessage);
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
+        }
+      },
+      builder: (context, state) {
+        return AbsorbPointer(
+          absorbing: state is SignUpLoading,
+          child: Stack(
+            children: [
+              _buildFormContent(context),
+              if (state is SignUpLoading)
+                const Center(child: CircularProgressIndicator()),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildFormContent(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(12.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView(
         children: [
-          SizedBox(height: 20.h),
-          Text("Sign Up", style: Textstyles.font32White500Weight),
-          SizedBox(height: 20.h),
+          Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 20.h),
+                Text("Sign Up", style: Textstyles.font32White500Weight),
+                SizedBox(height: 20.h),
 
-          CustomTextFormField(
-            label: "Full Name",
-            controller: NameController,
-            hinttext: "Tony Abraham",
-          ),
+                CustomTextFormField(
+                  label: "First Name",
+                  controller: firstNameController,
+                  hinttext: "Taher",
+                  icon: Icons.person,
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'First name is required';
+                    }
+                    return null;
+                  },
+                ),
 
-          CustomTextFormField(
-            label: "Phone Number",
-            controller: PhoneController,
-            hinttext: "+88520577931",
-          ),
+                CustomTextFormField(
+                  label: "Last Name",
+                  controller: lastNameController,
+                  hinttext: "Farh",
+                  icon: Icons.person,
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Last name is required';
+                    }
+                    return null;
+                  },
+                ),
 
-          CustomTextFormField(
-            label: "Email Address",
-            controller: EmailController,
-            hinttext: "example@example.com",
-          ),
+                CustomTextFormField(
+                  label: "Phone Number",
+                  controller: phoneController,
+                  hinttext: "+201234567890",
+                  icon: Icons.phone,
+                  keyboardType: TextInputType.phone,
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Phone number is required';
+                    }
+                    if (!RegExp(r'^\+?\d{10,15}$').hasMatch(value)) {
+                      return 'Enter a valid phone number';
+                    }
+                    return null;
+                  },
+                ),
 
-          CustomTextFormField(
-            label: "Password",
-            controller: PasswordController,
-            hinttext: "••••••••",
-            obscureText: true,
-            icon: IconlyLight.lock,
-          ),
+                CustomTextFormField(
+                  label: "Email Address",
+                  controller: emailController,
+                  hinttext: "example@example.com",
+                  icon: Icons.email,
+                  keyboardType: TextInputType.emailAddress,
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Email is required';
+                    }
+                    if (!RegExp(
+                      r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                    ).hasMatch(value.trim())) {
+                      return 'Enter a valid email';
+                    }
+                    return null;
+                  },
+                ),
 
-          CusttomButton(text: "Sign Up", onTap: () {}),
+                CustomTextFormField(
+                  label: "Password",
+                  controller: passwordController,
+                  hinttext: "••••••••",
+                  obscureText: true,
+                  icon: IconlyLight.lock,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Password is required';
+                    }
+                    if (value.length < 6) {
+                      return 'Password must be at least 6 characters';
+                    }
+                    if (!RegExp(
+                      r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$',
+                    ).hasMatch(value)) {
+                      return 'Password must contain letters and numbers';
+                    }
+                    return null;
+                  },
+                ),
 
-          SizedBox(height: 16.h),
+                CustomTextFormField(
+                  label: "Confirm Password",
+                  controller: confirmPasswordController,
+                  hinttext: "••••••••",
+                  obscureText: true,
+                  icon: IconlyLight.lock,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please confirm your password';
+                    }
+                    if (value != passwordController.text) {
+                      return 'Passwords do not match';
+                    }
+                    return null;
+                  },
+                ),
 
-          Center(
-            child: InkWell(
-              onTap: () {
-                GoRouter.of(context).push(AppRouter.kLoginView);
-              },
-              child: Text.rich(
-                TextSpan(
-                  children: [
-                    TextSpan(
-                      text: 'I already have an account. ',
-                      style: Textstyles.font14Grey400Weight,
+                SizedBox(height: 12.h),
+                Text("Date of Birth", style: Textstyles.font14Grey400Weight),
+                SizedBox(height: 8.h),
+                GestureDetector(
+                  onTap: () => _selectDate(context),
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(
+                      vertical: 14.h,
+                      horizontal: 12.w,
                     ),
-                    TextSpan(
-                      text: 'Sign In',
-                      style: Textstyles.font14MainColor500Weight,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF1E1E1E),
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    child: Text(
+                      selectedDate != null
+                          ? "${selectedDate!.toLocal()}".split(' ')[0]
+                          : "Select Date",
+                      style: TextStyle(
+                        color:
+                            selectedDate != null
+                                ? Colors.white
+                                : const Color(0xFFA2A2A7),
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 16.h),
+                Text("Gender", style: Textstyles.font14Grey400Weight),
+                SizedBox(height: 8.h),
+                Row(
+                  children: [
+                    Expanded(
+                      child: RadioListTile<String>(
+                        title: const Text(
+                          "Male",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        value: "Male",
+                        groupValue: selectedGender,
+                        onChanged: (val) {
+                          setState(() => selectedGender = val);
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: RadioListTile<String>(
+                        title: const Text(
+                          "Female",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        value: "Female",
+                        groupValue: selectedGender,
+                        onChanged: (val) {
+                          setState(() => selectedGender = val);
+                        },
+                      ),
                     ),
                   ],
                 ),
-              ),
+
+                SizedBox(height: 16.h),
+
+                CusttomButton(
+                  text: "Sign Up",
+                  onTap: () {
+                    if (_formKey.currentState!.validate()) {
+                      if (selectedDate == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Please select your date of birth'),
+                          ),
+                        );
+                        return;
+                      }
+                      if (selectedGender == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Please select your gender'),
+                          ),
+                        );
+                        return;
+                      }
+
+                      final model = SignUpRequestModel(
+                        firstName: firstNameController.text.trim(),
+                        lastName: lastNameController.text.trim(),
+                        email: emailController.text.trim(),
+                        password: passwordController.text,
+                        confirmPassword: confirmPasswordController.text,
+                        phoneNumber: phoneController.text.trim(),
+                        dateOfBirth: selectedDate!.toUtc().toIso8601String(),
+
+                        gender: selectedGender!,
+                      );
+
+                      context.read<SignUpCubit>().userSignUp(model);
+                    }
+                  },
+                ),
+
+                SizedBox(height: 16.h),
+
+                Center(
+                  child: InkWell(
+                    onTap: () {
+                      GoRouter.of(context).push(AppRouter.kLoginView);
+                    },
+                    child: Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'I already have an account. ',
+                            style: Textstyles.font14Grey400Weight,
+                          ),
+                          TextSpan(
+                            text: 'Sign In',
+                            style: Textstyles.font14MainColor500Weight,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
