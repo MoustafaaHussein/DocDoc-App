@@ -19,6 +19,7 @@ import 'package:docdoc_app/features/recomendation/presentation/manger/bloc/recom
 import 'package:docdoc_app/features/recomendation/presentation/views/presonalize_recomendation_view.dart';
 import 'package:docdoc_app/features/recomendation/presentation/views/recomendation_by_category_details_view.dart';
 import 'package:docdoc_app/features/recomendation/presentation/views/recomendation_by_category_view.dart';
+import 'package:docdoc_app/features/recomendation/presentation/views/recomendation_by_emotions_view.dart';
 import 'package:docdoc_app/features/recomendation/presentation/views/recomendation_view.dart';
 import 'package:docdoc_app/features/splash/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +44,7 @@ class AppRouter {
   static const kPersonInformationView = '/PersonInformationView';
   static const kHomePage = '/Home';
   static const kRcomendationByCategoryDetailsView = '/RecomendationDetails';
+  static const kRecomendationByEmotions = '/RecomenadtionByEmotions';
 
   static GoRouter initRouter({required bool isLoggedIn}) {
     return GoRouter(
@@ -189,8 +191,30 @@ class AppRouter {
           path: kRcomendationByCategoryDetailsView,
           pageBuilder:
               (context, state) => CustomTransitionPage(
-                child: RecomendationByCategoryDetailsView(
-                  recomendations: state.extra as RecomendationImageModel,
+                child: BlocProvider(
+                  create:
+                      (context) =>
+                          RecomendationBloc(getIt.get<RecomendationRepo>()),
+                  child: RecomendationByCategoryDetailsView(
+                    recomendations: state.extra as RecomendationImageModel,
+                  ),
+                ),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) =>
+                        FadeTransition(opacity: animation, child: child),
+              ),
+        ),
+        GoRoute(
+          path: kRecomendationByEmotions,
+          pageBuilder:
+              (context, state) => CustomTransitionPage(
+                child: BlocProvider(
+                  create:
+                      (context) =>
+                          RecomendationBloc(getIt.get<RecomendationRepo>()),
+                  child: RecomendationByEmotionsView(
+                    selectedEmotion: state.extra as String,
+                  ),
                 ),
                 transitionsBuilder:
                     (context, animation, secondaryAnimation, child) =>

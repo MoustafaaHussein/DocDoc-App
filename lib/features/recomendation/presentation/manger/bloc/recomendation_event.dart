@@ -21,3 +21,9 @@ class CompleteExcerciseEvent extends RecomendationEvent {
 
   const CompleteExcerciseEvent(this.feedBack, this.excersiceId);
 }
+
+class GetRecomendationByEmotion extends RecomendationEvent {
+  final String selectedEmotion;
+
+  const GetRecomendationByEmotion({required this.selectedEmotion});
+}

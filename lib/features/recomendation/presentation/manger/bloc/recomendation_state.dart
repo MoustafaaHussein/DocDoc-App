@@ -59,9 +59,15 @@ final class GetRecomendationBySelectedEmotionLoading
     extends RecomendationState {}
 
 final class GetRecomendationBySelectedEmotionFailed extends RecomendationState {
-  late final String errorMessage;
+  final String errorMessage;
+
+  const GetRecomendationBySelectedEmotionFailed({required this.errorMessage});
 }
 
 final class GetRecomendationBySelectedEmotionLoaded extends RecomendationState {
-  late final List<RecomendationByEmoitionsModel> emotionsRecomendations;
+  final List<RecomendationByEmoitionsModel> emotionsRecomendations;
+
+  const GetRecomendationBySelectedEmotionLoaded({
+    required this.emotionsRecomendations,
+  });
 }

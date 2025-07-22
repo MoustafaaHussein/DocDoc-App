@@ -65,6 +65,26 @@ class RecomendationBloc extends Bloc<RecomendationEvent, RecomendationState> {
             return emit(CompleteExcerciseSuccessful(sucessMessage: sucess));
           },
         );
+      } else if (event is GetRecomendationByEmotion) {
+        var result = await recomendationRepo.getRecomendationsByEmotions(
+          selectedEmotion: event.selectedEmotion,
+        );
+        result.fold(
+          (failure) {
+            return emit(
+              GetRecomendationBySelectedEmotionFailed(
+                errorMessage: failure.errorMessage,
+              ),
+            );
+          },
+          (recomendations) {
+            return emit(
+              GetRecomendationBySelectedEmotionLoaded(
+                emotionsRecomendations: recomendations,
+              ),
+            );
+          },
+        );
       }
     });
   }

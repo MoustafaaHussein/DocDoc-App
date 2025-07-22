@@ -1,5 +1,4 @@
 import 'package:camera/camera.dart';
-import 'package:device_preview/device_preview.dart';
 import 'package:dio/dio.dart';
 import 'package:docdoc_app/core/helpers/secure_storage.dart';
 import 'package:docdoc_app/core/helpers/service_locator.dart';
@@ -33,12 +32,7 @@ void main() async {
 
   final router = AppRouter.initRouter(isLoggedIn: token != null);
 
-  runApp(
-    DevicePreview(
-      enabled: false,
-      builder: (context) => DocDocApp(router: router),
-    ),
-  );
+  runApp(DocDocApp(router: router));
 }
 
 class DocDocApp extends StatelessWidget {

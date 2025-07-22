@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:docdoc_app/core/models/emoji_model.dart';
 import 'package:flutter/material.dart';
 
 Color getDiffcultyLevel(String level) {
@@ -18,4 +19,14 @@ Map<String, dynamic> convertToMap(String feedBack, String timeTaken) {
 
 String convertMapToJson(Map<String, dynamic> data) {
   return jsonEncode(data);
+}
+
+List<Map<String, dynamic>?> convertToEmojiDetails(List<String> names) {
+  for (final name in names) {
+    print('$name => ${emojiMap[name]}');
+  }
+  return names
+      .map((name) => emojiMap[name]) // `name` is already lowercase
+      .where((emoji) => emoji != null) // skip unknown ones
+      .toList();
 }
