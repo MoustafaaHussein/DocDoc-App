@@ -30,3 +30,13 @@ List<Map<String, dynamic>?> convertToEmojiDetails(List<String> names) {
       .where((emoji) => emoji != null) // skip unknown ones
       .toList();
 }
+
+String convertDataToRaw({
+  required String feedBack,
+  required String timeTakenToComplete,
+}) {
+  final String rawData = convertMapToJson(
+    convertToMap(feedBack, timeTakenToComplete),
+  );
+  return rawData;
+}

@@ -3,26 +3,22 @@ import 'package:docdoc_app/core/helpers/methods.dart';
 import 'package:docdoc_app/core/themes/app_styles.dart';
 import 'package:docdoc_app/core/widgets/custom_loading.dart';
 import 'package:docdoc_app/core/widgets/customized_error.dart';
-import 'package:docdoc_app/core/widgets/ratting_dialog.dart';
-import 'package:docdoc_app/features/recomendation/data/models/recomendation_by_category_model/recomendation_by_category_model.dart';
+import 'package:docdoc_app/features/recomendation/data/models/recomendation_by_emoitions_model/recomendation_by_emoitions_model.dart';
 import 'package:docdoc_app/features/recomendation/presentation/manger/bloc/recomendation_bloc.dart';
 import 'package:docdoc_app/features/recomendation/presentation/views/widgets/complete_excercise_dialog.dart';
-import 'package:docdoc_app/features/recomendation/presentation/views/widgets/gif_widget.dart';
+import 'package:docdoc_app/features/recomendation/presentation/views/widgets/emojis_list.dart';
+import 'package:docdoc_app/features/recomendation/presentation/views/widgets/recomendation_by_category_details_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 
-class RecomendationByCategoryDetailsViewBody extends StatelessWidget {
-  RecomendationByCategoryDetailsViewBody({
+class RecomendationsByEmotionsDetailsBody extends StatelessWidget {
+  RecomendationsByEmotionsDetailsBody({
     super.key,
     required this.recomendations,
-    required this.image,
   });
-  final RecomendationByCategoryModel recomendations;
-  final String image;
   late String feedBack, timeTakenToComplete;
-
+  final RecomendationByEmoitionsModel recomendations;
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -33,17 +29,7 @@ class RecomendationByCategoryDetailsViewBody extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: FittedBox(
-                    fit: BoxFit.contain,
-                    child: GifWidget(gifPath: image, isNetwork: false),
-                  ),
-                ),
-                SizedBox(height: 20),
+                SizedBox(height: 30),
                 Row(
                   children: [
                     FittedBox(
@@ -109,6 +95,16 @@ class RecomendationByCategoryDetailsViewBody extends StatelessWidget {
                     ),
                   ],
                 ),
+
+                SizedBox(height: 20),
+                Text('Do You feel ?'),
+                SizedBox(
+                  width: double.infinity,
+                  child: EmojisList(
+                    receivedEmojis: recomendations.targetEmotions!,
+                  ),
+                ),
+
                 SizedBox(height: 20),
                 Text('Instruction'),
                 SizedBox(height: 20),
@@ -155,8 +151,8 @@ class RecomendationByCategoryDetailsViewBody extends StatelessWidget {
                       BlocProvider.of<RecomendationBloc>(context).add(
                         CompleteExcerciseEvent(
                           convertDataToRaw(
-                            feedBack: feedBack,
-                            timeTakenToComplete: timeTakenToComplete,
+                            feedBack: '',
+                            timeTakenToComplete: '',
                           ),
                           recomendations.id!,
                         ),
@@ -166,59 +162,6 @@ class RecomendationByCategoryDetailsViewBody extends StatelessWidget {
                 ],
               );
             },
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class RateExcerciseWidget extends StatelessWidget {
-  const RateExcerciseWidget({
-    super.key,
-    required this.buttonText,
-    required this.titleText,
-    required this.textColor,
-    required this.textIcon,
-    this.iconColor,
-    required this.onSubmit,
-  });
-  final String buttonText, titleText;
-  final Color textColor;
-  final IconData textIcon;
-  final Color? iconColor;
-  final VoidCallback onSubmit;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        GestureDetector(
-          onTap: () {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return RatingDialogWidget(
-                  onSubmit: onSubmit,
-                  onCancel: () {
-                    GoRouter.of(context).pop();
-                  },
-                  titleText: titleText,
-                );
-              },
-            );
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                buttonText,
-                style: AppStyles.styleSemiBold18(
-                  context,
-                ).copyWith(color: textColor),
-              ),
-              SizedBox(width: 12),
-              Icon(textIcon, color: iconColor ?? Colors.white),
-            ],
           ),
         ),
       ],

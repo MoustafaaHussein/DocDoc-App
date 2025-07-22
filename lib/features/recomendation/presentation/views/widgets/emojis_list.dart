@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:docdoc_app/core/helpers/methods.dart';
 import 'package:flutter/material.dart';
 
@@ -13,10 +11,10 @@ class EmojisList extends StatelessWidget {
     final List<Map<String, dynamic>?> selectedEmojis = convertToEmojiDetails(
       receivedEmojis,
     );
-    log('${selectedEmojis.length}');
 
     return SizedBox(
       height: 100,
+      width: double.infinity,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: selectedEmojis.length,
