@@ -18,4 +18,8 @@ abstract class AppContainersStyle {
     color: Color(0xff24243B),
     borderRadius: BorderRadius.circular(20),
   );
+  static final proMembershipContainerStyles = BoxDecoration(
+    color: const Color(0xFF034F75),
+    borderRadius: BorderRadius.circular(20),
+  );
 }

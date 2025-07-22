@@ -7,7 +7,6 @@ import 'package:docdoc_app/features/recomendation/data/models/recomendation_by_e
 import 'package:docdoc_app/features/recomendation/presentation/manger/bloc/recomendation_bloc.dart';
 import 'package:docdoc_app/features/recomendation/presentation/views/widgets/complete_excercise_dialog.dart';
 import 'package:docdoc_app/features/recomendation/presentation/views/widgets/emojis_list.dart';
-import 'package:docdoc_app/features/recomendation/presentation/views/widgets/recomendation_by_category_details_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -21,6 +20,8 @@ class RecomendationsByEmotionsDetailsBody extends StatelessWidget {
   final RecomendationByEmoitionsModel recomendations;
   @override
   Widget build(BuildContext context) {
+    // return ProMembershipWidget();
+
     return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(
@@ -95,7 +96,6 @@ class RecomendationsByEmotionsDetailsBody extends StatelessWidget {
                     ),
                   ],
                 ),
-
                 SizedBox(height: 20),
                 Text('Do You feel ?'),
                 SizedBox(
@@ -104,7 +104,6 @@ class RecomendationsByEmotionsDetailsBody extends StatelessWidget {
                     receivedEmojis: recomendations.targetEmotions!,
                   ),
                 ),
-
                 SizedBox(height: 20),
                 Text('Instruction'),
                 SizedBox(height: 20),
@@ -129,16 +128,6 @@ class RecomendationsByEmotionsDetailsBody extends StatelessWidget {
             builder: (context, state) {
               return Column(
                 children: [
-                  RateExcerciseWidget(
-                    buttonText: 'Rate Recomendation',
-                    titleText: 'Recomendation Review',
-                    textColor: Colors.amberAccent,
-                    textIcon: Icons.star,
-                    iconColor: Colors.amberAccent,
-                    onSubmit: () {},
-                  ),
-                  SizedBox(height: 40),
-
                   ExcersiceDialog(
                     buttonText: 'Complete Excersice',
                     titleText: 'Recomendation Review',
@@ -151,8 +140,8 @@ class RecomendationsByEmotionsDetailsBody extends StatelessWidget {
                       BlocProvider.of<RecomendationBloc>(context).add(
                         CompleteExcerciseEvent(
                           convertDataToRaw(
-                            feedBack: '',
-                            timeTakenToComplete: '',
+                            feedBack: feedBack,
+                            timeTakenToComplete: timeTakenToComplete,
                           ),
                           recomendations.id!,
                         ),

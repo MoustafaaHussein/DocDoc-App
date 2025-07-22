@@ -1,5 +1,6 @@
 import 'package:docdoc_app/core/helpers/assets.dart';
 import 'package:docdoc_app/core/helpers/methods.dart';
+import 'package:docdoc_app/core/routes/app_routes.dart';
 import 'package:docdoc_app/core/themes/app_styles.dart';
 import 'package:docdoc_app/core/widgets/custom_loading.dart';
 import 'package:docdoc_app/core/widgets/customized_error.dart';
@@ -128,7 +129,9 @@ class RecomendationByCategoryDetailsViewBody extends StatelessWidget {
                   errorMessage: state.errorMessage,
                   onRetry: () {},
                 );
-              } else if (state is CompleteExcerciseSuccessful) {}
+              } else if (state is CompleteExcerciseSuccessful) {
+                GoRouter.of(context).pushReplacement(AppRouter.kHomeView);
+              }
             },
             builder: (context, state) {
               return Column(

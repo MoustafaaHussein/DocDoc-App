@@ -22,7 +22,7 @@ class _RecomendationByEmotionsViewState
     BlocProvider.of<RecomendationBloc>(
       context,
     ).add(GetRecomendationByEmotion(selectedEmotion: widget.selectedEmotion));
-    //TODO make widget receive the selcted emojis to be handled with the bloc
+
     super.initState();
   }
 

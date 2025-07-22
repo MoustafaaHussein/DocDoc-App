@@ -24,13 +24,17 @@ class CompleteExerciseDialog extends StatefulWidget {
 class _CompleteExerciseDialogState extends State<CompleteExerciseDialog> {
   bool? isCompleted;
   final TextEditingController feedbackController = TextEditingController();
-  String selectedTime = 'Less than 5 min';
+  String selectedTime = '5';
 
   final List<String> timeOptions = [
-    'Less than 5 min',
-    '5 - 10 min',
-    '10 - 20 min',
-    'More than 20 min',
+    '5',
+    '10',
+    '15',
+    '20',
+    '25',
+    '30',
+    '45',
+    '60',
   ];
 
   @override

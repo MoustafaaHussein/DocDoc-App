@@ -10,15 +10,10 @@ class AuthRepository {
   AuthRepository({required this.dio});
   Future<Map<String, dynamic>> signUp(SignUpRequestModel model) async {
     try {
-      print("📤 Request Body: ${model.toJson()}");
-
       final response = await dio.post(
         "https://mood-api-8urg.onrender.com/api/auth/register",
         data: model.toJson(),
       );
-
-      print("📥 Status Code: ${response.statusCode}");
-      print("📥 Response Body: ${response.data}");
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         return response.data;
@@ -26,7 +21,6 @@ class AuthRepository {
         throw Exception(response.data['message'] ?? 'Sign Up failed');
       }
     } catch (e) {
-      print("❌ DioException: $e");
       rethrow;
     }
   }
@@ -37,8 +31,6 @@ class AuthRepository {
         "https://mood-api-8urg.onrender.com/api/auth/login",
         data: model.toJson(),
       );
-      print("📥 Status Code: ${response.statusCode}");
-      print("📥 Response Body: ${response.data}");
 
       if (response.statusCode == 200) {
         return LoginResponseModel.fromJson(response.data);
@@ -46,7 +38,6 @@ class AuthRepository {
         throw Exception(response.data['message'] ?? 'Login failed');
       }
     } catch (e) {
-      print("❌ DioException: $e");
       rethrow;
     }
   }
