@@ -100,6 +100,15 @@ abstract class AppStyles {
       fontWeight: FontWeight.w600,
     );
   }
+
+  static TextStyle styleSemiBold30(BuildContext context) {
+    return TextStyle(
+      color: Colors.white,
+      fontSize: getResponsiveFontSize(context, fontSize: 30),
+      fontFamily: 'Poppins',
+      fontWeight: FontWeight.w600,
+    );
+  }
 }
 
 // sacleFactor

@@ -38,6 +38,18 @@ class Images {
   /// assets/images/angry.png
   static const String imagesImagesAngry = "assets/images/angry.png";
 
+  /// Assets for imagesImagesAnxiety
+  /// assets/images/anxiety.png
+  static const String imagesImagesAnxiety = "assets/images/anxiety.png";
+
+  /// Assets for imagesImagesBanicked
+  /// assets/images/banicked.png
+  static const String imagesImagesBanicked = "assets/images/banicked.png";
+
+  /// Assets for imagesImagesBored
+  /// assets/images/bored.png
+  static const String imagesImagesBored = "assets/images/bored.png";
+
   /// Assets for imagesImagesBreathing
   /// assets/images/breathing.gif
   static const String imagesImagesBreathing = "assets/images/breathing.gif";
@@ -47,9 +59,17 @@ class Images {
   static const String imagesImagesBreathingOriginal =
       "assets/images/breathing_original.gif";
 
-  /// Assets for imagesImagesCalm  Icon
-  /// assets/images/Calm - Icon.png
-  static const String imagesImagesCalmIcon = "assets/images/Calm - Icon.png";
+  /// Assets for imagesImagesCalmIcon
+  /// assets/images/Calm-Icon.png
+  static const String imagesImagesCalmIcon = "assets/images/Calm-Icon.png";
+
+  /// Assets for imagesImagesCheckMark
+  /// assets/images/check_mark.svg
+  static const String imagesImagesCheckMark = "assets/images/check_mark.svg";
+
+  /// Assets for imagesImagesConfused
+  /// assets/images/confused.png
+  static const String imagesImagesConfused = "assets/images/confused.png";
 
   /// Assets for imagesImagesCreative
   /// assets/images/creative.gif
@@ -63,6 +83,10 @@ class Images {
   /// assets/images/crisis.gif
   static const String imagesImagesCrisis = "assets/images/crisis.gif";
 
+  /// Assets for imagesImagesCritical
+  /// assets/images/critical.png
+  static const String imagesImagesCritical = "assets/images/critical.png";
+
   /// Assets for imagesImagesDeleteTrash
   /// assets/images/deleteTrash.svg
   static const String imagesImagesDeleteTrash = "assets/images/deleteTrash.svg";
@@ -70,6 +94,10 @@ class Images {
   /// Assets for imagesImagesDemoImage
   /// assets/images/DemoImage.png
   static const String imagesImagesDemoImage = "assets/images/DemoImage.png";
+
+  /// Assets for imagesImagesDepression
+  /// assets/images/depression.png
+  static const String imagesImagesDepression = "assets/images/depression.png";
 
   /// Assets for imagesImagesDisgusted
   /// assets/images/disgusted.png
@@ -105,6 +133,10 @@ class Images {
   /// assets/images/fear.png
   static const String imagesImagesFear = "assets/images/fear.png";
 
+  /// Assets for imagesImagesFrustrated
+  /// assets/images/frustrated.png
+  static const String imagesImagesFrustrated = "assets/images/frustrated.png";
+
   /// Assets for imagesImagesHappiness
   /// assets/images/happiness.png
   static const String imagesImagesHappiness = "assets/images/happiness.png";
@@ -112,6 +144,10 @@ class Images {
   /// Assets for imagesImagesHappy
   /// assets/images/Happy.png
   static const String imagesImagesHappy = "assets/images/Happy.png";
+
+  /// Assets for imagesImagesHopeless
+  /// assets/images/hopeless.png
+  static const String imagesImagesHopeless = "assets/images/hopeless.png";
 
   /// Assets for imagesImagesImage1
   /// assets/images/Image1.png
@@ -132,6 +168,10 @@ class Images {
   /// Assets for imagesImagesImg22
   /// assets/images/Img22.png
   static const String imagesImagesImg22 = "assets/images/Img22.png";
+
+  /// Assets for imagesImagesLonley
+  /// assets/images/lonley.png
+  static const String imagesImagesLonley = "assets/images/lonley.png";
 
   /// Assets for imagesImagesMasterCard
   /// assets/images/masterCard.svg
@@ -154,6 +194,10 @@ class Images {
   /// assets/images/MentalHealth.png
   static const String imagesImagesMentalHealth =
       "assets/images/MentalHealth.png";
+
+  /// Assets for imagesImagesNegative
+  /// assets/images/negative.png
+  static const String imagesImagesNegative = "assets/images/negative.png";
 
   /// Assets for imagesImagesNeutral
   /// assets/images/neutral.png
@@ -190,6 +234,14 @@ class Images {
   /// assets/images/Relax.png
   static const String imagesImagesRelax = "assets/images/Relax.png";
 
+  /// Assets for imagesImagesResentful
+  /// assets/images/resentful.png
+  static const String imagesImagesResentful = "assets/images/resentful.png";
+
+  /// Assets for imagesImagesRestless
+  /// assets/images/restless.png
+  static const String imagesImagesRestless = "assets/images/restless.png";
+
   /// Assets for imagesImagesSadFace
   /// assets/images/sad-face.png
   static const String imagesImagesSadFace = "assets/images/sad-face.png";
@@ -202,6 +254,10 @@ class Images {
   /// assets/images/self_care.gif
   static const String imagesImagesSelfCare = "assets/images/self_care.gif";
 
+  /// Assets for imagesImagesSluggish
+  /// assets/images/sluggish.png
+  static const String imagesImagesSluggish = "assets/images/sluggish.png";
+
   /// Assets for imagesImagesSocial
   /// assets/images/social.gif
   static const String imagesImagesSocial = "assets/images/social.gif";
@@ -211,10 +267,22 @@ class Images {
   static const String imagesImagesSplashScreen =
       "assets/images/splash_screen.png";
 
+  /// Assets for imagesImagesStiff
+  /// assets/images/stiff.png
+  static const String imagesImagesStiff = "assets/images/stiff.png";
+
+  /// Assets for imagesImagesStressed
+  /// assets/images/stressed.png
+  static const String imagesImagesStressed = "assets/images/stressed.png";
+
   /// Assets for imagesImagesSuccessfulmessage
   /// assets/images/successfulmessage.png
   static const String imagesImagesSuccessfulmessage =
       "assets/images/successfulmessage.png";
+
+  /// Assets for imagesImagesTense
+  /// assets/images/tense.png
+  static const String imagesImagesTense = "assets/images/tense.png";
 
   /// Assets for imagesImagesThinking
   /// assets/images/Thinking.gif
@@ -223,6 +291,18 @@ class Images {
   /// Assets for imagesImagesTime
   /// assets/images/time.svg
   static const String imagesImagesTime = "assets/images/time.svg";
+
+  /// Assets for imagesImagesTired
+  /// assets/images/tired.png
+  static const String imagesImagesTired = "assets/images/tired.png";
+
+  /// Assets for imagesImagesUngrateful
+  /// assets/images/ungrateful.png
+  static const String imagesImagesUngrateful = "assets/images/ungrateful.png";
+
+  /// Assets for imagesImagesUnmotivated
+  /// assets/images/unmotivated.png
+  static const String imagesImagesUnmotivated = "assets/images/unmotivated.png";
 
   /// Assets for imagesImagesVisa
   /// assets/images/visa.svg
@@ -235,6 +315,10 @@ class Images {
   /// Assets for imagesImagesWet leaves
   /// assets/images/wet leaves.jpg
   static const String imagesImagesWetleaves = "assets/images/wet leaves.jpg";
+
+  /// Assets for imagesImagesWorried
+  /// assets/images/worried.png
+  static const String imagesImagesWorried = "assets/images/worried.png";
 
   /// Assets for imagesImagesYogaLoadingIndicator
   /// assets/images/yoga_loading_indicator.svg
