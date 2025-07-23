@@ -4,6 +4,7 @@ import 'package:docdoc_app/features/Login/presentation/views/widgets/customButto
 import 'package:docdoc_app/features/Login/presentation/views/widgets/customTextFormField.dart';
 import 'package:docdoc_app/features/SignUP/presentation/data/Cubit/SignUpCubit.dart';
 import 'package:docdoc_app/features/SignUP/presentation/data/Cubit/SignUpState.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -100,11 +101,11 @@ class _SignupFormState extends State<SignupForm> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 20.h),
-                Text("Sign Up", style: Textstyles.font32White500Weight),
+                Text("sign_up".tr(), style: Textstyles.font32White500Weight),
                 SizedBox(height: 20.h),
 
                 CustomTextFormField(
-                  label: "First Name",
+                  label: "first_name".tr(),
                   controller: firstNameController,
                   hinttext: "Taher",
                   icon: Icons.person,
@@ -117,7 +118,7 @@ class _SignupFormState extends State<SignupForm> {
                 ),
 
                 CustomTextFormField(
-                  label: "Last Name",
+                  label: "last_name".tr(),
                   controller: lastNameController,
                   hinttext: "Farh",
                   icon: Icons.person,
@@ -130,7 +131,7 @@ class _SignupFormState extends State<SignupForm> {
                 ),
 
                 CustomTextFormField(
-                  label: "Phone Number",
+                  label: "phone_number".tr(),
                   controller: phoneController,
                   hinttext: "+201234567890",
                   icon: Icons.phone,
@@ -147,7 +148,7 @@ class _SignupFormState extends State<SignupForm> {
                 ),
 
                 CustomTextFormField(
-                  label: "Email Address",
+                  label: "email_address".tr(),
                   controller: emailController,
                   hinttext: "example@example.com",
                   icon: Icons.email,
@@ -166,7 +167,7 @@ class _SignupFormState extends State<SignupForm> {
                 ),
 
                 CustomTextFormField(
-                  label: "Password",
+                  label: "password".tr(),
                   controller: passwordController,
                   hinttext: "••••••••",
                   obscureText: true,
@@ -188,7 +189,7 @@ class _SignupFormState extends State<SignupForm> {
                 ),
 
                 CustomTextFormField(
-                  label: "Confirm Password",
+                  label: "confirm_password".tr(),
                   controller: confirmPasswordController,
                   hinttext: "••••••••",
                   obscureText: true,
@@ -205,7 +206,10 @@ class _SignupFormState extends State<SignupForm> {
                 ),
 
                 SizedBox(height: 12.h),
-                Text("Date of Birth", style: Textstyles.font14Grey400Weight),
+                Text(
+                  "date_of_birth".tr(),
+                  style: Textstyles.font14Grey400Weight,
+                ),
                 SizedBox(height: 8.h),
                 GestureDetector(
                   onTap: () => _selectDate(context),
@@ -235,17 +239,17 @@ class _SignupFormState extends State<SignupForm> {
                 ),
 
                 SizedBox(height: 16.h),
-                Text("Gender", style: Textstyles.font14Grey400Weight),
+                Text("gender".tr(), style: Textstyles.font14Grey400Weight),
                 SizedBox(height: 8.h),
                 Row(
                   children: [
                     Expanded(
                       child: RadioListTile<String>(
-                        title: const Text(
-                          "Male",
+                        title: Text(
+                          "male".tr(),
                           style: TextStyle(color: Colors.white),
                         ),
-                        value: "Male",
+                        value: "male".tr(),
                         groupValue: selectedGender,
                         onChanged: (val) {
                           setState(() => selectedGender = val);
@@ -254,11 +258,11 @@ class _SignupFormState extends State<SignupForm> {
                     ),
                     Expanded(
                       child: RadioListTile<String>(
-                        title: const Text(
-                          "Female",
+                        title: Text(
+                          "female".tr(),
                           style: TextStyle(color: Colors.white),
                         ),
-                        value: "Female",
+                        value: "female".tr(),
                         groupValue: selectedGender,
                         onChanged: (val) {
                           setState(() => selectedGender = val);
@@ -271,7 +275,7 @@ class _SignupFormState extends State<SignupForm> {
                 SizedBox(height: 16.h),
 
                 CusttomButton(
-                  text: "Sign Up",
+                  text: "sign_up".tr(),
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
                       if (selectedDate == null) {
@@ -319,11 +323,12 @@ class _SignupFormState extends State<SignupForm> {
                       TextSpan(
                         children: [
                           TextSpan(
-                            text: 'I already have an account. ',
+                            text: 'i_already_have_an_account'.tr(),
                             style: Textstyles.font14Grey400Weight,
                           ),
+
                           TextSpan(
-                            text: 'Sign In',
+                            text: 'sign_in'.tr(),
                             style: Textstyles.font14MainColor500Weight,
                           ),
                         ],

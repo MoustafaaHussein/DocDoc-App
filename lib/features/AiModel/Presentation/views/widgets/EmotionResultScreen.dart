@@ -1,5 +1,7 @@
 import 'package:docdoc_app/core/routes/app_routes.dart';
 import 'package:docdoc_app/core/themes/app_colors.dart';
+import 'package:docdoc_app/features/AiModel/Presentation/views/widgets/submitEmotionButton.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:go_router/go_router.dart';
@@ -33,8 +35,8 @@ class EmotionResultScreen extends StatelessWidget {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pop(); // العودة من شاشة النتائج
-                  onRescan(); // استدعاء دالة إعادة المسح
+                  Navigator.of(context).pop();
+                  onRescan();
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 15),
@@ -56,14 +58,15 @@ class EmotionResultScreen extends StatelessWidget {
 
     double maxProbability = 0.0;
     String dominantEmotion = "غير معروف";
-    if (probabilities.isNotEmpty) {
-      for (int i = 0; i < probabilities.length; i++) {
-        if (i < labels.length && probabilities[i] > maxProbability) {
-          maxProbability = probabilities[i];
-          dominantEmotion = labels[i];
-        }
+
+    for (int i = 0; i < probabilities.length; i++) {
+      if (i < labels.length && probabilities[i] > maxProbability) {
+        maxProbability = probabilities[i];
+        dominantEmotion = labels[i];
       }
     }
+
+    int intensityLevel = ((maxProbability * 10).clamp(1, 10)).round();
 
     return Scaffold(
       appBar: AppBar(
@@ -104,7 +107,7 @@ class EmotionResultScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     const Text(
-                      "  Most Mood",
+                      "Most Mood",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -133,7 +136,7 @@ class EmotionResultScreen extends StatelessWidget {
               ),
             ),
             const Text(
-              " All Propabilities",
+              "All Probabilities",
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -176,10 +179,15 @@ class EmotionResultScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
+            SubmitEmotionButton(
+              emotionType: dominantEmotion,
+              intensityLevel: intensityLevel,
+            ),
+            const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pop(); // العودة إلى شاشة الكاميرا
-                onRescan(); // استدعاء دالة إعادة المسح
+                Navigator.of(context).pop();
+                onRescan();
               },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 15),
@@ -189,7 +197,7 @@ class EmotionResultScreen extends StatelessWidget {
                 ),
               ),
               child: const Text(
-                "Scaan Again ",
+                "Scan Again",
                 style: TextStyle(fontSize: 18, color: Colors.white),
               ),
             ),

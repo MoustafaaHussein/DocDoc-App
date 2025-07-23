@@ -4,6 +4,7 @@ import 'package:docdoc_app/core/themes/app_styles.dart';
 import 'package:docdoc_app/features/Home/presentation/views/widgets/QuoteCard.dart';
 import 'package:docdoc_app/features/Home/presentation/views/widgets/SpecialAppBar.dart';
 import 'package:docdoc_app/features/Home/presentation/views/widgets/customTypes.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -51,13 +52,13 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Emotion Recognizer",
+                  "emotion_recognizer".tr(),
                   style: AppStyles.styleSemiBold24(
                     context,
                   ).copyWith(color: Colors.white),
                 ),
                 Text(
-                  'Ai Features ✨',
+                  'ai_features'.tr(),
                   style: AppStyles.styleRegular14(
                     context,
                   ).copyWith(color: const Color(0xFFA2A2A7)),
@@ -83,12 +84,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '1 on 1 Sessions',
+                        'one_on_one_sessions'.tr(),
                         style: Textstyles.font22Brown800Weight,
                       ),
                       SizedBox(height: 5.h),
                       Text(
-                        "Let’s open up to the things that\n matter the most ",
+                        "open_up".tr(),
                         style: Textstyles.font12Brown400Weight,
                       ),
                       SizedBox(height: 5.h),
@@ -97,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Subscribe Now! ",
+                            "subscribe_now".tr(),
                             style: Textstyles.font16Orange700Weight,
                           ),
 
@@ -121,19 +122,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Row(
                   children: [
                     CustomJournalTile(
-                      title: 'Exercise',
+                      title: 'exercise'.tr(),
                       icon: IconlyLight.activity,
                     ),
-                    const CustomJournalTile(
-                      title: 'Meditation',
+                    CustomJournalTile(
+                      title: 'meditation'.tr(),
                       icon: Icons.self_improvement,
                     ),
                     CustomJournalTile(
-                      title: 'Mental',
+                      title: 'mental'.tr(),
                       icon: Ionicons.bonfire_outline,
                     ),
-                    const CustomJournalTile(
-                      title: 'Self Care',
+                    CustomJournalTile(
+                      title: 'self_care'.tr(),
                       icon: Ionicons.moon_outline,
                     ),
                   ],
@@ -143,10 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             SizedBox(height: 15.h),
 
-            QuoteCard(
-              quote:
-                  " “ It is better to conquer yourself than to win a thousand battles ” ",
-            ),
+            QuoteCard(quote: "quote_battle".tr()),
             SizedBox(height: 15.h),
             InkWell(
               onTap: () {
@@ -165,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'How would you describe your mood?',
+                        'describe_your_mood'.tr(),
                         style: Textstyles.font22Black800Weight,
                       ),
 
@@ -175,7 +173,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Chek It Now !",
+                            "check_it_now".tr(),
                             style: Textstyles.font16OWhite700Weight,
                           ),
 

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:go_router/go_router.dart';
@@ -13,67 +14,67 @@ class _EmojiSwitchScreenState extends State<EmojiSwitchScreen> {
   final List<Map<String, dynamic>> emojiList = [
     {
       'imagePath': 'assets/images/neutral.png',
-      'name': 'Neutral',
+      'name': 'neutral'.tr(),
       'color': Colors.grey, // حيادي
     },
     {
       'imagePath': 'assets/images/angry.png',
-      'name': 'Angry',
+      'name': 'angry'.tr(),
       'color': Colors.redAccent, // غضب
     },
     {
       'imagePath': 'assets/images/happiness.png',
-      'name': 'Happy',
+      'name': 'happy'.tr(),
       'color': Colors.amber, // سعادة
     },
     {
       'imagePath': 'assets/images/sad-face.png',
-      'name': 'Sad',
+      'name': 'sad'.tr(),
       'color': Colors.blue, // حزن
     },
     {
       'imagePath': 'assets/images/fear.png',
-      'name': 'Fear',
+      'name': 'fear'.tr(),
       'color': Colors.deepPurple, // خوف
     },
     {
       'imagePath': 'assets/images/disgusted.png',
-      'name': 'Disgusted',
+      'name': 'disgusted'.tr(),
       'color': Colors.teal, // اشمئزاز
     },
     {
       'imagePath': 'assets/images/anxiety.png',
-      'name': 'Anxiety',
+      'name': 'anxiety'.tr(),
       'color': Colors.orangeAccent, // قلق
     },
     {
       'imagePath': 'assets/images/banicked.png',
-      'name': 'Panicked',
+      'name': 'panicked'.tr(),
       'color': Colors.deepOrange, // ذعر
     },
     {
       'imagePath': 'assets/images/bored.png',
-      'name': 'Bored',
+      'name': 'bored'.tr(),
       'color': Colors.brown, // ملل
     },
     {
       'imagePath': 'assets/images/confused.png',
-      'name': 'Confused',
+      'name': 'confused'.tr(),
       'color': Colors.indigoAccent, // ارتباك
     },
     {
       'imagePath': 'assets/images/hopeless.png',
-      'name': 'Hopeless',
+      'name': 'hopeless'.tr(),
       'color': Colors.black54, // يأس
     },
     {
       'imagePath': 'assets/images/streesed.png',
-      'name': 'Stressed',
+      'name': 'stressed'.tr(),
       'color': Colors.pinkAccent, // توتر
     },
     {
       'imagePath': 'assets/images/worried.png',
-      'name': 'Worried',
+      'name': 'worried'.tr(),
       'color': Colors.lightBlue, // قلق
     },
   ];
@@ -246,7 +247,7 @@ class _EmojiSwitchScreenState extends State<EmojiSwitchScreen> {
               padding: const EdgeInsets.only(bottom: 40.0),
               child: ElevatedButton(
                 onPressed: () {
-                  print('Selected Emotion: $selectedEmotionName');
+                  print('select_emotion: $selectedEmotionName');
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(' $selectedEmotionName Selected'),
@@ -264,8 +265,8 @@ class _EmojiSwitchScreenState extends State<EmojiSwitchScreen> {
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
-                child: const Text(
-                  'Select Emotion',
+                child: Text(
+                  'select_emotion'.tr(),
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
               ),

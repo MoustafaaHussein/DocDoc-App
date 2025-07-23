@@ -6,6 +6,7 @@ import 'package:docdoc_app/features/Login/Data/Cubit/LoginCubit.dart';
 import 'package:docdoc_app/features/Login/Data/Cubit/LoginState.dart';
 import 'package:docdoc_app/features/Login/Data/Repo/LoginRepo.dart';
 import 'package:docdoc_app/features/Login/presentation/views/widgets/customTextFormField.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
@@ -50,17 +51,17 @@ class LoginForm extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 150.h),
-              Text("Sign In", style: Textstyles.font32White500Weight),
+              Text("sign_in".tr(), style: Textstyles.font32White500Weight),
               SizedBox(height: 40.h),
 
               CustomTextFormField(
-                label: "Email Address",
+                label: "email_address".tr(),
                 controller: emailController,
                 hinttext: 'example@example.com',
               ),
               SizedBox(height: 25.h),
               CustomTextFormField(
-                label: "Password",
+                label: "password".tr(),
                 controller: passwordController,
                 hinttext: "••••••••",
                 obscureText: true,
@@ -79,12 +80,9 @@ class LoginForm extends StatelessWidget {
                         password: passwordController.text.trim(),
                       );
 
-                      cubit.login(
-                        model,
-                        "",
-                      ); // لو login بياخد model بس شيل الـ ""
+                      cubit.login(model, "");
                     },
-                    text: "Sign In",
+                    text: "sign_in".tr(),
                     buttonColor: AppColors.kButtonPrimaryColor,
                   ),
 
@@ -98,11 +96,11 @@ class LoginForm extends StatelessWidget {
                     TextSpan(
                       children: [
                         TextSpan(
-                          text: 'I’m a new user. ',
+                          text: 'new_user'.tr(),
                           style: Textstyles.font14Grey400Weight,
                         ),
                         TextSpan(
-                          text: 'Sign UP',
+                          text: 'sign_up'.tr(),
                           style: Textstyles.font14MainColor500Weight,
                         ),
                       ],

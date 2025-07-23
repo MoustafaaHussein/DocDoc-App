@@ -1,3 +1,6 @@
+import 'package:docdoc_app/features/Analytics/screens/AnalyticsScreen.dart';
+import 'package:docdoc_app/features/Analytics/screens/demo.dart';
+import 'package:docdoc_app/features/Mood_History/Screens/MoodHistoryScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -30,6 +33,9 @@ import 'package:docdoc_app/features/splash/presentation/views/splash_view.dart';
 
 class AppRouter {
   static const kOnBoardView = '/onBoardView';
+  static const kHistoryView = '/HistoryView';
+  static const kAnalyticsView = '/AnalyticsView';
+  static const kDemoView = '/DemoView';
   static const kSplashView = '/';
   static const kAiSessionView = '/AiSessionView';
   static const kEmotiomDetectorView = '/EmotiomDetectorView';
@@ -51,6 +57,9 @@ class AppRouter {
     return GoRouter(
       initialLocation: isLoggedIn ? kHomePage : kLoginView,
       routes: [
+        GoRoute(path: kHistoryView, builder: (context, state) => const MoodHistoryScreen()),
+        GoRoute(path: kDemoView, builder: (context, state) => const WeeklyMoodDemoScreen ()),
+        GoRoute(path: kAnalyticsView, builder: (context, state) => const WeeklyMoodScreen()),
         GoRoute(path: kHomePage, builder: (context, state) => const HomePage()),
         GoRoute(path: kEmotiomDetectorView, builder: (context, state) => const EmotionDetectorScreen()),
         GoRoute(path: kAiSessionView, builder: (context, state) => const AiView()),

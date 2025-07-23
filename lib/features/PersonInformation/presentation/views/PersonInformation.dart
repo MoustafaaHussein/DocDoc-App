@@ -2,6 +2,7 @@ import 'package:docdoc_app/core/styles/TextStyles.dart';
 import 'package:docdoc_app/core/themes/app_colors.dart';
 import 'package:docdoc_app/features/PersonInformation/presentation/views/widgets/ProfileInfoTile.dart';
 import 'package:docdoc_app/features/PersonInformation/presentation/views/widgets/editImage.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -45,7 +46,7 @@ class _PersoninformationState extends State<Personinformation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edit Profile"),
+        title: Text("person_info".tr()),
         centerTitle: true,
         backgroundColor: AppColors.kDarkModeBackgroundColor,
         leading: Padding(
@@ -77,28 +78,28 @@ class _PersoninformationState extends State<Personinformation> {
                 SizedBox(height: 15.h),
                 Text(fullName ?? '', style: Textstyles.font16White400Weight),
                 ProfileInfoTile(
-                  label: 'Full Name',
+                  label: 'full_name'.tr(),
                   value: fullName ?? '',
                   icon: IconlyLight.profile,
                 ),
                 Divider(),
                 SizedBox(height: 15.h),
                 ProfileInfoTile(
-                  label: 'Email Address',
+                  label: 'email_address'.tr(),
                   value: email ?? '',
                   icon: IconlyLight.message,
                 ),
                 Divider(),
                 SizedBox(height: 15.h),
                 ProfileInfoTile(
-                  label: 'Phone Number',
+                  label: 'phone_number'.tr(),
                   value: phone ?? '',
                   icon: IconlyLight.call,
                 ),
                 Divider(),
                 SizedBox(height: 15.h),
                 ProfileInfoTile(
-                  label: 'birth Date ',
+                  label: 'date_of_birth'.tr(),
                   value: dob ?? '',
                   icon: IconlyLight.calendar,
                 ),
