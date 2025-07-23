@@ -16,3 +16,5 @@ final class DeleteCreditCardEvent extends PaymentEvent {
 
   DeleteCreditCardEvent({required this.cardId});
 }
+
+final class GetProPlansEvent extends PaymentEvent {}

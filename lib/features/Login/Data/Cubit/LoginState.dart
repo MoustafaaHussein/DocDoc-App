@@ -1,7 +1,4 @@
-
-
 import 'package:docdoc_app/features/Login/Data/Model/LoginModel.dart';
-
 
 abstract class LoginState {}
 

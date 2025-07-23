@@ -74,11 +74,12 @@ class EmotionDetectorController {
     try {
       _interpreter = await Interpreter.fromAsset('assets/model.tflite');
       final labelsData = await rootBundle.loadString('assets/labels.txt');
-      _labels = labelsData
-          .split('\n')
-          .map((e) => e.trim())
-          .where((e) => e.isNotEmpty)
-          .toList();
+      _labels =
+          labelsData
+              .split('\n')
+              .map((e) => e.trim())
+              .where((e) => e.isNotEmpty)
+              .toList();
       _isModelLoaded = true;
     } catch (e) {
       debugPrint("Error loading model or labels: $e");

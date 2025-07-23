@@ -18,3 +18,17 @@ final class GetAllPaymentMethodsSuccess extends PaymentState {
 final class GetAllPaymentMethodLoading extends PaymentState {}
 
 final class DeleteCreditCardSuccess extends PaymentState {}
+
+final class GetProPlansSuccess extends PaymentState {
+  final List<ProPlans> proPlans;
+
+  GetProPlansSuccess({required this.proPlans});
+}
+
+final class GetProPlansFailed extends PaymentState {
+  final String errorMessage;
+
+  GetProPlansFailed({required this.errorMessage});
+}
+
+final class GetProPlansLoading extends PaymentState {}

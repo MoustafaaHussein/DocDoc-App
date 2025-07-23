@@ -4,7 +4,6 @@ import 'package:docdoc_app/features/SignUP/presentation/data/repo/SignUpRepo.dar
 import 'package:flutter_bloc/flutter_bloc.dart' show Cubit;
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class LoginCubit extends Cubit<LoginState> {
   final AuthRepository authRepository;
 

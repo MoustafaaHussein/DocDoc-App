@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:docdoc_app/features/payment/data/models/get_pro_plans/datum.dart';
 import 'package:docdoc_app/features/payment/domain/entites/credit_card_entity.dart';
 import 'package:docdoc_app/features/payment/domain/repos/payment_repositry.dart';
 import 'package:meta/meta.dart';
@@ -22,6 +23,15 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
       if (event is DeleteCreditCardEvent) {
         await paymentRepositry.deleteCreditCard(cardId: event.cardId);
         emit(DeleteCreditCardSuccess());
+      }
+      if (event is GetProPlansEvent) {
+        emit(GetProPlansLoading());
+        var result = await paymentRepositry.getProPlans();
+        result.fold(
+          (failure) =>
+              emit(GetProPlansFailed(errorMessage: failure.errorMessage)),
+          (proPlans) => emit(GetProPlansSuccess(proPlans: proPlans)),
+        );
       }
     });
   }

@@ -3,7 +3,6 @@ import 'package:docdoc_app/core/helpers/methods.dart';
 import 'package:docdoc_app/core/themes/app_styles.dart';
 import 'package:docdoc_app/core/widgets/custom_loading.dart';
 import 'package:docdoc_app/core/widgets/customized_error.dart';
-import 'package:docdoc_app/features/payment/presentation/views/widgets/pro_membership_widget.dart';
 import 'package:docdoc_app/features/recomendation/data/models/recomendation_by_emoitions_model/recomendation_by_emoitions_model.dart';
 import 'package:docdoc_app/features/recomendation/presentation/manger/bloc/recomendation_bloc.dart';
 import 'package:docdoc_app/features/recomendation/presentation/views/widgets/complete_excercise_dialog.dart';
@@ -21,8 +20,6 @@ class RecomendationsByEmotionsDetailsBody extends StatelessWidget {
   final RecomendationByEmoitionsModel recomendations;
   @override
   Widget build(BuildContext context) {
-    return ProMembershipWidget();
-
     return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(
