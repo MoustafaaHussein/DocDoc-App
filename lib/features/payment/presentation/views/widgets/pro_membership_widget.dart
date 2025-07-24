@@ -26,10 +26,12 @@ class _ProMembershipWidgetState extends State<ProMembershipWidget> {
         if (state is GetProPlansFailed) {
           return CustomErrorWidget(
             errorMessage: state.errorMessage,
-            onRetry: () {},
+            onRetry: () {
+              BlocProvider.of<PaymentBloc>(context).add(GetProPlansEvent());
+            },
           );
         } else if (state is GetProPlansSuccess) {
-          return ProMemberShipBlocConsumer(proPlans: state.proPlans[0]);
+          return ProMemberShipBlocConsumer(proPlans: state.proPlans);
         } else {
           return CustomLoading();
         }
