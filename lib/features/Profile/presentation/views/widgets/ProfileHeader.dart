@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:docdoc_app/core/routes/app_routes.dart';
 import 'package:docdoc_app/core/themes/app_colors.dart';
+import 'package:docdoc_app/features/Profile/presentation/views/widgets/LanguageBottomShhet.dart';
 import 'package:docdoc_app/features/Profile/presentation/views/widgets/SettingTile.dart';
 import 'package:docdoc_app/features/SignUP/presentation/data/repo/SignUpRepo.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -116,34 +118,33 @@ class _ProfileHeaderScreenState extends State<ProfileHeaderScreen> {
                 SizedBox(height: 4.h),
 
                 // العضوية
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 4,
-                  ),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFDFF0CE),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: const Text(
-                    'BASIC MEMBER',
-                    style: TextStyle(
-                      color: Color(0xFF5E814E),
-                      fontWeight: FontWeight.w600,
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-
+                // Container(
+                //   padding: const EdgeInsets.symmetric(
+                //     horizontal: 12,
+                //     vertical: 4,
+                //   ),
+                //   decoration: BoxDecoration(
+                //     color: const Color(0xFFDFF0CE),
+                //     borderRadius: BorderRadius.circular(16),
+                //   ),
+                //   child: const Text(
+                //     'BASIC MEMBER',
+                //     style: TextStyle(
+                //       color: Color(0xFF5E814E),
+                //       fontWeight: FontWeight.w600,
+                //       fontSize: 12,
+                //     ),
+                //   ),
+                // ),
                 SizedBox(height: 16.h),
 
                 // البيانات
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
-                    _InfoItem(title: 'Age', value: '17y'),
-                    _InfoItem(title: 'Weight', value: '48kg'),
-                    _InfoItem(title: 'Height', value: '162cm'),
+                  children: [
+                    _InfoItem(title: 'age_label'.tr(), value: '17y'),
+                    _InfoItem(title: 'weight_label'.tr(), value: '48kg'),
+                    _InfoItem(title: 'height_label'.tr(), value: '162cm'),
                   ],
                 ),
 
@@ -156,7 +157,7 @@ class _ProfileHeaderScreenState extends State<ProfileHeaderScreen> {
                 // SizedBox(height: 8.h),
                 SettingsTile(
                   icon: Ionicons.person_outline,
-                  title: "Personal Information",
+                  title: "personal_info".tr(),
                   onTap: () {
                     GoRouter.of(context).push(AppRouter.kPersonInformationView);
                   },
@@ -164,7 +165,7 @@ class _ProfileHeaderScreenState extends State<ProfileHeaderScreen> {
                 SizedBox(height: 8.h),
                 SettingsTile(
                   icon: Ionicons.wallet_outline,
-                  title: "Your Cards",
+                  title: "your_cards".tr(),
                   onTap: () {
                     GoRouter.of(context).push(AppRouter.kPaymentMethods);
                   },
@@ -172,7 +173,7 @@ class _ProfileHeaderScreenState extends State<ProfileHeaderScreen> {
                 SizedBox(height: 8.h),
                 SettingsTile(
                   icon: Ionicons.moon_outline,
-                  title: "Dark Mode",
+                  title: "dark_mode".tr(),
                   trailing: Switch(
                     value: isDarkMode,
                     onChanged: (val) {
@@ -182,27 +183,47 @@ class _ProfileHeaderScreenState extends State<ProfileHeaderScreen> {
                 ),
                 SizedBox(height: 8.h),
                 SettingsTile(
+                  icon: Ionicons.language,
+                  title: "Language".tr(),
+                  onTap: () => showLanguageBottomSheet(context),
+                ),
+                SizedBox(height: 8.h),
+                SettingsTile(
+                  icon: Ionicons.stats_chart_outline,
+                  title: "history".tr(),
+                  onTap: () {
+                    GoRouter.of(context).push(AppRouter.kHistoryView);
+                  },
+                ),
+                SizedBox(height: 8.h),
+                SettingsTile(
+                  icon: Ionicons.bar_chart_outline,
+                  title: "analytics".tr(),
+                  onTap: () {
+                    GoRouter.of(context).push(AppRouter.kAnalyticsView);
+                  },
+                ),
+                SizedBox(height: 8.h),
+                SettingsTile(
                   icon: Ionicons.log_out_outline,
-                  title: "Log Out",
+                  title: "log_out".tr(),
                   onTap: () async {
                     final shouldLogout = await showDialog<bool>(
                       context: context,
                       builder:
                           (context) => AlertDialog(
-                            title: const Text("Confirm Logout"),
-                            content: const Text(
-                              "Are you sure you want to log out?",
-                            ),
+                            title: Text("confirm_logout".tr()),
+                            content: Text("logout_message".tr()),
                             actions: [
                               TextButton(
                                 onPressed:
                                     () => Navigator.of(context).pop(false),
-                                child: const Text("No"),
+                                child: Text("no".tr()),
                               ),
                               TextButton(
                                 onPressed:
                                     () => Navigator.of(context).pop(true),
-                                child: const Text("Yes"),
+                                child: Text("yes".tr()),
                               ),
                             ],
                           ),

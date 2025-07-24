@@ -12,8 +12,11 @@ dependencies:
   animations: ^2.0.11
   camera: ^0.11.2
   dartz: ^0.10.1
+  device_preview: ^1.2.0
   dio: ^5.8.0+1
+  easy_localization: ^3.0.7+1
   equatable: ^2.0.7
+  fl_chart: ^1.0.0
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
@@ -30,7 +33,6 @@ dependencies:
   intl: ^0.20.2
   ionicons: ^0.2.2
   path_provider: ^2.1.5
-  purchases_flutter: ^9.0.0
   quiver: ^3.2.2
   shared_preferences: ^2.5.3
   shimmer: ^3.0.0
@@ -48,6 +50,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/langs/
     - assets/labels.txt
     - assets/model.tflite
     - assets/emotions_model.tflite

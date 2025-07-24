@@ -1,4 +1,5 @@
 import 'package:docdoc_app/core/styles/TextStyles.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -32,7 +33,7 @@ class _AisessionState extends State<AisessionHeader> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Take care of \nyourself',
+                    'take_care_title'.tr(),
                     style: Textstyles.font30Black600Weight,
                   ),
                   Image.asset("assets/images/imageee.png"),
@@ -41,7 +42,7 @@ class _AisessionState extends State<AisessionHeader> {
               SizedBox(height: 15.h),
 
               Text(
-                "Check Your Mood in 5sec",
+                "check_mood_fast".tr(),
                 style: Textstyles.font14MoreGrey400Weight,
               ),
               SizedBox(height: 15.h),
@@ -50,7 +51,7 @@ class _AisessionState extends State<AisessionHeader> {
                 child: Opacity(
                   opacity: 0.80,
                   child: Text(
-                    'Self care is simply the time we take to look after our mind and body. But how do we practice it regularly? Let’s explore the science of self-care in this course.',
+                    'self_care_description'.tr(),
                     style: TextStyle(
                       color: const Color(0xFF1C1B1F),
                       fontSize: 13,

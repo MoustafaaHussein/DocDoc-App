@@ -34,7 +34,13 @@ class Textstyles {
     fontWeight: FontWeight.w600,
     height: 1.20,
   );
-
+  static TextStyle font19Black600Weight = TextStyle(
+    color: const Color(0xFF1C1B1F),
+    fontSize: 19,
+    fontFamily: 'Sora',
+    fontWeight: FontWeight.w600,
+    height: 1.20,
+  );
   static TextStyle font16OWhite700Weight = TextStyle(
     color: Colors.white,
     fontSize: 16,

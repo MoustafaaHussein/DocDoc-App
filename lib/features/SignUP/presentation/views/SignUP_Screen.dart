@@ -22,7 +22,7 @@ class _SignupScreenState extends State<SignupScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.kDarkModeBackgroundColor,
         leading: Padding(
-          padding: const EdgeInsets.only(left: 12), // مسافة بسيطة من الطرف
+          padding: const EdgeInsets.only(left: 12), 
           child: Container(
             width: 42,
             height: 42,

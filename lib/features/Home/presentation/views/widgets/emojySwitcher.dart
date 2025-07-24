@@ -195,8 +195,8 @@ class _EmojiSwitchScreenState extends State<EmojiSwitchScreen> {
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
-                child: const Text(
-                  'Select Emotion',
+                child: Text(
+                  'select_emotion'.tr(),
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
               ),

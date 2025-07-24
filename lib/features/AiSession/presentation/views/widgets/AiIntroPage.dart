@@ -1,4 +1,5 @@
 import 'package:docdoc_app/core/routes/app_routes.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -47,8 +48,8 @@ class AiIntroWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  'We’ll advise you through',
+                 Text(
+                  'advise_you'.tr(),
                   style: TextStyle(
                     color: Color.fromARGB(255, 20, 20, 21),
                     fontSize: 22,
@@ -57,8 +58,8 @@ class AiIntroWidget extends StatelessWidget {
                     height: 1.20,
                   ),
                 ),
-                const Text(
-                  '3 keys idea',
+                 Text(
+                  'three_keys'.tr(),
                   style: TextStyle(
                     color: Color.fromARGB(153, 109, 108, 108),
                     fontSize: 16,
@@ -72,15 +73,15 @@ class AiIntroWidget extends StatelessWidget {
           ),
           _buildItem(
             image: "assets/images/seelfCare.png",
-            text: "What is self-care",
+            text: "what_is_self_care".tr(),
           ),
           _buildItem(
             image: "assets/images/Image1.png",
-            text: "When and how practice it",
+            text: "when_and_how_practice".tr(),
           ),
           _buildItem(
             image: "assets/images/Image2.png",
-            text: "How self-care improve our lifes",
+            text: "how_self_care_improves".tr(),
           ),
           SizedBox(height: 8.h),
           Padding(
@@ -99,8 +100,8 @@ class AiIntroWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 alignment: Alignment.center,
-                child: const Text(
-                  'Start',
+                child:  Text(
+                  'start'.tr(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.black,

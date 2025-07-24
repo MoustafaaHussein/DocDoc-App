@@ -1,9 +1,12 @@
 import 'package:docdoc_app/core/helpers/service_locator.dart';
 import 'package:docdoc_app/features/AiSession/presentation/views/Ai_View.dart';
+import 'package:docdoc_app/features/Analytics/screens/AnalyticsScreen.dart';
+import 'package:docdoc_app/features/Analytics/screens/demo.dart';
 import 'package:docdoc_app/features/Home/presentation/views/CustomNavigationBar.dart';
 import 'package:docdoc_app/features/Home/presentation/views/Home.dart';
 import 'package:docdoc_app/features/Home/presentation/views/widgets/emojySwitcher.dart';
 import 'package:docdoc_app/features/Login/presentation/views/LoginScreen.dart';
+import 'package:docdoc_app/features/Mood_History/Screens/MoodHistoryScreen.dart';
 import 'package:docdoc_app/features/PersonInformation/presentation/views/PersonInformation.dart';
 import 'package:docdoc_app/features/SignUP/presentation/views/SignUP_Screen.dart';
 import 'package:docdoc_app/features/onboard/presentation/views/on_board_view.dart';
@@ -30,6 +33,9 @@ import 'package:go_router/go_router.dart';
 
 class AppRouter {
   static const kOnBoardView = '/onBoardView';
+  static const kHistoryView = '/HistoryView';
+  static const kAnalyticsView = '/AnalyticsView';
+  static const kDemoView = '/DemoView';
   static const kSplashView = '/';
   static const kAiSessionView = '/AiSessionView';
   static const kEmotiomDetectorView = '/EmotiomDetectorView';
@@ -54,6 +60,18 @@ class AppRouter {
     return GoRouter(
       initialLocation: isLoggedIn ? kHomePage : kLoginView,
       routes: [
+        GoRoute(
+          path: kHistoryView,
+          builder: (context, state) => const MoodHistoryScreen(),
+        ),
+        GoRoute(
+          path: kDemoView,
+          builder: (context, state) => const WeeklyMoodDemoScreen(),
+        ),
+        GoRoute(
+          path: kAnalyticsView,
+          builder: (context, state) => const WeeklyMoodScreen(),
+        ),
         GoRoute(path: kHomePage, builder: (context, state) => const HomePage()),
         // GoRoute(
         //   path: kEmotiomDetectorView,
