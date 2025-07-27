@@ -1,7 +1,6 @@
 import 'package:docdoc_app/core/routes/app_routes.dart';
 import 'package:docdoc_app/core/themes/app_colors.dart';
 import 'package:docdoc_app/features/AiModel/Presentation/views/widgets/submitEmotionButton.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:go_router/go_router.dart';
@@ -186,7 +185,7 @@ class EmotionResultScreen extends StatelessWidget {
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                GoRouter.of(context).pop();
                 onRescan();
               },
               style: ElevatedButton.styleFrom(
