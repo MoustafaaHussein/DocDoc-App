@@ -69,8 +69,13 @@
   "worried": "قلق",
   "Language":"اللغه",
   "full_name":"الاسم كامل",
-  "person_info":"البيانات الشخصية"
+  "person_info":"البيانات الشخصية",
+  "payment_added":"تمت إضافة طريقة الدفع بنجاح",
+  "add_card":"إضافة بطاقة الائتمان +",
+  "expiration_date":"تاريخ الانتهاء",
+  "cardholder_name":"اسم حامل البطاقة",
+  "card_number":"رقم الكارت",
+  "delete_payment_method":""
 
-  
 
 }

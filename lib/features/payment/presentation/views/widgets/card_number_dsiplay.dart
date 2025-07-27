@@ -1,6 +1,7 @@
 import 'package:docdoc_app/core/helpers/assets.dart';
 import 'package:docdoc_app/core/themes/app_colors.dart';
 import 'package:docdoc_app/core/themes/app_styles.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -18,7 +19,7 @@ class CardNumber extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Card Number',
+          'card_number'.tr(),
           style: AppStyles.styleRegular14(
             context,
           ).copyWith(fontSize: 16, height: 1),
