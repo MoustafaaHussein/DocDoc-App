@@ -68,5 +68,11 @@
   "stressed": "Stressed",
   "worried": "Worried",
   "full_name":"Full Name",
-  "person_info":"Personla Information"
+  "person_info":"Personla Information",
+  "payment_added":"Payment Method added sucessfully",
+  "add_card":"Add Credit Card +",
+  "expiration_date":"Expiration Date",
+  "cardholder_name":"Cardholder Name",
+  "card_number":"Card Number",
+  "delete_payment_method":"هل أنت متأكد أنك تريد حذف/nطريقة الدفع هذه؟"
 }

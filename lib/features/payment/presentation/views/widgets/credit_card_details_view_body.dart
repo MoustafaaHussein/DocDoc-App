@@ -10,6 +10,7 @@ import 'package:docdoc_app/features/payment/presentation/views/widgets/card_numb
 import 'package:docdoc_app/features/payment/presentation/views/widgets/credit_card_model.dart';
 import 'package:docdoc_app/features/payment/presentation/views/widgets/cvc_display.dart';
 import 'package:docdoc_app/features/payment/presentation/views/widgets/expiry_date_display.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; // Required for BlocProvider.of
 import 'package:flutter_svg/flutter_svg.dart';
@@ -105,7 +106,7 @@ class CreditCardDetailsViewBody extends StatelessWidget {
                             GoRouter.of(dialogContext).pop();
                           },
                           titileText:
-                              'Are you Sure you want to delete\nthis Payment method ',
+                              'delete_payment_method'.tr(),
                           subTittle: '',
                           onCancel: () {
                             // Pop the warning dialog if cancelled
