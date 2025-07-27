@@ -150,11 +150,11 @@ class _ProfileHeaderScreenState extends State<ProfileHeaderScreen> {
 
                 SizedBox(height: 24.h),
 
-                // SettingsTile(
-                //   icon: Ionicons.analytics_outline,
-                //   title: "Invite Friends",
-                // ),
-                // SizedBox(height: 8.h),
+                SettingsTile(
+                  icon: Ionicons.analytics_outline,
+                  title: "Invite Friends",
+                ),
+                SizedBox(height: 8.h),
                 SettingsTile(
                   icon: Ionicons.person_outline,
                   title: "personal_info".tr(),

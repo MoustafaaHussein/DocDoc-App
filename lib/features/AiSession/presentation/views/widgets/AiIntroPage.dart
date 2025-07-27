@@ -1,11 +1,11 @@
 import 'package:docdoc_app/core/routes/app_routes.dart';
+import 'package:docdoc_app/core/themes/app_styles.dart';
+import 'package:docdoc_app/features/AiSession/presentation/views/widgets/AiSessionHeader.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-
-import 'package:docdoc_app/features/AiSession/presentation/views/widgets/AiSessionHeader.dart';
 
 class AiIntroWidget extends StatelessWidget {
   const AiIntroWidget({super.key});
@@ -48,24 +48,21 @@ class AiIntroWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                 Text(
-                  'advise_you'.tr(),
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 20, 20, 21),
-                    fontSize: 22,
-                    fontFamily: 'Sora',
-                    fontWeight: FontWeight.w600,
-                    height: 1.20,
+                Expanded(
+                  flex: 3,
+                  child: Text(
+                    'advise_you'.tr(),
+                    style: AppStyles.styleSemiBold24(
+                      context,
+                    ).copyWith(color: Color.fromARGB(255, 20, 20, 21)),
                   ),
                 ),
-                 Text(
-                  'three_keys'.tr(),
-                  style: TextStyle(
-                    color: Color.fromARGB(153, 109, 108, 108),
-                    fontSize: 16,
-                    fontFamily: 'Sora',
-                    fontWeight: FontWeight.w400,
-                    height: 1.38,
+                Expanded(
+                  child: Text(
+                    'three_keys'.tr(),
+                    style: AppStyles.styleMedium18(
+                      context,
+                    ).copyWith(color: Color.fromARGB(153, 109, 108, 108)),
                   ),
                 ),
               ],
@@ -100,7 +97,7 @@ class AiIntroWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 alignment: Alignment.center,
-                child:  Text(
+                child: Text(
                   'start'.tr(),
                   textAlign: TextAlign.center,
                   style: TextStyle(

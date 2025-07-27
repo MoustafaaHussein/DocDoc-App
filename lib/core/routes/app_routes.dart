@@ -1,4 +1,5 @@
 import 'package:docdoc_app/core/helpers/service_locator.dart';
+import 'package:docdoc_app/features/AiModel/Presentation/views/EmotionDetectorScreen.dart';
 import 'package:docdoc_app/features/AiSession/presentation/views/Ai_View.dart';
 import 'package:docdoc_app/features/Analytics/screens/AnalyticsScreen.dart';
 import 'package:docdoc_app/features/Analytics/screens/demo.dart';
@@ -73,10 +74,10 @@ class AppRouter {
           builder: (context, state) => const WeeklyMoodScreen(),
         ),
         GoRoute(path: kHomePage, builder: (context, state) => const HomePage()),
-        // GoRoute(
-        //   path: kEmotiomDetectorView,
-        //   builder: (context, state) => const EmotionDetectorScreen(),
-        // ),
+        GoRoute(
+          path: kEmotiomDetectorView,
+          builder: (context, state) => const EmotionDetectorScreen(),
+        ),
         GoRoute(
           path: kAiSessionView,
           builder: (context, state) => const AiView(),

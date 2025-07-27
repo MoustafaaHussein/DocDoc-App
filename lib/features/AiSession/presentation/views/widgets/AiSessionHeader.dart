@@ -1,4 +1,4 @@
-import 'package:docdoc_app/core/styles/TextStyles.dart';
+import 'package:docdoc_app/core/themes/app_styles.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,9 +18,13 @@ class _AisessionState extends State<AisessionHeader> {
     return Stack(
       children: [
         SizedBox(
-          height: screenHeight * 0.50,
           width: double.infinity,
-          child: Image.asset('assets/images/Ai_Session.png', fit: BoxFit.cover),
+          child: FittedBox(
+            child: Image.asset(
+              'assets/images/Ai_Session.png',
+              fit: BoxFit.cover,
+            ),
+          ),
         ),
 
         Padding(
@@ -32,18 +36,43 @@ class _AisessionState extends State<AisessionHeader> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'take_care_title'.tr(),
-                    style: Textstyles.font30Black600Weight,
+                  // Text with flexible space
+                  Expanded(
+                    flex: 3,
+                    child: Text(
+                      'take_care_title'.tr(),
+                      style: AppStyles.styleSemiBold30(
+                        context,
+                      ).copyWith(color: const Color(0xFF1C1B1F)),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                  Image.asset("assets/images/imageee.png"),
+
+                  const SizedBox(width: 12), // spacing between text and image
+                  // Image that grows with screen size but never overflows
+                  Flexible(
+                    flex: 1,
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        return Image.asset(
+                          "assets/images/imageee.png",
+                          width: constraints.maxWidth,
+                          fit: BoxFit.contain,
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
+
               SizedBox(height: 15.h),
 
               Text(
                 "check_mood_fast".tr(),
-                style: Textstyles.font14MoreGrey400Weight,
+                style: AppStyles.styleMedium16(
+                  context,
+                ).copyWith(color: Color.fromARGB(255, 116, 116, 117)),
               ),
               SizedBox(height: 15.h),
               SizedBox(
@@ -52,13 +81,9 @@ class _AisessionState extends State<AisessionHeader> {
                   opacity: 0.80,
                   child: Text(
                     'self_care_description'.tr(),
-                    style: TextStyle(
-                      color: const Color(0xFF1C1B1F),
-                      fontSize: 13,
-                      fontFamily: 'Sora',
-                      fontWeight: FontWeight.w400,
-                      height: 1.30,
-                    ),
+                    style: AppStyles.styleMedium16(
+                      context,
+                    ).copyWith(color: Color(0xFF1C1B1F)),
                   ),
                 ),
               ),

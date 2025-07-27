@@ -1,5 +1,4 @@
 import 'package:camera/camera.dart';
-import 'package:device_preview/device_preview.dart';
 import 'package:dio/dio.dart';
 import 'package:docdoc_app/core/helpers/secure_storage.dart';
 import 'package:docdoc_app/core/helpers/service_locator.dart';
@@ -27,7 +26,8 @@ late List<CameraDescription> cameras;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-
+  final prefs = await SharedPreferences.getInstance();
+  final token = prefs.getString("token");
   try {
     cameras = await availableCameras();
   } on CameraException catch (e) {
@@ -45,10 +45,7 @@ void main() async {
       path: 'assets/langs',
       fallbackLocale: const Locale('en'),
       saveLocale: true,
-      child: DevicePreview(
-        enabled: false,
-        builder: (context) => DocDocApp(router: router),
-      ),
+      child: DocDocApp(router: router),
     ),
   );
 }
@@ -65,6 +62,9 @@ class DocDocApp extends StatelessWidget {
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
+            BlocProvider<PaymentBloc>(
+              create: (context) => PaymentBloc(getIt.get<PaymentRepositry>()),
+            ),
             BlocProvider<WeeklyMoodCubit>(
               create: (context) => WeeklyMoodCubit(WeeklyMoodRepo(Dio())),
             ),

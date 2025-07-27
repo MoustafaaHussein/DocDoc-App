@@ -1,5 +1,6 @@
 import 'package:docdoc_app/core/models/emoji_model.dart';
 import 'package:docdoc_app/core/routes/app_routes.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:go_router/go_router.dart';

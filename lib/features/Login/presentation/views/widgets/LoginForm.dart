@@ -2,6 +2,7 @@ import 'package:docdoc_app/core/routes/app_routes.dart';
 import 'package:docdoc_app/core/styles/TextStyles.dart';
 import 'package:docdoc_app/core/themes/app_colors.dart';
 import 'package:docdoc_app/core/widgets/custom_button.dart';
+import 'package:docdoc_app/core/widgets/custom_loading.dart';
 import 'package:docdoc_app/features/Login/Data/Cubit/LoginCubit.dart';
 import 'package:docdoc_app/features/Login/Data/Cubit/LoginState.dart';
 import 'package:docdoc_app/features/Login/Data/Repo/LoginRepo.dart';
@@ -45,70 +46,72 @@ class LoginForm extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.all(12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 150.h),
-              Text("sign_in".tr(), style: Textstyles.font32White500Weight),
-              SizedBox(height: 40.h),
+        return SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 150.h),
+                Text("sign_in".tr(), style: Textstyles.font32White500Weight),
+                SizedBox(height: 40.h),
 
-              CustomTextFormField(
-                label: "email_address".tr(),
-                controller: emailController,
-                hinttext: 'example@example.com',
-              ),
-              SizedBox(height: 25.h),
-              CustomTextFormField(
-                label: "password".tr(),
-                controller: passwordController,
-                hinttext: "••••••••",
-                obscureText: true,
-                icon: IconlyLight.lock,
-              ),
-              SizedBox(height: 25.h),
+                CustomTextFormField(
+                  label: "email_address".tr(),
+                  controller: emailController,
+                  hinttext: 'example@example.com',
+                ),
+                SizedBox(height: 25.h),
+                CustomTextFormField(
+                  label: "password".tr(),
+                  controller: passwordController,
+                  hinttext: "••••••••",
+                  obscureText: true,
+                  icon: IconlyLight.lock,
+                ),
+                SizedBox(height: 25.h),
 
-              state is LoginLoading
-                  ? const Center(child: CircularProgressIndicator())
-                  : CustomButton(
-                    onpressed: () {
-                      final cubit = context.read<LoginCubit>();
+                state is LoginLoading
+                    ? const Center(child: CustomLoading())
+                    : CustomButton(
+                      onpressed: () {
+                        final cubit = context.read<LoginCubit>();
 
-                      final model = LoginRequestModel(
-                        email: emailController.text.trim(),
-                        password: passwordController.text.trim(),
-                      );
+                        final model = LoginRequestModel(
+                          email: emailController.text.trim(),
+                          password: passwordController.text.trim(),
+                        );
 
-                      cubit.login(model, "");
+                        cubit.login(model, "");
+                      },
+                      text: "sign_in".tr(),
+                      buttonColor: AppColors.kButtonPrimaryColor,
+                    ),
+
+                SizedBox(height: 25.h),
+                Center(
+                  child: InkWell(
+                    onTap: () {
+                      GoRouter.of(context).push(AppRouter.kSignUpView);
                     },
-                    text: "sign_in".tr(),
-                    buttonColor: AppColors.kButtonPrimaryColor,
-                  ),
-
-              SizedBox(height: 25.h),
-              Center(
-                child: InkWell(
-                  onTap: () {
-                    GoRouter.of(context).push(AppRouter.kSignUpView);
-                  },
-                  child: Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: 'new_user'.tr(),
-                          style: Textstyles.font14Grey400Weight,
-                        ),
-                        TextSpan(
-                          text: 'sign_up'.tr(),
-                          style: Textstyles.font14MainColor500Weight,
-                        ),
-                      ],
+                    child: Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'new_user'.tr(),
+                            style: Textstyles.font14Grey400Weight,
+                          ),
+                          TextSpan(
+                            text: 'sign_up'.tr(),
+                            style: Textstyles.font14MainColor500Weight,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
