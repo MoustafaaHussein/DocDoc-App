@@ -117,44 +117,8 @@ class _ProfileHeaderScreenState extends State<ProfileHeaderScreen> {
                 ),
                 SizedBox(height: 4.h),
 
-                // العضوية
-                // Container(
-                //   padding: const EdgeInsets.symmetric(
-                //     horizontal: 12,
-                //     vertical: 4,
-                //   ),
-                //   decoration: BoxDecoration(
-                //     color: const Color(0xFFDFF0CE),
-                //     borderRadius: BorderRadius.circular(16),
-                //   ),
-                //   child: const Text(
-                //     'BASIC MEMBER',
-                //     style: TextStyle(
-                //       color: Color(0xFF5E814E),
-                //       fontWeight: FontWeight.w600,
-                //       fontSize: 12,
-                //     ),
-                //   ),
-                // ),
-                SizedBox(height: 16.h),
-
-                // البيانات
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _InfoItem(title: 'age_label'.tr(), value: '17y'),
-                    _InfoItem(title: 'weight_label'.tr(), value: '48kg'),
-                    _InfoItem(title: 'height_label'.tr(), value: '162cm'),
-                  ],
-                ),
-
                 SizedBox(height: 24.h),
 
-                SettingsTile(
-                  icon: Ionicons.analytics_outline,
-                  title: "Invite Friends",
-                ),
-                SizedBox(height: 8.h),
                 SettingsTile(
                   icon: Ionicons.person_outline,
                   title: "personal_info".tr(),
@@ -169,17 +133,6 @@ class _ProfileHeaderScreenState extends State<ProfileHeaderScreen> {
                   onTap: () {
                     GoRouter.of(context).push(AppRouter.kPaymentMethods);
                   },
-                ),
-                SizedBox(height: 8.h),
-                SettingsTile(
-                  icon: Ionicons.moon_outline,
-                  title: "dark_mode".tr(),
-                  trailing: Switch(
-                    value: isDarkMode,
-                    onChanged: (val) {
-                      setState(() => isDarkMode = val);
-                    },
-                  ),
                 ),
                 SizedBox(height: 8.h),
                 SettingsTile(
@@ -217,12 +170,11 @@ class _ProfileHeaderScreenState extends State<ProfileHeaderScreen> {
                             actions: [
                               TextButton(
                                 onPressed:
-                                    () => Navigator.of(context).pop(false),
+                                    () => GoRouter.of(context).pop(false),
                                 child: Text("no".tr()),
                               ),
                               TextButton(
-                                onPressed:
-                                    () => Navigator.of(context).pop(true),
+                                onPressed: () => GoRouter.of(context).pop(true),
                                 child: Text("yes".tr()),
                               ),
                             ],

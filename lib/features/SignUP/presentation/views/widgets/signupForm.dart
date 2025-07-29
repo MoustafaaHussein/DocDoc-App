@@ -1,5 +1,6 @@
 import 'package:docdoc_app/core/routes/app_routes.dart';
 import 'package:docdoc_app/core/styles/TextStyles.dart';
+import 'package:docdoc_app/core/widgets/custom_loading.dart';
 import 'package:docdoc_app/features/Login/presentation/views/widgets/customButton.dart';
 import 'package:docdoc_app/features/Login/presentation/views/widgets/customTextFormField.dart';
 import 'package:docdoc_app/features/SignUP/presentation/data/Cubit/SignUpCubit.dart';
@@ -77,13 +78,7 @@ class _SignupFormState extends State<SignupForm> {
       builder: (context, state) {
         return AbsorbPointer(
           absorbing: state is SignUpLoading,
-          child: Stack(
-            children: [
-              _buildFormContent(context),
-              if (state is SignUpLoading)
-                const Center(child: CircularProgressIndicator()),
-            ],
-          ),
+          child: CustomLoading(),
         );
       },
     );
