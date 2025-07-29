@@ -1,4 +1,4 @@
-package com.example.docdoc_app
+package com.drKhaled.myMood
 
 import io.flutter.embedding.android.FlutterActivity
 

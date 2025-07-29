@@ -119,8 +119,8 @@ class _EmotionDetectorScreenState extends State<EmotionDetectorScreen>
     }
 
     try {
-      interpreter = await Interpreter.fromAsset('assets/emotions_model.tflite');
-      final labelsData = await rootBundle.loadString('assets/labelss.txt');
+      interpreter = await Interpreter.fromAsset('assets/model.tflite');
+      final labelsData = await rootBundle.loadString('assets/labels.txt');
       labels =
           labelsData
               .split('\n')

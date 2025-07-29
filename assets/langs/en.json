@@ -74,5 +74,21 @@
   "expiration_date":"Expiration Date",
   "cardholder_name":"Cardholder Name",
   "card_number":"Card Number",
-  "delete_payment_method":"هل أنت متأكد أنك تريد حذف/nطريقة الدفع هذه؟"
+  "delete_payment_method":"Delete Payment Method",
+  
+  "emergency": "Emergency",
+  "environmental": "Environmental",
+   "physical": "Physical",
+  "breathing": "Breathing",
+  "select_category": "Select a category",
+  "cognitive": "Cognitive",
+  "social": "Social",
+  "creative": "Creative",
+  "self-care": "Self-Care",
+  "crisis": "Crisis",
+  "nature": "Nature"
+  
+  
+ 
+  
 }

@@ -19,7 +19,6 @@ class _SplashViewBodyState extends State<SplashViewBody> {
 
   void handlingNavigation() {
     Future.delayed(const Duration(seconds: 6), () {
-      // Navigate to the next screen after the delay
       GoRouter.of(context).pushReplacement(AppRouter.kOnBoardView);
     });
   }

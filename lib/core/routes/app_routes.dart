@@ -59,7 +59,8 @@ class AppRouter {
 
   static GoRouter initRouter({required bool isLoggedIn}) {
     return GoRouter(
-      initialLocation: isLoggedIn ? kHomePage : kLoginView,
+      initialLocation: kSplashView,
+      //isLoggedIn ? kHomePage : kLoginView,
       routes: [
         GoRoute(
           path: kHistoryView,

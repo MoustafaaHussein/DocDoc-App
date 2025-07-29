@@ -1,3 +1,4 @@
+import 'package:docdoc_app/core/themes/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomJournalTile extends StatelessWidget {
@@ -9,7 +10,6 @@ class CustomJournalTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 155,
       height: 62,
       margin: const EdgeInsets.only(right: 12), // مسافة بين العناصر
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -21,13 +21,13 @@ class CustomJournalTile extends StatelessWidget {
         children: [
           Icon(icon, size: 22, color: const Color(0xFF573926)),
           const SizedBox(width: 12),
-          Text(
-            title,
-            style: const TextStyle(
-              color: Color(0xFF573926),
-              fontSize: 14,
-              fontFamily: 'Epilogue',
-              fontWeight: FontWeight.w700,
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              title,
+              style: AppStyles.styleBold16(
+                context,
+              ).copyWith(color: Color(0xFF573926)),
             ),
           ),
         ],

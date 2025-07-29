@@ -74,7 +74,23 @@
   "expiration_date":"تاريخ الانتهاء",
   "cardholder_name":"اسم حامل البطاقة",
   "card_number":"رقم الكارت",
-  "delete_payment_method":""
+  "delete_payment_method":"إزالة طريقة الدفع",
+  
+  "social": "اجتماعي",
+  "creative": "إبداعي",
+   "physical": "بدني",
+  "breathing": "تنفس",
+
+  "cognitive": "معرفي",
+  "select_category": "اختر فئة",
+  "self-care": "العناية الذاتية",
+  
+  "emergency": "حالات الطوارئ",
+  "crisis": "أزمة",
+  "environmental": "بيئي",
+  "nature": "الطبيعة"
+ 
+ 
 
 
 }

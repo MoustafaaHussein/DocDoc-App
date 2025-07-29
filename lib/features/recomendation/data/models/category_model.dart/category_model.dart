@@ -1,74 +1,76 @@
 import 'package:docdoc_app/core/helpers/assets.dart';
 import 'package:docdoc_app/features/recomendation/data/models/recomendation_by_category_model/recomendation_by_category_model.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SubCategoryModel {
-  final String name;
+  final String key; // English value (used for API)
   final String image;
 
-  SubCategoryModel({required this.name, required this.image});
+  SubCategoryModel({required this.key, required this.image});
+
+  String get translatedName => key.tr(); // Used for UI
 }
 
 class CategoryModel {
-  final String category;
+  final String key; // English value (used for API)
   final List<SubCategoryModel> subCategories;
 
-  CategoryModel({required this.category, required this.subCategories});
+  CategoryModel({required this.key, required this.subCategories});
+
+  String get translatedName => key.tr(); // Used for UI
 }
 
 final List<CategoryModel> categoriesList = [
   CategoryModel(
-    category: 'Exercise',
+    key: 'exercise',
     subCategories: [
-      SubCategoryModel(name: 'physical', image: Images.imagesImagesExcersice),
+      SubCategoryModel(key: 'physical', image: Images.imagesImagesExcersice),
       SubCategoryModel(
-        name: 'breathing',
+        key: 'breathing',
         image: Images.imagesImagesBreathingOriginal,
       ),
     ],
   ),
   CategoryModel(
-    category: 'Meditation',
+    key: 'meditation',
     subCategories: [
-      SubCategoryModel(
-        name: 'meditation',
-        image: Images.imagesImagesMeditation,
-      ),
+      SubCategoryModel(key: 'meditation', image: Images.imagesImagesMeditation),
     ],
   ),
   CategoryModel(
-    category: 'Mental',
+    key: 'mental',
     subCategories: [
-      SubCategoryModel(name: 'cognitive', image: Images.imagesImagesThinking),
+      SubCategoryModel(key: 'cognitive', image: Images.imagesImagesThinking),
     ],
   ),
   CategoryModel(
-    category: 'Social',
+    key: 'social',
     subCategories: [
-      SubCategoryModel(name: 'social', image: Images.imagesImagesSocial),
+      SubCategoryModel(key: 'social', image: Images.imagesImagesSocial),
     ],
   ),
   CategoryModel(
-    category: 'Creative',
+    key: 'creative',
     subCategories: [
-      SubCategoryModel(name: 'creative', image: Images.imagesImagesCreative),
+      SubCategoryModel(key: 'creative', image: Images.imagesImagesCreative),
     ],
   ),
   CategoryModel(
-    category: 'Self-Care',
+    key: 'self_care',
     subCategories: [
-      SubCategoryModel(name: 'self-care', image: Images.imagesImagesSelfCare),
+      SubCategoryModel(key: 'self_care', image: Images.imagesImagesSelfCare),
     ],
   ),
   CategoryModel(
-    category: 'Emergency',
+    key: 'emergency'.tr(),
     subCategories: [
-      SubCategoryModel(name: 'crisis', image: Images.imagesImagesCrisis),
+      SubCategoryModel(key: 'crisis', image: Images.imagesImagesCrisis),
     ],
   ),
   CategoryModel(
-    category: 'Environmental',
+    key: 'environmental'.tr(),
     subCategories: [
-      SubCategoryModel(name: 'nature', image: Images.imagesImagesBreathing),
+      SubCategoryModel(key: 'nature', image: Images.imagesImagesBreathing),
     ],
   ),
 ];

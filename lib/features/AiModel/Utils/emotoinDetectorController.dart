@@ -1,11 +1,10 @@
+import 'package:camera/camera.dart';
+import 'package:docdoc_app/features/AiModel/Model/EmotionData.dart'; // مسار الـ EmotionData
 import 'package:docdoc_app/features/AiModel/Utils/EmotionDetector.dart';
 import 'package:flutter/foundation.dart';
-import 'package:camera/camera.dart';
-import 'package:tflite_flutter/tflite_flutter.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:image/image.dart' as img_lib;
-
-import 'package:docdoc_app/features/AiModel/Model/EmotionData.dart'; // مسار الـ EmotionData
+import 'package:tflite_flutter/tflite_flutter.dart';
 
 class EmotionDetectorController {
   CameraController? _cameraController;
@@ -72,7 +71,7 @@ class EmotionDetectorController {
     }
 
     try {
-      _interpreter = await Interpreter.fromAsset('assets/model.tflite');
+      _interpreter = await Interpreter.fromAsset(' assets/model.tflite');
       final labelsData = await rootBundle.loadString('assets/labels.txt');
       _labels =
           labelsData

@@ -13,6 +13,8 @@ import 'package:docdoc_app/features/SignUP/presentation/data/Cubit/SignUpCubit.d
 import 'package:docdoc_app/features/SignUP/presentation/data/repo/SignUpRepo.dart';
 import 'package:docdoc_app/features/payment/domain/repos/payment_repositry.dart';
 import 'package:docdoc_app/features/payment/presentation/manger/bloc/payment_bloc.dart';
+import 'package:docdoc_app/features/recomendation/domain/repos/recomendation_repo.dart';
+import 'package:docdoc_app/features/recomendation/presentation/manger/bloc/recomendation_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -62,6 +64,11 @@ class DocDocApp extends StatelessWidget {
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
+            BlocProvider<RecomendationBloc>(
+              create:
+                  (context) =>
+                      RecomendationBloc(getIt.get<RecomendationRepo>()),
+            ),
             BlocProvider<PaymentBloc>(
               create: (context) => PaymentBloc(getIt.get<PaymentRepositry>()),
             ),

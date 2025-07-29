@@ -3,13 +3,11 @@ import 'package:docdoc_app/core/styles/TextStyles.dart';
 import 'package:docdoc_app/core/themes/app_styles.dart';
 import 'package:docdoc_app/features/Home/presentation/views/widgets/QuoteCard.dart';
 import 'package:docdoc_app/features/Home/presentation/views/widgets/SpecialAppBar.dart';
-import 'package:docdoc_app/features/Home/presentation/views/widgets/customTypes.dart';
+import 'package:docdoc_app/features/Home/presentation/views/widgets/custom_excercise_scrollable_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -45,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
         imageUrl: "assets/images/onboard_image1.png",
       ),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16),
         child: ListView(
           children: [
             Row(
@@ -113,34 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             SizedBox(height: 20.h),
 
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: GestureDetector(
-                onTap: () {
-                  GoRouter.of(context).push(AppRouter.kRecomendation);
-                },
-                child: Row(
-                  children: [
-                    CustomJournalTile(
-                      title: 'exercise'.tr(),
-                      icon: IconlyLight.activity,
-                    ),
-                    CustomJournalTile(
-                      title: 'meditation'.tr(),
-                      icon: Icons.self_improvement,
-                    ),
-                    CustomJournalTile(
-                      title: 'mental'.tr(),
-                      icon: Ionicons.bonfire_outline,
-                    ),
-                    CustomJournalTile(
-                      title: 'self_care'.tr(),
-                      icon: Ionicons.moon_outline,
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            CustomExcersicesScrollableWidget(),
 
             SizedBox(height: 15.h),
 
@@ -152,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               child: Container(
                 width: double.infinity,
-                height: 220.h,
+
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
                   color: const Color.fromARGB(255, 138, 142, 240),
@@ -174,10 +145,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Text(
                             "check_it_now".tr(),
-                            style: Textstyles.font16OWhite700Weight,
+                            style: AppStyles.styleSemiBold18(
+                              context,
+                            ).copyWith(color: Colors.white),
                           ),
 
-                          Image.asset("assets/images/MentalHealth.png"),
+                          Flexible(
+                            child: Image.asset(
+                              "assets/images/MentalHealth.png",
+                              fit: BoxFit.scaleDown,
+                            ),
+                          ),
                         ],
                       ),
                     ],

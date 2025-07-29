@@ -32,7 +32,7 @@ class CategoryGridPage extends StatelessWidget {
           closedColor: Colors.transparent,
           closedBuilder: (context, openContainer) {
             return CategoryCard(
-              category: category.category,
+              category: category.translatedName,
               onTap: openContainer,
             );
           },
@@ -89,7 +89,7 @@ class SubCategoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomizedAppBar(
-        title: category.category,
+        title: category.translatedName,
         onTap: () => GoRouter.of(context).pop(),
       ),
       body: ListView.builder(
@@ -112,7 +112,7 @@ class SubCategoryPage extends StatelessWidget {
                 boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4)],
               ),
               child: Text(
-                sub.name,
+                sub.translatedName,
                 style: AppStyles.styleMedium18(
                   context,
                 ).copyWith(color: Colors.white),

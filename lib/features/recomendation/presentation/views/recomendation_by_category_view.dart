@@ -7,11 +7,12 @@ import 'package:go_router/go_router.dart';
 class RecomendationByCategoryView extends StatelessWidget {
   const RecomendationByCategoryView({super.key, required this.subCategory});
   final SubCategoryModel subCategory;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomizedAppBar(
-        title: subCategory.name,
+        title: subCategory.translatedName,
         onTap: () {
           GoRouter.of(context).pop();
         },

@@ -179,7 +179,8 @@ class EmotionResultScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             SubmitEmotionButton(
-              emotionType: dominantEmotion,
+              emotionType:
+                  dominantEmotion.split(' ').sublist(1).join(' ').toLowerCase(),
               intensityLevel: intensityLevel,
             ),
             const SizedBox(height: 10),

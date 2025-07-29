@@ -21,7 +21,7 @@ class _RecomendationByCategoryBlocState
   void initState() {
     BlocProvider.of<RecomendationBloc>(
       context,
-    ).add(CategoryRecomendationEvent(subCategory: widget.subCategory.name));
+    ).add(CategoryRecomendationEvent(subCategory: widget.subCategory.key));
     super.initState();
   }
 
