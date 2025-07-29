@@ -44,7 +44,18 @@ class AuthRepository {
 
   Future<void> logout() async {
     final prefs = await SharedPreferences.getInstance();
+
     await prefs.remove("token");
+    await prefs.remove("userId");
+    await prefs.remove("userFirstName");
+    await prefs.remove("userLastName");
+    await prefs.remove("userEmail");
+    await prefs.remove("userPhone");
+    await prefs.remove("userDob");
+    await prefs.remove("userGender");
+    await prefs.remove("profilePicture");
+
+    await prefs.setBool("isLoggedIn", false);
   }
 
   // Future<void> logout(BuildContext context) async {

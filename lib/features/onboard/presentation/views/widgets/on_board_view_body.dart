@@ -5,6 +5,7 @@ import 'package:docdoc_app/core/widgets/custom_button.dart';
 import 'package:docdoc_app/features/onboard/presentation/views/widgets/on_board_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnBoardViewBody extends StatefulWidget {
   const OnBoardViewBody({super.key});
@@ -44,23 +45,23 @@ class _OnBoardViewBodyState extends State<OnBoardViewBody> {
             horizontal: Constants.kButtonPadding(context),
           ),
           child: CustomButton(
-            onpressed: () {
-              if (currentPage >= 2) {
-                currentPage != 2
-                    ? pageController.nextPage(
-                      duration: const Duration(milliseconds: 300),
-                      curve:
-                          currentPage == 2 ? Curves.slowMiddle : Curves.easeIn,
-                    )
-                    : GoRouter.of(
-                      context,
-                    ).pushReplacement(AppRouter.kPaymentMethods);
-              }
-              GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
-            },
-            text: 'التالي',
-            buttonColor: AppColors.kButtonPrimaryColor,
-          ),
+  onpressed: () async {
+    if (currentPage < 2) {
+      await pageController.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeIn,
+      );
+    } else {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('isFirstTime', false);
+
+      GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
+    }
+  },
+  text: 'التالي',
+  buttonColor: AppColors.kButtonPrimaryColor,
+),
+
         ),
         SizedBox(height: 40),
       ],
