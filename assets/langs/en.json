@@ -86,7 +86,13 @@
   "creative": "Creative",
   "self-care": "Self-Care",
   "crisis": "Crisis",
-  "nature": "Nature"
+  "nature": "Nature",
+  "continue":"Continue",
+  "helpful": "Helpful",
+  "not_helpful": "Not Helpful",
+  "please_provide_us_with_more_details": "Please provide us with more details",
+  "submit": "Submit",
+  "retry": "Retry"
   
   
  

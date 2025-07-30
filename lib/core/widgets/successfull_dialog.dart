@@ -1,6 +1,7 @@
 import 'package:docdoc_app/core/helpers/assets.dart';
 import 'package:docdoc_app/core/themes/app_colors.dart';
 import 'package:docdoc_app/core/themes/app_styles.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class SuccessDialogWidget extends StatelessWidget {
@@ -68,8 +69,8 @@ class SuccessDialogWidget extends StatelessWidget {
                   ),
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
-                child: const Text(
-                  'Continue',
+                child:  Text(
+                  'Continue'.tr(),
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
               ),

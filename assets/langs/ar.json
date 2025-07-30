@@ -88,7 +88,13 @@
   "emergency": "حالات الطوارئ",
   "crisis": "أزمة",
   "environmental": "بيئي",
-  "nature": "الطبيعة"
+  "nature": "الطبيعة",
+  "continue":"متابعة",
+  "helpful": "مفيد",
+  "not_helpful": "غير مفيد",
+  "please_provide_us_with_more_details": "يرجى تزويدنا بمزيد من التفاصيل",
+  "submit": "إرسال",
+  "retry": "إعادة المحاولة"
  
  
 

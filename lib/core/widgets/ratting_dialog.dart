@@ -1,6 +1,7 @@
 import 'package:docdoc_app/core/helpers/assets.dart';
 import 'package:docdoc_app/core/themes/app_colors.dart';
 import 'package:docdoc_app/core/themes/app_styles.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -77,7 +78,7 @@ class _RatingDialogWidgetState extends State<RatingDialogWidget> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ChoiceChip(
-                          label: const Text("Helpful"),
+                          label:  Text("helpful".tr()),
                           labelStyle: AppStyles.styleMedium18(context).copyWith(
                             color:
                                 isHelpful == true ? Colors.white : Colors.green,
@@ -92,7 +93,7 @@ class _RatingDialogWidgetState extends State<RatingDialogWidget> {
                         ),
                         const SizedBox(width: 12),
                         ChoiceChip(
-                          label: const Text("Not Helpful"),
+                          label:  Text("not_helpful".tr()),
                           labelStyle: AppStyles.styleMedium18(context).copyWith(
                             color:
                                 isHelpful == false ? Colors.white : Colors.red,
@@ -116,7 +117,7 @@ class _RatingDialogWidgetState extends State<RatingDialogWidget> {
                       maxLines: 3,
                       style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
-                        hintText: 'Please provide us with more details',
+                        hintText: 'please_provide_us_with_more_details'.tr(),
                         hintStyle: const TextStyle(color: Color(0xFF98A2B3)),
                         filled: true,
                         fillColor: const Color(0xFF1C1C1E),
@@ -153,8 +154,8 @@ class _RatingDialogWidgetState extends State<RatingDialogWidget> {
                           ),
                           padding: const EdgeInsets.symmetric(vertical: 14),
                         ),
-                        child: const Text(
-                          'Submit',
+                        child:  Text(
+                          'submit'.tr(),
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
                       ),

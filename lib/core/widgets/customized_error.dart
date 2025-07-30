@@ -1,4 +1,5 @@
 import 'package:docdoc_app/core/helpers/assets.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -21,7 +22,7 @@ class CustomErrorWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             SvgPicture.asset(
-              Images.imagesImagesError, // 👈 Add this image to assets
+              Images.imagesImagesError, 
               height: 180,
             ),
             const SizedBox(height: 16),
@@ -31,7 +32,7 @@ class CustomErrorWidget extends StatelessWidget {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 20),
-            ElevatedButton(onPressed: onRetry, child: const Text('Retry')),
+            ElevatedButton(onPressed: onRetry, child:  Text('retry'.tr())),
           ],
         ),
       ),
