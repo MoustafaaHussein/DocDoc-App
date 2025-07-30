@@ -36,16 +36,6 @@ class PaymentViewBody extends StatelessWidget {
             child: CustomButton(
               onpressed: () {
                 GoRouter.of(context).push(AppRouter.kAddNewPaymentMethod);
-                // showModalBottomSheet(
-                //   context: context,
-                //   backgroundColor: Colors.transparent,
-                //   isScrollControlled: true,
-                //   builder:
-                //       (context) => FractionallySizedBox(
-                //         heightFactor: 0.6,
-                //         child: const ProMembershipWidget(),
-                //       ),
-                // );
               },
               text: "add_card".tr(),
               buttonColor: AppColors.kButtonPrimaryColor,
@@ -57,3 +47,13 @@ class PaymentViewBody extends StatelessWidget {
     );
   }
 }
+    // showModalBottomSheet(
+                //   context: context,
+                //   backgroundColor: Colors.transparent,
+                //   isScrollControlled: true,
+                //   builder:
+                //       (context) => FractionallySizedBox(
+                //         heightFactor: 0.6,
+                //         child: const ProMembershipWidget(),
+                //       ),
+                // );

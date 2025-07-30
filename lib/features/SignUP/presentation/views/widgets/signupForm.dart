@@ -1,6 +1,7 @@
 import 'package:docdoc_app/core/routes/app_routes.dart';
 import 'package:docdoc_app/core/styles/TextStyles.dart';
 import 'package:docdoc_app/core/widgets/custom_loading.dart';
+import 'package:docdoc_app/core/widgets/customized_error.dart';
 import 'package:docdoc_app/features/Login/presentation/views/widgets/customButton.dart';
 import 'package:docdoc_app/features/Login/presentation/views/widgets/customTextFormField.dart';
 import 'package:docdoc_app/features/SignUP/presentation/data/Cubit/SignUpCubit.dart';
@@ -69,16 +70,20 @@ class _SignupFormState extends State<SignupForm> {
           ).showSnackBar(const SnackBar(content: Text('Sign Up Successful')));
           GoRouter.of(context).pushReplacement(AppRouter.kLoginView);
         } else if (state is SignUpFailure) {
-          print(state.errorMessage);
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
+          CustomErrorWidget(
+            errorMessage: state.errorMessage,
+            onRetry: () {
+              GoRouter.of(context).pop();
+            },
+          );
+        } else if (state is SignUpLoading) {
+          CustomLoading();
         }
       },
       builder: (context, state) {
         return AbsorbPointer(
           absorbing: state is SignUpLoading,
-          child: CustomLoading(),
+          child: _buildFormContent(context),
         );
       },
     );
@@ -86,7 +91,7 @@ class _SignupFormState extends State<SignupForm> {
 
   Widget _buildFormContent(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(12.0),
+      padding: const EdgeInsets.only(top: 10.0, bottom: 30, left: 20),
       child: ListView(
         children: [
           Form(
@@ -306,7 +311,7 @@ class _SignupFormState extends State<SignupForm> {
                   },
                 ),
 
-                SizedBox(height: 16.h),
+                SizedBox(height: 30.h),
 
                 Center(
                   child: InkWell(
@@ -330,6 +335,7 @@ class _SignupFormState extends State<SignupForm> {
                     ),
                   ),
                 ),
+                SizedBox(height: 30),
               ],
             ),
           ),

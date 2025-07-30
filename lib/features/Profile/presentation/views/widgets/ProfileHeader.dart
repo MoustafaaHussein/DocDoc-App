@@ -115,7 +115,7 @@ class _ProfileHeaderScreenState extends State<ProfileHeaderScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 4.h),
+             
 
                 SizedBox(height: 24.h),
 

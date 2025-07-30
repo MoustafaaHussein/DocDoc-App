@@ -78,8 +78,9 @@ class WeeklyMoodDemoScreen extends StatelessWidget {
                         interval: 1,
                         getTitlesWidget: (value, _) {
                           int index = value.toInt();
-                          if (index < 0 || index >= weekDates.length)
+                          if (index < 0 || index >= weekDates.length) {
                             return const SizedBox();
+                          }
                           return Padding(
                             padding: const EdgeInsets.only(top: 8.0),
                             child: Text(

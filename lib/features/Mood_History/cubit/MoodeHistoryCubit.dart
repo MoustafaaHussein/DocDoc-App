@@ -2,9 +2,6 @@ import 'package:docdoc_app/features/Mood_History/cubit/MoodHistoryState.dart';
 import 'package:docdoc_app/features/Mood_History/repo/MoodHistoryRepo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
-
-
 class MoodHistoryCubit extends Cubit<MoodHistoryState> {
   final MoodHistoryRepo repo;
 

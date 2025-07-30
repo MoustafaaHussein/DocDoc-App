@@ -48,7 +48,12 @@ class LoginForm extends StatelessWidget {
       builder: (context, state) {
         return SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.only(
+              top: 10.0,
+              bottom: 30,
+              left: 20,
+              right: 20,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

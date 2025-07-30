@@ -50,8 +50,9 @@ class WeeklyMoodScreen extends StatelessWidget {
                                 interval: 1,
                                 getTitlesWidget: (value, _) {
                                   int index = value.toInt();
-                                  if (index < 0 || index >= dailyData.length)
+                                  if (index < 0 || index >= dailyData.length) {
                                     return const SizedBox();
+                                  }
                                   final date = DateFormat(
                                     'E',
                                   ).format(dailyData[index].date);
