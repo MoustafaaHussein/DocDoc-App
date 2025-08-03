@@ -81,10 +81,7 @@ class _SignupFormState extends State<SignupForm> {
         }
       },
       builder: (context, state) {
-        return AbsorbPointer(
-          absorbing: state is SignUpLoading,
-          child: _buildFormContent(context),
-        );
+        return _buildFormContent(context);
       },
     );
   }
@@ -205,38 +202,38 @@ class _SignupFormState extends State<SignupForm> {
                 ),
 
                 SizedBox(height: 12.h),
-                Text(
-                  "date_of_birth".tr(),
-                  style: Textstyles.font14Grey400Weight,
-                ),
-                SizedBox(height: 8.h),
-                GestureDetector(
-                  onTap: () => _selectDate(context),
-                  child: Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(
-                      vertical: 14.h,
-                      horizontal: 12.w,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF1E1E1E),
-                      borderRadius: BorderRadius.circular(12.r),
-                    ),
-                    child: Text(
-                      selectedDate != null
-                          ? "${selectedDate!.toLocal()}".split(' ')[0]
-                          : "Select Date",
-                      style: TextStyle(
-                        color:
-                            selectedDate != null
-                                ? Colors.white
-                                : const Color(0xFFA2A2A7),
-                        fontSize: 14.sp,
-                      ),
-                    ),
-                  ),
-                ),
 
+                // Text(
+                //   "date_of_birth".tr(),
+                //   style: Textstyles.font14Grey400Weight,
+                // ),
+                // SizedBox(height: 8.h),
+                // GestureDetector(
+                //   onTap: () => _selectDate(context),
+                //   child: Container(
+                //     width: double.infinity,
+                //     padding: EdgeInsets.symmetric(
+                //       vertical: 14.h,
+                //       horizontal: 12.w,
+                //     ),
+                //     decoration: BoxDecoration(
+                //       color: const Color(0xFF1E1E1E),
+                //       borderRadius: BorderRadius.circular(12.r),
+                //     ),
+                //     child: Text(
+                //       selectedDate != null
+                //           ? "${selectedDate!.toLocal()}".split(' ')[0]
+                //           : "Select Date",
+                //       style: TextStyle(
+                //         color:
+                //             selectedDate != null
+                //                 ? Colors.white
+                //                 : const Color(0xFFA2A2A7),
+                //         fontSize: 14.sp,
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 SizedBox(height: 16.h),
                 Text("gender".tr(), style: Textstyles.font14Grey400Weight),
                 SizedBox(height: 8.h),
