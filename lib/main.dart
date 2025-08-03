@@ -1,38 +1,105 @@
-import 'package:device_preview/device_preview.dart';
+import 'package:camera/camera.dart';
+import 'package:dio/dio.dart';
+import 'package:docdoc_app/core/helpers/secure_storage.dart';
+import 'package:docdoc_app/core/helpers/service_locator.dart';
 import 'package:docdoc_app/core/routes/app_routes.dart';
 import 'package:docdoc_app/core/themes/app_colors.dart';
+import 'package:docdoc_app/features/Analytics/cubit/AnalyticsCubit.dart';
+import 'package:docdoc_app/features/Analytics/repo/AnalyticsRepo.dart';
+import 'package:docdoc_app/features/Login/Data/Cubit/LoginCubit.dart';
+import 'package:docdoc_app/features/Mood_History/cubit/MoodeHistoryCubit.dart';
+import 'package:docdoc_app/features/Mood_History/repo/MoodHistoryRepo.dart';
+import 'package:docdoc_app/features/SignUP/presentation/data/Cubit/SignUpCubit.dart';
+import 'package:docdoc_app/features/SignUP/presentation/data/repo/SignUpRepo.dart';
+import 'package:docdoc_app/features/payment/domain/repos/payment_repositry.dart';
+import 'package:docdoc_app/features/payment/presentation/manger/bloc/payment_bloc.dart';
+import 'package:docdoc_app/features/recomendation/domain/repos/recomendation_repo.dart';
+import 'package:docdoc_app/features/recomendation/presentation/manger/bloc/recomendation_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+late List<CameraDescription> cameras;
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  final token = prefs.getString("token");
+  try {
+    cameras = await availableCameras();
+  } on CameraException catch (e) {
+    print('Error accessing cameras: $e');
+  }
+
+  await SecureStorage.init();
+  serviceLocator();
+
+  final router = AppRouter.initRouter(isLoggedIn: token != null);
+
   runApp(
-    DevicePreview(
-      enabled: true,
-
-      builder: (context) {
-        return const DocDocApp();
-      },
+    EasyLocalization(
+      supportedLocales: const [Locale('en'), Locale('ar')],
+      path: 'assets/langs',
+      fallbackLocale: const Locale('en'),
+      saveLocale: true,
+      child: DocDocApp(router: router),
     ),
   );
 }
 
 class DocDocApp extends StatelessWidget {
-  const DocDocApp({super.key});
-
-  // This widget is the root of your application.
+  const DocDocApp({super.key, required this.router});
+  final GoRouter router;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      supportedLocales: const [Locale('ar'), Locale('en')],
-      locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
-      theme: ThemeData.dark().copyWith(
-        textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
-        scaffoldBackgroundColor: AppColors.kDarkModeBackgroundColor,
-      ),
-      debugShowCheckedModeBanner: false,
-      routerConfig: AppRouter.router,
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider<RecomendationBloc>(
+              create:
+                  (context) =>
+                      RecomendationBloc(getIt.get<RecomendationRepo>()),
+            ),
+            BlocProvider<PaymentBloc>(
+              create: (context) => PaymentBloc(getIt.get<PaymentRepositry>()),
+            ),
+            BlocProvider<WeeklyMoodCubit>(
+              create: (context) => WeeklyMoodCubit(WeeklyMoodRepo(Dio())),
+            ),
+            BlocProvider<MoodHistoryCubit>(
+              create:
+                  (context) =>
+                      MoodHistoryCubit(context.read<MoodHistoryRepo>()),
+            ),
+            BlocProvider(create: (_) => LoginCubit(AuthRepository(dio: Dio()))),
+            BlocProvider(
+              create: (_) => SignUpCubit(AuthRepository(dio: Dio())),
+            ),
+          ],
+          child: MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            routerConfig: router,
+            locale: context.locale,
+            supportedLocales: context.supportedLocales,
+            localizationsDelegates: context.localizationDelegates,
+            theme: ThemeData.dark().copyWith(
+              textTheme: GoogleFonts.poppinsTextTheme(
+                ThemeData.dark().textTheme,
+              ),
+              scaffoldBackgroundColor: AppColors.kDarkModeBackgroundColor,
+            ),
+          ),
+        );
+      },
     );
   }
 }
-// This is a simple Flutter application that sets up the main entry point and the root widget.
