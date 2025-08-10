@@ -55,7 +55,7 @@ class WarningDialog extends StatelessWidget {
               subTittle,
               style: AppStyles.styleRegular14(
                 context,
-              ).copyWith(color: Color(0xFF98A2B3)),
+              ).copyWith(color: const Color(0xFF98A2B3)),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
@@ -76,7 +76,7 @@ class WarningDialog extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(

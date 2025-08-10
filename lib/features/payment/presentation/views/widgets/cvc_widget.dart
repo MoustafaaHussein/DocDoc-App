@@ -17,7 +17,7 @@ class CVC extends StatelessWidget {
         const SizedBox(width: 30),
         Expanded(
           child: CustomTextField(
-            inputType: TextInputType.numberWithOptions(),
+            inputType: const TextInputType.numberWithOptions(),
 
             onChange: onChange,
           ),

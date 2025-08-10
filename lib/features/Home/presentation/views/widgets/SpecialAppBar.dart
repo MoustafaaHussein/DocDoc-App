@@ -86,7 +86,7 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
                             borderRadius: BorderRadius.circular(1234),
                           ),
                         ),
-                        child: Column(
+                        child: const Column(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -109,7 +109,7 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
                                 Text(
                                   'Pro Member',
                                   style: TextStyle(
-                                    color: const Color(0xFF9BB068),
+                                    color: Color(0xFF9BB068),
                                     fontSize: 12,
                                     fontFamily: 'Urbanist',
                                     fontWeight: FontWeight.w700,

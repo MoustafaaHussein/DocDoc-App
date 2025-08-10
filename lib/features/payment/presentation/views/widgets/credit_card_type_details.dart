@@ -24,7 +24,7 @@ class CreditCardTypeDetails extends StatelessWidget {
                 context,
               ).copyWith(color: Colors.grey),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               '$expiryMonth/$expiryYear',
               style: AppStyles.styleMedium13(
@@ -33,7 +33,7 @@ class CreditCardTypeDetails extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(width: 30),
+        const SizedBox(width: 30),
         Column(
           children: [
             Text(
@@ -42,7 +42,7 @@ class CreditCardTypeDetails extends StatelessWidget {
                 context,
               ).copyWith(color: Colors.grey),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               cvc,
               style: AppStyles.styleMedium13(
@@ -51,7 +51,7 @@ class CreditCardTypeDetails extends StatelessWidget {
             ),
           ],
         ),
-        Spacer(),
+        const Spacer(),
         SvgPicture.asset(
           cardType == "Mastercard"
               ? Images.imagesImagesMasterCard

@@ -23,12 +23,12 @@ class PaymentsPlanPageViewItems extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 decoration: ShapeDecoration(
                   shape: RoundedRectangleBorder(
-                    side: BorderSide(color: Colors.white),
+                    side: const BorderSide(color: Colors.white),
                     borderRadius: BorderRadiusGeometry.circular(12),
                   ),
                 ),
@@ -39,28 +39,28 @@ class PaymentsPlanPageViewItems extends StatelessWidget {
                   ).copyWith(color: Colors.white),
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Text(
                 '${proPlans.price} \$',
                 style: AppStyles.styleSemiBold30(
                   context,
                 ).copyWith(color: Colors.white),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Text(
                 proPlans.description!,
                 style: AppStyles.styleMedium18(
                   context,
                 ).copyWith(color: Colors.grey),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Expanded(
                 child: ProMemberShipFeaturesList(features: proPlans.features!),
               ),
               Row(
                 children: [
                   SvgPicture.asset(Images.imagesImagesTime),
-                  SizedBox(width: 4),
+                  const SizedBox(width: 4),
                   Text(
                     '${proPlans.durationDays} days',
                     style: AppStyles.styleMedium13(
@@ -69,13 +69,13 @@ class PaymentsPlanPageViewItems extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
               CustomButton(
                 onpressed: () {},
                 text: 'SubScribe ',
                 buttonColor: Colors.grey,
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
             ],
           ),
         ),

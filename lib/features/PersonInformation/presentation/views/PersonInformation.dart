@@ -59,7 +59,7 @@ class _PersoninformationState extends State<Personinformation> {
               shape: BoxShape.circle,
             ),
             child: IconButton(
-              icon: Icon(IconlyLight.arrowLeft2, color: Colors.white, size: 20),
+              icon: const Icon(IconlyLight.arrowLeft2, color: Colors.white, size: 20),
               onPressed: () {
                 GoRouter.of(context).pop();
               },
@@ -82,28 +82,28 @@ class _PersoninformationState extends State<Personinformation> {
                   value: fullName ?? '',
                   icon: IconlyLight.profile,
                 ),
-                Divider(),
+                const Divider(),
                 SizedBox(height: 15.h),
                 ProfileInfoTile(
                   label: 'email_address'.tr(),
                   value: email ?? '',
                   icon: IconlyLight.message,
                 ),
-                Divider(),
+                const Divider(),
                 SizedBox(height: 15.h),
                 ProfileInfoTile(
                   label: 'phone_number'.tr(),
                   value: phone ?? '',
                   icon: IconlyLight.call,
                 ),
-                Divider(),
+                const Divider(),
                 SizedBox(height: 15.h),
                 ProfileInfoTile(
                   label: 'date_of_birth'.tr(),
                   value: dob ?? '',
                   icon: IconlyLight.calendar,
                 ),
-                Divider(),
+                const Divider(),
                 // BirthDateTile(
                 //   initialDate: dob != null ? DateTime.tryParse(dob!) : null,
                 //   onDateSelected: (date) {

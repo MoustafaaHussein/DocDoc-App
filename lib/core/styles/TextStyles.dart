@@ -12,36 +12,36 @@ class Textstyles {
   );
 
   static TextStyle font12Brown400Weight = TextStyle(
-    color: Color(0xFF573926),
+    color: const Color(0xFF573926),
     fontSize: 12.sp,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w400,
     height: 1.5,
   );
 
-  static TextStyle font16Orange700Weight = TextStyle(
-    color: const Color(0xFFFE8235),
+  static TextStyle font16Orange700Weight = const TextStyle(
+    color: Color(0xFFFE8235),
     fontSize: 16,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w700,
     height: 2,
   );
 
-  static TextStyle font30Black600Weight = TextStyle(
-    color: const Color(0xFF1C1B1F),
+  static TextStyle font30Black600Weight = const TextStyle(
+    color: Color(0xFF1C1B1F),
     fontSize: 30,
     fontFamily: 'Sora',
     fontWeight: FontWeight.w600,
     height: 1.20,
   );
-  static TextStyle font19Black600Weight = TextStyle(
-    color: const Color(0xFF1C1B1F),
+  static TextStyle font19Black600Weight = const TextStyle(
+    color: Color(0xFF1C1B1F),
     fontSize: 19,
     fontFamily: 'Sora',
     fontWeight: FontWeight.w600,
     height: 1.20,
   );
-  static TextStyle font16OWhite700Weight = TextStyle(
+  static TextStyle font16OWhite700Weight = const TextStyle(
     color: Colors.white,
     fontSize: 16,
     fontFamily: 'Poppins',
@@ -57,13 +57,13 @@ class Textstyles {
     height: 1,
   );
 
-  static TextStyle font22Brown800Weight = TextStyle(
-    color: const Color(0xFF573926),
+  static TextStyle font22Brown800Weight = const TextStyle(
+    color: Color(0xFF573926),
     fontSize: 22,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w800,
   );
-  static TextStyle font22Black800Weight = TextStyle(
+  static TextStyle font22Black800Weight = const TextStyle(
     color: Colors.black,
     fontSize: 22,
     fontFamily: 'Poppins',

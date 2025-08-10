@@ -161,9 +161,9 @@ class _MoodScrollSectionState extends State<MoodScrollSection> {
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.health_and_safety, color: Colors.white, size: 24),
+            const Icon(Icons.health_and_safety, color: Colors.white, size: 24),
             SizedBox(width: 8.h),
-            Text(
+            const Text(
               'Freud Score',
               style: TextStyle(
                 color: Colors.white,
@@ -180,7 +180,7 @@ class _MoodScrollSectionState extends State<MoodScrollSection> {
           height: 120,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            border: Border.all(color: Color(0xFFB4C38C), width: 10),
+            border: Border.all(color: const Color(0xFFB4C38C), width: 10),
           ),
           child: const Center(
             child: Column(

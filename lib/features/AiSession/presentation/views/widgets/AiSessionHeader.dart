@@ -72,7 +72,7 @@ class _AisessionState extends State<AisessionHeader> {
                 "check_mood_fast".tr(),
                 style: AppStyles.styleMedium16(
                   context,
-                ).copyWith(color: Color.fromARGB(255, 116, 116, 117)),
+                ).copyWith(color: const Color.fromARGB(255, 116, 116, 117)),
               ),
               SizedBox(height: 15.h),
               SizedBox(
@@ -83,7 +83,7 @@ class _AisessionState extends State<AisessionHeader> {
                     'self_care_description'.tr(),
                     style: AppStyles.styleMedium16(
                       context,
-                    ).copyWith(color: Color(0xFF1C1B1F)),
+                    ).copyWith(color: const Color(0xFF1C1B1F)),
                   ),
                 ),
               ),

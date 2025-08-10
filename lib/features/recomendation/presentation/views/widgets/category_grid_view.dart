@@ -56,11 +56,11 @@ class CategoryCard extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                const Color.fromARGB(255, 14, 78, 131),
-                const Color.fromARGB(255, 10, 35, 55),
+                Color.fromARGB(255, 14, 78, 131),
+                Color.fromARGB(255, 10, 35, 55),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -109,7 +109,7 @@ class SubCategoryPage extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.circular(12),
-                boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4)],
+                boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 4)],
               ),
               child: Text(
                 sub.translatedName,

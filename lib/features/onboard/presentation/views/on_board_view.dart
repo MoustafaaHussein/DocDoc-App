@@ -6,6 +6,6 @@ class OnBoardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: OnBoardViewBody());
+    return const Scaffold(body: OnBoardViewBody());
   }
 }

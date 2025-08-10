@@ -53,7 +53,7 @@ class _RecomendationByEmotionsViewState
               recomendations: state.emotionsRecomendations,
             );
           } else {
-            return CustomLoading();
+            return const CustomLoading();
           }
         },
       ),

@@ -18,7 +18,7 @@ class CategoryRecomendationList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return recomendations.isEmpty
-        ? EmptyDataWidget(
+        ? const EmptyDataWidget(
           message: 'No recommendation available right now',
           svgAssetPath: Images.imagesImagesNoData,
         )

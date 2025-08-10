@@ -15,7 +15,7 @@ class ExpiryDateDisplay extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('Expiry Date', style: AppStyles.styleMedium16(context)),
-        SizedBox(height: 15),
+        const SizedBox(height: 15),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -25,11 +25,11 @@ class ExpiryDateDisplay extends StatelessWidget {
                 context,
               ).copyWith(color: Colors.white, height: 1),
             ),
-            Spacer(),
+            const Spacer(),
           ],
         ),
-        SizedBox(height: 10),
-        Divider(color: AppColors.kDviderColor, thickness: 1),
+        const SizedBox(height: 10),
+        const Divider(color: AppColors.kDviderColor, thickness: 1),
       ],
     );
   }

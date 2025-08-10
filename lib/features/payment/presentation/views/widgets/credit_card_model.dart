@@ -25,7 +25,7 @@ class CreditCardModel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: AppContainersStyle.creditCardStyle,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,11 +36,11 @@ class CreditCardModel extends StatelessWidget {
             height: 30,
             width: 30,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           CreditCardNumber(cardNumber: creditCardNumber),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(cardHolderName, style: AppStyles.styleRegular14(context)),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           CreditCardTypeDetails(
             expiryMonth: expiryMonth,
             expiryYear: expiryYear,

@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: const Color.fromARGB(255, 240, 229, 193),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -111,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             SizedBox(height: 20.h),
 
-            CustomExcersicesScrollableWidget(),
+            const CustomExcersicesScrollableWidget(),
 
             SizedBox(height: 15.h),
 
@@ -129,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: const Color.fromARGB(255, 138, 142, 240),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

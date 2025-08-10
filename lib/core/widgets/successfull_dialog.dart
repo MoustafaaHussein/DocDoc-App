@@ -53,7 +53,7 @@ class SuccessDialogWidget extends StatelessWidget {
               subTittle,
               style: AppStyles.styleRegular14(
                 context,
-              ).copyWith(color: Color(0xFF98A2B3)),
+              ).copyWith(color: const Color(0xFF98A2B3)),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),

@@ -2,7 +2,7 @@ name: docdoc_app
 description: "A new Flutter project."
 publish_to: "none"
 
-version: 1.0.0+2
+version: 1.0.0+3
 
 environment:
   sdk: ^3.7.2
@@ -34,7 +34,8 @@ dependencies:
   intl: ^0.20.2
   ionicons: ^0.2.2
   path_provider: ^2.1.5
-  purchases_flutter: ^9.1.0
+  purchases_flutter: ^9.2.0
+  purchases_ui_flutter: ^9.2.0
   quiver: ^3.2.2
   rename: ^3.1.0
   shared_preferences: ^2.5.3

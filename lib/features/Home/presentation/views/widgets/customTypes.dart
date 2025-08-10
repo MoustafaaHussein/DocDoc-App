@@ -27,7 +27,7 @@ class CustomJournalTile extends StatelessWidget {
               title,
               style: AppStyles.styleBold16(
                 context,
-              ).copyWith(color: Color(0xFF573926)),
+              ).copyWith(color: const Color(0xFF573926)),
             ),
           ),
         ],

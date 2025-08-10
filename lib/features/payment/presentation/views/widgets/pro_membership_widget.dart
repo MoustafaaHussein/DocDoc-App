@@ -33,7 +33,7 @@ class _ProMembershipWidgetState extends State<ProMembershipWidget> {
         } else if (state is GetProPlansSuccess) {
           return ProMemberShipBlocConsumer(proPlans: state.proPlans);
         } else {
-          return CustomLoading();
+          return const CustomLoading();
         }
       },
     );

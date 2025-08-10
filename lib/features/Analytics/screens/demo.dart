@@ -94,10 +94,10 @@ class WeeklyMoodDemoScreen extends StatelessWidget {
                         },
                       ),
                     ),
-                    rightTitles: AxisTitles(
+                    rightTitles: const AxisTitles(
                       sideTitles: SideTitles(showTitles: false),
                     ),
-                    topTitles: AxisTitles(
+                    topTitles: const AxisTitles(
                       sideTitles: SideTitles(showTitles: false),
                     ),
                   ),
@@ -111,7 +111,7 @@ class WeeklyMoodDemoScreen extends StatelessWidget {
                       gradient: const LinearGradient(
                         colors: [Colors.blueAccent, Colors.lightBlue],
                       ),
-                      dotData: FlDotData(show: true),
+                      dotData: const FlDotData(show: true),
                       belowBarData: BarAreaData(
                         show: true,
                         gradient: LinearGradient(
@@ -139,11 +139,11 @@ class WeeklyMoodDemoScreen extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
+              child: const Padding(
+                padding: EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
                       "التحليل الأسبوعي",
                       style: TextStyle(

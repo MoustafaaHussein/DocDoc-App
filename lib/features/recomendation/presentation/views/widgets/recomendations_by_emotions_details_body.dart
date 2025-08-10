@@ -28,7 +28,7 @@ class RecomendationsByEmotionsDetailsBody extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Row(
                   children: [
                     FittedBox(
@@ -40,10 +40,10 @@ class RecomendationsByEmotionsDetailsBody extends StatelessWidget {
                         ).copyWith(color: Colors.white),
                       ),
                     ),
-                    Spacer(),
-                    SizedBox(width: 10),
+                    const Spacer(),
+                    const SizedBox(width: 10),
                     Container(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: getDiffcultyLevel(
                           recomendations.difficultyLevel!,
@@ -57,7 +57,7 @@ class RecomendationsByEmotionsDetailsBody extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 FittedBox(
                   fit: BoxFit.scaleDown,
                   child: Text(
@@ -69,23 +69,23 @@ class RecomendationsByEmotionsDetailsBody extends StatelessWidget {
                     ).copyWith(color: Colors.grey),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   children: [
-                    Icon(Icons.star, color: Colors.amber),
-                    SizedBox(width: 10),
+                    const Icon(Icons.star, color: Colors.amber),
+                    const SizedBox(width: 10),
                     Text(
                       recomendations.effectivenessRating.toString(),
                       style: AppStyles.styleMedium13(context),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     SvgPicture.asset(
                       Images.imagesImagesTime,
                       fit: BoxFit.scaleDown,
                       height: 20,
                       width: 20,
                     ),
-                    SizedBox(width: 2),
+                    const SizedBox(width: 2),
                     Text(
                       "${recomendations.estimatedDurationMinutes} min",
                       style: AppStyles.styleMedium13(
@@ -94,28 +94,28 @@ class RecomendationsByEmotionsDetailsBody extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
-                Text('Do You feel ?'),
+                const SizedBox(height: 20),
+                const Text('Do You feel ?'),
                 SizedBox(
                   width: double.infinity,
                   child: EmojisList(
                     receivedEmojis: recomendations.targetEmotions!,
                   ),
                 ),
-                SizedBox(height: 20),
-                Text('Instruction'),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
+                const Text('Instruction'),
+                const SizedBox(height: 20),
                 Text(recomendations.instructions!),
               ],
             ),
           ),
         ),
-        SliverToBoxAdapter(child: SizedBox(height: 50)),
+        const SliverToBoxAdapter(child: SizedBox(height: 50)),
         SliverToBoxAdapter(
           child: BlocConsumer<RecomendationBloc, RecomendationState>(
             listener: (context, state) {
               if (state is CompleteExcerciseLoading) {
-                CustomLoading();
+                const CustomLoading();
               } else if (state is CompleteExcerciseFailed) {
                 CustomErrorWidget(
                   errorMessage: state.errorMessage,

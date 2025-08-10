@@ -11,7 +11,7 @@ class ProMemberShipFeatures extends StatelessWidget {
     return Row(
       children: [
         SvgPicture.asset(Images.imagesImagesCheckMark),
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
         Text(
           feature,
           style: AppStyles.styleMedium16(context).copyWith(color: Colors.grey),

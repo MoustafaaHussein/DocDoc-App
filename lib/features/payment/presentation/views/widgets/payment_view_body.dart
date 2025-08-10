@@ -26,11 +26,11 @@ class PaymentViewBody extends StatelessWidget {
         children: [
           creditCards.isNotEmpty
               ? Expanded(child: CreditCardList(creditCards: creditCards))
-              : EmptyDataWidget(
+              : const EmptyDataWidget(
                 message: 'No Payment Method Added',
                 svgAssetPath: Images.imagesImagesNoData,
               ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: CustomButton(
@@ -41,7 +41,7 @@ class PaymentViewBody extends StatelessWidget {
               buttonColor: AppColors.kButtonPrimaryColor,
             ),
           ),
-          SizedBox(height: 50),
+          const SizedBox(height: 50),
         ],
       ),
     );

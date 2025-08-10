@@ -11,6 +11,6 @@ class AiView extends StatefulWidget {
 class _AiViewState extends State<AiView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: AiIntroWidget());
+    return const Scaffold(body: AiIntroWidget());
   }
 }

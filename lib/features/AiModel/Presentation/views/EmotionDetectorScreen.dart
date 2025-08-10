@@ -283,8 +283,8 @@ class _EmotionDetectorScreenState extends State<EmotionDetectorScreen>
 
     if (_isNavigationInProgress) {
       return Scaffold(
-        appBar: AppBar(title: Text("جاري معالجة النتائج...")),
-        body: Center(child: CircularProgressIndicator()),
+        appBar: AppBar(title: const Text("جاري معالجة النتائج...")),
+        body: const Center(child: CircularProgressIndicator()),
       );
     }
 

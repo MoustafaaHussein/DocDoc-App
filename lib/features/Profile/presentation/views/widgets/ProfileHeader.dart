@@ -75,11 +75,11 @@ class _ProfileHeaderScreenState extends State<ProfileHeaderScreen> {
                 SizedBox(height: 40.h),
 
                 // أزرار العنوان
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
+                    children: [
                       CircleAvatar(
                         backgroundColor: Colors.white24,
                         child: Icon(Icons.arrow_back, color: Colors.white),
@@ -92,11 +92,11 @@ class _ProfileHeaderScreenState extends State<ProfileHeaderScreen> {
                 SizedBox(height: 80.h),
 
                 // صورة البروفايل
-                Center(
+                const Center(
                   child: CircleAvatar(
                     radius: 48,
                     backgroundColor: Colors.white,
-                    child: const CircleAvatar(
+                    child: CircleAvatar(
                       radius: 44,
                       backgroundImage: AssetImage(
                         'assets/images/onboard_image1.png',

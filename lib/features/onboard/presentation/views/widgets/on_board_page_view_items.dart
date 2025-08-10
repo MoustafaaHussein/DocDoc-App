@@ -23,21 +23,21 @@ class OnBoardPageViewItems extends StatelessWidget {
             child: Image.asset(image, fit: BoxFit.cover),
           ),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Text(
           textAlign: TextAlign.center,
           title,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 26,
             fontWeight: FontWeight.w600,
             color: Colors.white,
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Text(
           description,
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 16, color: AppColors.kSubTitleColor),
+          style: const TextStyle(fontSize: 16, color: AppColors.kSubTitleColor),
         ),
       ],
     );

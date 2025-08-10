@@ -15,7 +15,7 @@ class AddPaymentMethodView extends StatelessWidget {
           GoRouter.of(context).pop();
         },
       ),
-      body: AddPaymentBlocConsumer(),
+      body: const AddPaymentBlocConsumer(),
     );
   }
 }

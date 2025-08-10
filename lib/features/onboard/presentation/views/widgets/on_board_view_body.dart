@@ -39,7 +39,7 @@ class _OnBoardViewBodyState extends State<OnBoardViewBody> {
     return Column(
       children: [
         Expanded(child: OnBoardPageView(pageController: pageController)),
-        SizedBox(height: 40),
+        const SizedBox(height: 40),
         Padding(
           padding: EdgeInsets.symmetric(
             horizontal: Constants.kButtonPadding(context),
@@ -63,7 +63,7 @@ class _OnBoardViewBodyState extends State<OnBoardViewBody> {
 ),
 
         ),
-        SizedBox(height: 40),
+        const SizedBox(height: 40),
       ],
     );
   }

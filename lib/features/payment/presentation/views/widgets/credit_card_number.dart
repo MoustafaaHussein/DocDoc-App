@@ -17,7 +17,7 @@ class CreditCardNumber extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(width: 30),
+        const SizedBox(width: 30),
         Flexible(
           child: FittedBox(
             fit: BoxFit.scaleDown,
@@ -27,7 +27,7 @@ class CreditCardNumber extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(width: 30),
+        const SizedBox(width: 30),
         Flexible(
           child: FittedBox(
             fit: BoxFit.scaleDown,
@@ -37,7 +37,7 @@ class CreditCardNumber extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(width: 30),
+        const SizedBox(width: 30),
         Flexible(
           child: FittedBox(
             child: Text(
@@ -46,7 +46,7 @@ class CreditCardNumber extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(width: 30),
+        const SizedBox(width: 30),
       ],
     );
   }

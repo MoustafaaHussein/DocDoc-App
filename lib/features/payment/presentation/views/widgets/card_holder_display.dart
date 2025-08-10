@@ -19,23 +19,23 @@ class CardHolderNameDisplay extends StatelessWidget {
             context,
           ).copyWith(fontSize: 16, height: 1),
         ),
-        SizedBox(height: 15),
+        const SizedBox(height: 15),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SvgPicture.asset(Images.imagesImagesPerson, fit: BoxFit.fill),
-            SizedBox(width: 25),
+            const SizedBox(width: 25),
             Text(
               cardHolderName,
               style: AppStyles.styleRegular14(
                 context,
               ).copyWith(color: Colors.white, height: 1),
             ),
-            Spacer(),
+            const Spacer(),
           ],
         ),
-        SizedBox(height: 10),
-        Divider(color: AppColors.kDviderColor, thickness: 1),
+        const SizedBox(height: 10),
+        const Divider(color: AppColors.kDviderColor, thickness: 1),
       ],
     );
   }

@@ -10,7 +10,7 @@ class RecomendationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: RecomendationViewBody(),
+      body: const RecomendationViewBody(),
       appBar: CustomizedAppBar(
         title: 'select_category'.tr(),
         onTap: () {

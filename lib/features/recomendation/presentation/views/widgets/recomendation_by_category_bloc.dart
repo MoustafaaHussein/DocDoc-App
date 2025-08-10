@@ -40,7 +40,7 @@ class _RecomendationByCategoryBlocState
             onRetry: () {},
           );
         } else {
-          return CustomLoading();
+          return const CustomLoading();
         }
       },
     );

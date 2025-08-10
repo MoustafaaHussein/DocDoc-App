@@ -6,6 +6,6 @@ class PaymentView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PaymentsBlocConsumer();
+    return const PaymentsBlocConsumer();
   }
 }

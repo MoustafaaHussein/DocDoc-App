@@ -7,15 +7,15 @@ abstract class AppContainersStyle {
     shape: OvalBorder(),
   );
   static final creditCardStyle = BoxDecoration(
-    color: Color(0xff24243B),
+    color: const Color(0xff24243B),
     borderRadius: BorderRadius.circular(20),
-    image: DecorationImage(
+    image: const DecorationImage(
       fit: BoxFit.fill,
       image: AssetImage(Images.imagesImagesMastercardBackGround),
     ),
   );
   static final recomendadtionCardStyle = BoxDecoration(
-    color: Color(0xff24243B),
+    color: const Color(0xff24243B),
     borderRadius: BorderRadius.circular(20),
   );
   static final proMembershipContainerStyles = BoxDecoration(

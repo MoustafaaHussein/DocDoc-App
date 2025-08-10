@@ -4,7 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 void showLanguageBottomSheet(BuildContext context) {
   showModalBottomSheet(
     context: context,
-    shape: RoundedRectangleBorder(
+    shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
     ),
     builder: (_) {
@@ -13,7 +13,7 @@ void showLanguageBottomSheet(BuildContext context) {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
+            const Text(
               'اختر اللغة',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
@@ -26,14 +26,14 @@ void showLanguageBottomSheet(BuildContext context) {
                     context.setLocale(const Locale('ar'));
                     Navigator.pop(context);
                   },
-                  child: Text('العربية'),
+                  child: const Text('العربية'),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     context.setLocale(const Locale('en'));
                     Navigator.pop(context);
                   },
-                  child: Text('English'),
+                  child: const Text('English'),
                 ),
               ],
             ),

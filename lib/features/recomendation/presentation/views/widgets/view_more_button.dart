@@ -7,7 +7,7 @@ class ViewMoreButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: ElevatedButton.styleFrom(backgroundColor: Color(0xff222239)),
+      style: ElevatedButton.styleFrom(backgroundColor: const Color(0xff222239)),
       onPressed: onPressed,
       child: Text('View Steps..', style: AppStyles.styleRegular14(context)),
     );

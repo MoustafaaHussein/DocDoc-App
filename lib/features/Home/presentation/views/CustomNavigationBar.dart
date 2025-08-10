@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
 
   final List<IconData> iconList = [IconlyLight.home, IconlyLight.user2];
 
-  final List<Widget> _screens = [HomeScreen(), ProfileScreen()];
+  final List<Widget> _screens = [const HomeScreen(), const ProfileScreen()];
 
   @override
   Widget build(BuildContext context) {

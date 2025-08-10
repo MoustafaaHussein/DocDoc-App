@@ -45,7 +45,7 @@ class _RatingDialogWidgetState extends State<RatingDialogWidget> {
                   children: [
                     // Image in the center
                     Container(
-                      margin: EdgeInsets.all(12),
+                      margin: const EdgeInsets.all(12),
                       padding: const EdgeInsets.all(20),
                       decoration: ShapeDecoration(
                         shape: RoundedRectangleBorder(
@@ -85,7 +85,7 @@ class _RatingDialogWidgetState extends State<RatingDialogWidget> {
                           selected: isHelpful == true,
                           selectedColor: Colors.green,
                           backgroundColor: Colors.transparent,
-                          side: BorderSide(color: Colors.green),
+                          side: const BorderSide(color: Colors.green),
                           onSelected: (selected) {
                             setState(() => isHelpful = true);
                           },
@@ -100,7 +100,7 @@ class _RatingDialogWidgetState extends State<RatingDialogWidget> {
                           selected: isHelpful == false,
                           selectedColor: Colors.red,
                           backgroundColor: Colors.transparent,
-                          side: BorderSide(color: Colors.red),
+                          side: const BorderSide(color: Colors.red),
                           onSelected: (selected) {
                             setState(() => isHelpful = false);
                           },

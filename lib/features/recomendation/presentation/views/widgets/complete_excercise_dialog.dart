@@ -47,7 +47,7 @@ class ExcersiceDialog extends StatelessWidget {
                   context,
                 ).copyWith(color: textColor),
               ),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               Icon(textIcon, color: iconColor ?? Colors.white),
             ],
           ),

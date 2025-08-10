@@ -31,7 +31,7 @@ class _AddPaymentMethodViewBodyState extends State<AddPaymentMethodViewBody> {
   String part3 = '';
   String part4 = '';
 
-  final uuid = Uuid();
+  final uuid = const Uuid();
 
   late String cardHolderName, cardNumber, cvc, expiryMonth, expiryYear;
 
@@ -63,14 +63,14 @@ class _AddPaymentMethodViewBodyState extends State<AddPaymentMethodViewBody> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Text(
                 'card_number'.tr(),
                 style: AppStyles.styleMedium16(
                   context,
                 ).copyWith(fontSize: 16, height: 1),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               Row(
                 children: [
                   Expanded(
@@ -140,47 +140,47 @@ class _AddPaymentMethodViewBodyState extends State<AddPaymentMethodViewBody> {
                   ),
                 ],
               ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               Text(
                 'cardholder_name'.tr(),
                 style: AppStyles.styleRegular14(
                   context,
                 ).copyWith(fontSize: 16, height: 1),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               CustomTextField(
                 onChange: (value) {
                   cardHolderName = value!;
                 },
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Text(
                 'expiration_date'.tr(),
                 style: AppStyles.styleRegular14(
                   context,
                 ).copyWith(fontSize: 16, height: 1),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               ExpiryDatePicker(
                 onChanged: (month, year) {
                   expiryMonth = month;
                   expiryYear = year;
                 },
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Text(
                 'CVC',
                 style: AppStyles.styleRegular14(
                   context,
                 ).copyWith(fontSize: 16, height: 1),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               CVC(
                 onChange: (value) {
                   cvc = value!;
                 },
               ),
-              SizedBox(height: 200),
+              const SizedBox(height: 200),
               CustomButton(
                 onpressed: () {
                   if (formKey.currentState!.validate()) {
@@ -196,7 +196,7 @@ class _AddPaymentMethodViewBodyState extends State<AddPaymentMethodViewBody> {
                 text: 'add_card'.tr(),
                 buttonColor: AppColors.kButtonPrimaryColor,
               ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
             ],
           ),
         ),

@@ -5,7 +5,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Home Screen'));
+    return const Center(child: Text('Home Screen'));
   }
 }
 
@@ -14,7 +14,7 @@ class FavoritesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Favorites Screen'));
+    return const Center(child: Text('Favorites Screen'));
   }
 }
 
@@ -23,6 +23,6 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Settings Screen'));
+    return const Center(child: Text('Settings Screen'));
   }
 }

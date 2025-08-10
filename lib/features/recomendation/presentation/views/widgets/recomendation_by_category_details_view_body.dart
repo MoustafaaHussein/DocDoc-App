@@ -44,7 +44,7 @@ class RecomendationByCategoryDetailsViewBody extends StatelessWidget {
                     child: GifWidget(gifPath: image, isNetwork: false),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   children: [
                     FittedBox(
@@ -56,10 +56,10 @@ class RecomendationByCategoryDetailsViewBody extends StatelessWidget {
                         ).copyWith(color: Colors.white),
                       ),
                     ),
-                    Spacer(),
-                    SizedBox(width: 10),
+                    const Spacer(),
+                    const SizedBox(width: 10),
                     Container(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: getDiffcultyLevel(
                           recomendations.difficultyLevel!,
@@ -73,7 +73,7 @@ class RecomendationByCategoryDetailsViewBody extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 FittedBox(
                   fit: BoxFit.scaleDown,
                   child: Text(
@@ -85,23 +85,23 @@ class RecomendationByCategoryDetailsViewBody extends StatelessWidget {
                     ).copyWith(color: Colors.grey),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   children: [
-                    Icon(Icons.star, color: Colors.amber),
-                    SizedBox(width: 10),
+                    const Icon(Icons.star, color: Colors.amber),
+                    const SizedBox(width: 10),
                     Text(
                       recomendations.effectivenessRating.toString(),
                       style: AppStyles.styleMedium13(context),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     SvgPicture.asset(
                       Images.imagesImagesTime,
                       fit: BoxFit.scaleDown,
                       height: 20,
                       width: 20,
                     ),
-                    SizedBox(width: 2),
+                    const SizedBox(width: 2),
                     Text(
                       "${recomendations.estimatedDurationMinutes} min",
                       style: AppStyles.styleMedium13(
@@ -110,20 +110,20 @@ class RecomendationByCategoryDetailsViewBody extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
-                Text('Instruction'),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
+                const Text('Instruction'),
+                const SizedBox(height: 20),
                 Text(recomendations.instructions!),
               ],
             ),
           ),
         ),
-        SliverToBoxAdapter(child: SizedBox(height: 50)),
+        const SliverToBoxAdapter(child: SizedBox(height: 50)),
         SliverToBoxAdapter(
           child: BlocConsumer<RecomendationBloc, RecomendationState>(
             listener: (context, state) {
               if (state is CompleteExcerciseLoading) {
-                CustomLoading();
+                const CustomLoading();
               } else if (state is CompleteExcerciseFailed) {
                 CustomErrorWidget(
                   errorMessage: state.errorMessage,
@@ -144,7 +144,7 @@ class RecomendationByCategoryDetailsViewBody extends StatelessWidget {
                     iconColor: Colors.amberAccent,
                     onSubmit: () {},
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
 
                   ExcersiceDialog(
                     buttonText: 'Complete Excersice',
@@ -219,7 +219,7 @@ class RateExcerciseWidget extends StatelessWidget {
                   context,
                 ).copyWith(color: textColor),
               ),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               Icon(textIcon, color: iconColor ?? Colors.white),
             ],
           ),

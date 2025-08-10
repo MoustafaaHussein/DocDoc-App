@@ -8,7 +8,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(children: [ProfileHeaderScreen(), SizedBox(height: 24.h)]),
+      body: ListView(children: [const ProfileHeaderScreen(), SizedBox(height: 24.h)]),
     );
   }
 }

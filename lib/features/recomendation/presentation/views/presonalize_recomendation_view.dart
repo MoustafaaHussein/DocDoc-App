@@ -19,7 +19,7 @@ class PresonalizeRecomendationView extends StatelessWidget {
           GoRouter.of(context).pop();
         },
       ),
-      body: PersonalizeRecomendationBlocConsumer(),
+      body: const PersonalizeRecomendationBlocConsumer(),
     );
   }
 }
@@ -60,7 +60,7 @@ class _PersonalizeRecomendationBlocConsumerState
             },
           );
         } else {
-          return CustomLoading();
+          return const CustomLoading();
         }
       },
     );

@@ -31,7 +31,7 @@ class _SignupScreenState extends State<SignupScreen> {
               shape: BoxShape.circle,
             ),
             child: IconButton(
-              icon: Icon(IconlyLight.arrowLeft2, color: Colors.white, size: 20),
+              icon: const Icon(IconlyLight.arrowLeft2, color: Colors.white, size: 20),
               onPressed: () {
                 GoRouter.of(context).pop();
               },
@@ -39,7 +39,7 @@ class _SignupScreenState extends State<SignupScreen> {
           ),
         ),
       ),
-      body: SignupForm(),
+      body: const SignupForm(),
     );
   }
 }

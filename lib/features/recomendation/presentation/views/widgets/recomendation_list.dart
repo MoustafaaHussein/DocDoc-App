@@ -10,7 +10,7 @@ class RecomendationList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return personalizeSuggestions.isEmpty
-        ? EmptyDataWidget(
+        ? const EmptyDataWidget(
           message: 'No recommendation available right now',
           svgAssetPath: Images.imagesImagesNoData,
         )

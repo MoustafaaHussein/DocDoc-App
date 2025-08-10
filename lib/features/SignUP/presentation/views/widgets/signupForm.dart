@@ -77,7 +77,7 @@ class _SignupFormState extends State<SignupForm> {
             },
           );
         } else if (state is SignUpLoading) {
-          CustomLoading();
+          const CustomLoading();
         }
       },
       builder: (context, state) {
@@ -243,7 +243,7 @@ class _SignupFormState extends State<SignupForm> {
                       child: RadioListTile<String>(
                         title: Text(
                           "male".tr(),
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                         ),
                         value: "male".tr(),
                         groupValue: selectedGender,
@@ -256,7 +256,7 @@ class _SignupFormState extends State<SignupForm> {
                       child: RadioListTile<String>(
                         title: Text(
                           "female".tr(),
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                         ),
                         value: "female".tr(),
                         groupValue: selectedGender,
@@ -332,7 +332,7 @@ class _SignupFormState extends State<SignupForm> {
                     ),
                   ),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
               ],
             ),
           ),

@@ -29,7 +29,7 @@ class AddPaymentBlocConsumer extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        return AddPaymentMethodViewBody();
+        return const AddPaymentMethodViewBody();
       },
     );
   }

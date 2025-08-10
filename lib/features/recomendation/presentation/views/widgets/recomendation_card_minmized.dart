@@ -18,7 +18,7 @@ class RecomendationCardMinimized extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(12),
+      padding: const EdgeInsets.all(12),
       decoration: AppContainersStyle.recomendadtionCardStyle,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,10 +34,10 @@ class RecomendationCardMinimized extends StatelessWidget {
                   ).copyWith(color: Colors.white),
                 ),
               ),
-              Spacer(),
-              SizedBox(width: 10),
+              const Spacer(),
+              const SizedBox(width: 10),
               Container(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   color: getDiffcultyLevel(diffucltyLevel),
                   borderRadius: BorderRadius.circular(12),
@@ -49,7 +49,7 @@ class RecomendationCardMinimized extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           FittedBox(
             fit: BoxFit.scaleDown,
             child: Text(
@@ -61,20 +61,20 @@ class RecomendationCardMinimized extends StatelessWidget {
               ).copyWith(color: Colors.grey),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Row(
             children: [
-              Icon(Icons.star, color: Colors.amber),
-              SizedBox(width: 10),
+              const Icon(Icons.star, color: Colors.amber),
+              const SizedBox(width: 10),
               Text(ratting, style: AppStyles.styleMedium13(context)),
-              Spacer(),
+              const Spacer(),
               SvgPicture.asset(
                 Images.imagesImagesTime,
                 fit: BoxFit.scaleDown,
                 height: 20,
                 width: 20,
               ),
-              SizedBox(width: 2),
+              const SizedBox(width: 2),
               Text(
                 "$timeRemaining min",
                 style: AppStyles.styleMedium13(

@@ -54,7 +54,7 @@ class AiIntroWidget extends StatelessWidget {
                     'advise_you'.tr(),
                     style: AppStyles.styleSemiBold24(
                       context,
-                    ).copyWith(color: Color.fromARGB(255, 20, 20, 21)),
+                    ).copyWith(color: const Color.fromARGB(255, 20, 20, 21)),
                   ),
                 ),
                 Expanded(
@@ -62,7 +62,7 @@ class AiIntroWidget extends StatelessWidget {
                     'three_keys'.tr(),
                     style: AppStyles.styleMedium18(
                       context,
-                    ).copyWith(color: Color.fromARGB(153, 109, 108, 108)),
+                    ).copyWith(color: const Color.fromARGB(153, 109, 108, 108)),
                   ),
                 ),
               ],
@@ -100,7 +100,7 @@ class AiIntroWidget extends StatelessWidget {
                 child: Text(
                   'start'.tr(),
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 19,
                     fontFamily: 'Sora',

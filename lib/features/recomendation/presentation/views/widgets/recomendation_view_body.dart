@@ -6,6 +6,6 @@ class RecomendationViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CategoryGridPage();
+    return const CategoryGridPage();
   }
 }

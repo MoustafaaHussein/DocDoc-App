@@ -27,7 +27,7 @@ class SubmitEmotionButton extends StatelessWidget {
           context,
         ).push(AppRouter.kRecomendationByEmotions, extra: emotionType);
       },
-      icon: Icon(IconlyLight.send),
+      icon: const Icon(IconlyLight.send),
       label: Text("Submit Emotion", style: Textstyles.font16OWhite700Weight),
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.deepPurple,

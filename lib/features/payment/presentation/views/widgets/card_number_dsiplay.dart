@@ -24,7 +24,7 @@ class CardNumber extends StatelessWidget {
             context,
           ).copyWith(fontSize: 16, height: 1),
         ),
-        SizedBox(height: 15),
+        const SizedBox(height: 15),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -33,14 +33,14 @@ class CardNumber extends StatelessWidget {
               fit: BoxFit.fill,
               // color: Colors.white,
             ),
-            SizedBox(width: 25),
+            const SizedBox(width: 25),
             Text(
               '${cardNumber.substring(0, 4)} ${cardNumber.substring(4, 8)} ${cardNumber.substring(8, 12)} ${cardNumber.substring(12, 16)}',
               style: AppStyles.styleRegular14(
                 context,
               ).copyWith(color: Colors.white, height: 1),
             ),
-            Spacer(),
+            const Spacer(),
             SvgPicture.asset(
               cardType == 'MasterCard'
                   ? Images.imagesImagesMasterCard
@@ -51,8 +51,8 @@ class CardNumber extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 10),
-        Divider(color: AppColors.kDviderColor, thickness: 1),
+        const SizedBox(height: 10),
+        const Divider(color: AppColors.kDviderColor, thickness: 1),
       ],
     );
   }

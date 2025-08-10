@@ -198,7 +198,7 @@ class _EmojiSwitchScreenState extends State<EmojiSwitchScreen> {
                 ),
                 child: Text(
                   'select_emotion'.tr(),
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+                  style: const TextStyle(fontSize: 20, color: Colors.white),
                 ),
               ),
             ),

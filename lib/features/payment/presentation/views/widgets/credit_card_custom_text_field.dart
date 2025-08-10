@@ -9,7 +9,7 @@ class CreditCardCustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: ShapeDecoration(
-        color: Color(0xff24243B),
+        color: const Color(0xff24243B),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       child: TextFormField(
@@ -28,7 +28,7 @@ class CreditCardCustomTextField extends StatelessWidget {
           FilteringTextInputFormatter.digitsOnly,
           LengthLimitingTextInputFormatter(4),
         ],
-        decoration: InputDecoration(border: InputBorder.none),
+        decoration: const InputDecoration(border: InputBorder.none),
       ),
     );
   }
