@@ -5,7 +5,7 @@ class SignUpRequestModel {
   final String password;
   final String confirmPassword;
   final String phoneNumber;
-  final String dateOfBirth;
+
   final String gender;
 
   SignUpRequestModel({
@@ -15,7 +15,7 @@ class SignUpRequestModel {
     required this.password,
     required this.confirmPassword,
     required this.phoneNumber,
-    required this.dateOfBirth,
+
     required this.gender,
   });
 
@@ -26,7 +26,7 @@ class SignUpRequestModel {
     "password": password,
     "confirmPassword": confirmPassword,
     "phoneNumber": phoneNumber,
-    "dateOfBirth": dateOfBirth,
+
     "gender": gender,
   };
 }
@@ -37,7 +37,7 @@ class UserModel {
   final String lastName;
   final String email;
   final String phoneNumber;
-  final String dateOfBirth;
+
   final String gender;
 
   UserModel({
@@ -46,7 +46,7 @@ class UserModel {
     required this.lastName,
     required this.email,
     required this.phoneNumber,
-    required this.dateOfBirth,
+
     required this.gender,
   });
 
@@ -57,7 +57,7 @@ class UserModel {
       lastName: json['lastName'],
       email: json['email'],
       phoneNumber: json['phoneNumber'],
-      dateOfBirth: json['dateOfBirth'],
+
       gender: json['gender'],
     );
   }

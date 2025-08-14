@@ -103,7 +103,7 @@ class _SignupFormState extends State<SignupForm> {
                 CustomTextFormField(
                   label: "first_name".tr(),
                   controller: firstNameController,
-                  hinttext: "Taher",
+                  hinttext: "first_name".tr(),
                   icon: Icons.person,
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
@@ -116,7 +116,7 @@ class _SignupFormState extends State<SignupForm> {
                 CustomTextFormField(
                   label: "last_name".tr(),
                   controller: lastNameController,
-                  hinttext: "Farh",
+                  hinttext: "last_name".tr(),
                   icon: Icons.person,
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
@@ -176,9 +176,9 @@ class _SignupFormState extends State<SignupForm> {
                       return 'Password must be at least 6 characters';
                     }
                     if (!RegExp(
-                      r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$',
+                      r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@_!#$%^&*])[A-Za-z\d@_!#$%^&*]+$',
                     ).hasMatch(value)) {
-                      return 'Password must contain letters and numbers';
+                      return 'Password must contain uppercase, lowercase, number, and special character (@_!#...)';
                     }
                     return null;
                   },
@@ -203,37 +203,6 @@ class _SignupFormState extends State<SignupForm> {
 
                 SizedBox(height: 12.h),
 
-                // Text(
-                //   "date_of_birth".tr(),
-                //   style: Textstyles.font14Grey400Weight,
-                // ),
-                // SizedBox(height: 8.h),
-                // GestureDetector(
-                //   onTap: () => _selectDate(context),
-                //   child: Container(
-                //     width: double.infinity,
-                //     padding: EdgeInsets.symmetric(
-                //       vertical: 14.h,
-                //       horizontal: 12.w,
-                //     ),
-                //     decoration: BoxDecoration(
-                //       color: const Color(0xFF1E1E1E),
-                //       borderRadius: BorderRadius.circular(12.r),
-                //     ),
-                //     child: Text(
-                //       selectedDate != null
-                //           ? "${selectedDate!.toLocal()}".split(' ')[0]
-                //           : "Select Date",
-                //       style: TextStyle(
-                //         color:
-                //             selectedDate != null
-                //                 ? Colors.white
-                //                 : const Color(0xFFA2A2A7),
-                //         fontSize: 14.sp,
-                //       ),
-                //     ),
-                //   ),
-                // ),
                 SizedBox(height: 16.h),
                 Text("gender".tr(), style: Textstyles.font14Grey400Weight),
                 SizedBox(height: 8.h),
@@ -274,14 +243,6 @@ class _SignupFormState extends State<SignupForm> {
                   text: "sign_up".tr(),
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
-                      if (selectedDate == null) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Please select your date of birth'),
-                          ),
-                        );
-                        return;
-                      }
                       if (selectedGender == null) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
@@ -298,8 +259,8 @@ class _SignupFormState extends State<SignupForm> {
                         password: passwordController.text,
                         confirmPassword: confirmPasswordController.text,
                         phoneNumber: phoneController.text.trim(),
-                        dateOfBirth: selectedDate!.toUtc().toIso8601String(),
 
+                        // dateOfBirth: selectedDate!.toUtc().toIso8601String(),
                         gender: selectedGender!,
                       );
 
