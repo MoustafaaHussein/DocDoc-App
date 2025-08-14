@@ -86,7 +86,12 @@
   "creative": "Creative",
   "self-care": "Self-Care",
   "crisis": "Crisis",
-  "nature": "Nature"
+  "nature": "Nature",
+  "How are you feeling?" :"How are you feeling?",
+   "Easy":"Easy", 
+ "Medium":"Medium",
+ "Hard":"Hard",
+ "Thank you For your feedback":"Thank you For your feedback"
   
   
  

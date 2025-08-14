@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:dio/dio.dart';
 import 'package:docdoc_app/core/helpers/secure_storage.dart';
 import 'package:docdoc_app/core/helpers/service_locator.dart';
+import 'package:docdoc_app/core/helpers/shared_prefs_helper.dart';
 import 'package:docdoc_app/core/routes/app_routes.dart';
 import 'package:docdoc_app/core/themes/app_colors.dart';
 import 'package:docdoc_app/features/Analytics/cubit/AnalyticsCubit.dart';
@@ -21,15 +22,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 late List<CameraDescription> cameras;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  final prefs = await SharedPreferences.getInstance();
-  final token = prefs.getString("token");
+  await SharedPrefsHelper.init();
+  final token = SharedPrefsHelper.getString("token");
   try {
     cameras = await availableCameras();
   } on CameraException catch (e) {

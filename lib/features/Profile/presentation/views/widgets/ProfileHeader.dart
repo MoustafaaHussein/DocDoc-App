@@ -115,7 +115,6 @@ class _ProfileHeaderScreenState extends State<ProfileHeaderScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-             
 
                 SizedBox(height: 24.h),
 
@@ -138,7 +137,9 @@ class _ProfileHeaderScreenState extends State<ProfileHeaderScreen> {
                 SettingsTile(
                   icon: Ionicons.language,
                   title: "Language".tr(),
-                  onTap: () => showLanguageBottomSheet(context),
+                  onTap: () {
+                    showLanguageBottomSheet(context);
+                  },
                 ),
                 SizedBox(height: 8.h),
                 SettingsTile(

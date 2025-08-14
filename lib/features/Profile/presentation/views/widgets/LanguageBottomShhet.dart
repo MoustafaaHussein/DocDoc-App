@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:docdoc_app/core/helpers/constants.dart';
+import 'package:docdoc_app/core/helpers/shared_prefs_helper.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 
 void showLanguageBottomSheet(BuildContext context) {
   showModalBottomSheet(
@@ -22,14 +24,22 @@ void showLanguageBottomSheet(BuildContext context) {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    await SharedPrefsHelper.setString(
+                      Constants.languageKey,
+                      "language=ar",
+                    );
                     context.setLocale(const Locale('ar'));
                     Navigator.pop(context);
                   },
                   child: const Text('العربية'),
                 ),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    await SharedPrefsHelper.setString(
+                      Constants.languageKey,
+                      "language=en",
+                    );
                     context.setLocale(const Locale('en'));
                     Navigator.pop(context);
                   },

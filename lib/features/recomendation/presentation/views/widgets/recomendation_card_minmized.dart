@@ -2,6 +2,7 @@ import 'package:docdoc_app/core/helpers/assets.dart';
 import 'package:docdoc_app/core/helpers/methods.dart';
 import 'package:docdoc_app/core/styles/app_containers_style.dart';
 import 'package:docdoc_app/core/themes/app_styles.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -43,7 +44,7 @@ class RecomendationCardMinimized extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
-                  diffucltyLevel,
+                  diffucltyLevel.tr(),
                   style: AppStyles.styleMedium13(context),
                 ),
               ),

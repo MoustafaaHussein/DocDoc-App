@@ -89,7 +89,7 @@ class _EmojiSwitchScreenState extends State<EmojiSwitchScreen> {
                 itemBuilder: (context, index) {
                   final bool isSelected = index == _currentPage;
                   final emojiData = emojiList[index];
-
+                  final String name = emojiData['name'];
                   double value = 1.0;
                   if (_pageController.position.haveDimensions) {
                     value = (1 - (_pageController.page! - index).abs() * 0.25)
@@ -136,7 +136,7 @@ class _EmojiSwitchScreenState extends State<EmojiSwitchScreen> {
                                   ),
                                   // اسم الشعور تحت الصورة
                                   Text(
-                                    emojiData['name'],
+                                    name.tr(),
                                     style: TextStyle(
                                       fontSize: 24 * value,
                                       fontWeight: FontWeight.bold,

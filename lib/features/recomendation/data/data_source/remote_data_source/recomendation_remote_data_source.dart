@@ -1,8 +1,9 @@
 import 'package:docdoc_app/core/helpers/api_service.dart';
+import 'package:docdoc_app/core/helpers/constants.dart';
+import 'package:docdoc_app/core/helpers/shared_prefs_helper.dart';
 import 'package:docdoc_app/features/recomendation/data/models/personalize_recomendation_model/personalize_recomendation_model.dart';
 import 'package:docdoc_app/features/recomendation/data/models/recomendation_by_category_model/recomendation_by_category_model.dart';
 import 'package:docdoc_app/features/recomendation/data/models/recomendation_by_emoitions_model/recomendation_by_emoitions_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class RecomendationRemoteDataSource {
   Future<List<PersonalizeRecomendationModel>> getPersonalizeRecomendation();
@@ -25,8 +26,7 @@ class RecomendationRemoteDataSourceImpl extends RecomendationRemoteDataSource {
   @override
   Future<List<PersonalizeRecomendationModel>>
   getPersonalizeRecomendation() async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('token');
+    final token = SharedPrefsHelper.getString('token');
     var response = await apiService.get(
       endPoint: '/api/recommendation/personalized',
       token: token,
@@ -45,10 +45,11 @@ class RecomendationRemoteDataSourceImpl extends RecomendationRemoteDataSource {
   Future<List<RecomendationByCategoryModel>> getRecomendationByCategory({
     required String subCategory,
   }) async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('token');
+    final token = SharedPrefsHelper.getString('token');
+    var language = SharedPrefsHelper.getString(Constants.languageKey);
     var response = await apiService.get(
-      endPoint: '/api/recommendation/by-category/$subCategory?limit=10',
+      endPoint:
+          '/api/recommendation/by-category/$subCategory?limit=10&language=$language',
       token: token,
     );
     List<dynamic> list = response as List;
@@ -65,10 +66,10 @@ class RecomendationRemoteDataSourceImpl extends RecomendationRemoteDataSource {
     required int excersiceId,
     required String feedBack,
   }) async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('token');
+    final token = SharedPrefsHelper.getString('token');
+    var language = SharedPrefsHelper.getString(Constants.languageKey);
     var response = await apiService.post(
-      endPoint: '/api/recommendation/exercises/$excersiceId/complete',
+      endPoint: '/api/recommendation/exercises/$excersiceId/complete?$language',
       token: token,
       data: feedBack,
     );
@@ -79,10 +80,12 @@ class RecomendationRemoteDataSourceImpl extends RecomendationRemoteDataSource {
   Future<List<RecomendationByEmoitionsModel>> getRecomendationsByEmotions({
     required String selectedEmotion,
   }) async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('token');
+    final token = SharedPrefsHelper.getString('token');
+    var language = SharedPrefsHelper.getString(Constants.languageKey);
+
     var response = await apiService.get(
-      endPoint: '/api/recommendation/by-emotion/$selectedEmotion?limit=10',
+      endPoint:
+          '/api/recommendation/by-emotion/$selectedEmotion?limit=10&$language',
       token: token,
     );
     List<RecomendationByEmoitionsModel> emotionsRecomendations = [];

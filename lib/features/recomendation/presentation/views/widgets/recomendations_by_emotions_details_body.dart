@@ -7,9 +7,11 @@ import 'package:docdoc_app/features/recomendation/data/models/recomendation_by_e
 import 'package:docdoc_app/features/recomendation/presentation/manger/bloc/recomendation_bloc.dart';
 import 'package:docdoc_app/features/recomendation/presentation/views/widgets/complete_excercise_dialog.dart';
 import 'package:docdoc_app/features/recomendation/presentation/views/widgets/emojis_list.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 class RecomendationsByEmotionsDetailsBody extends StatelessWidget {
   RecomendationsByEmotionsDetailsBody({
@@ -121,7 +123,18 @@ class RecomendationsByEmotionsDetailsBody extends StatelessWidget {
                   errorMessage: state.errorMessage,
                   onRetry: () {},
                 );
-              } else if (state is CompleteExcerciseSuccessful) {}
+              } else if (state is CompleteExcerciseSuccessful) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      'Thank you For your feedback'.tr(),
+                      style: AppStyles.styleMedium16(context),
+                    ),
+                    backgroundColor: Colors.green,
+                  ),
+                );
+                GoRouter.of(context).pop();
+              }
             },
             builder: (context, state) {
               return Column(

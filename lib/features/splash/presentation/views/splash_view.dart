@@ -6,6 +6,20 @@ class SplashView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: SplashViewBody());
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFFA5CAC2), // Top color
+              Color(0xFFD3EBE6), // Bottom color
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: const SplashViewBody(),
+      ),
+    );
   }
 }

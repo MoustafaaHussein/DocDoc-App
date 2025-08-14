@@ -3,6 +3,7 @@ import 'package:docdoc_app/core/widgets/custom_loading.dart';
 import 'package:docdoc_app/core/widgets/customized_error.dart';
 import 'package:docdoc_app/features/recomendation/presentation/manger/bloc/recomendation_bloc.dart';
 import 'package:docdoc_app/features/recomendation/presentation/views/widgets/recomendation_by_emotions_view_body.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -30,7 +31,7 @@ class _RecomendationByEmotionsViewState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomizedAppBar(
-        title: "How are you feeling?",
+        title: "How are you feeling?".tr(),
         onTap: () {
           GoRouter.of(context).pop();
         },

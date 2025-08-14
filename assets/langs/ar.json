@@ -88,8 +88,12 @@
   "emergency": "حالات الطوارئ",
   "crisis": "أزمة",
   "environmental": "بيئي",
-  "nature": "الطبيعة"
- 
+  "nature": "الطبيعة",
+ "How are you feeling?" : "ما هو شعورك",
+ "Easy":"سهل", 
+ "Medium":"متوسط",
+ "Hard":"صعب",
+  "Thank you For your feedback": "أحسنت"
  
 
 
