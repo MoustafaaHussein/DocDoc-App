@@ -1,11 +1,14 @@
+import 'package:docdoc_app/core/helpers/methods.dart';
 import 'package:docdoc_app/core/routes/app_routes.dart';
 import 'package:docdoc_app/core/styles/TextStyles.dart';
 import 'package:docdoc_app/core/themes/app_styles.dart';
 import 'package:docdoc_app/features/Home/presentation/views/widgets/QuoteCard.dart';
 import 'package:docdoc_app/features/Home/presentation/views/widgets/SpecialAppBar.dart';
 import 'package:docdoc_app/features/Home/presentation/views/widgets/custom_excercise_scrollable_widget.dart';
+import 'package:docdoc_app/features/payment/presentation/manger/subscription_cubit/subscription_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     getUserName();
+    context.read<SubscriptionCubit>().checkProStatus();
   }
 
   void getUserName() async {
@@ -67,8 +71,28 @@ class _HomeScreenState extends State<HomeScreen> {
 
             InkWell(
               onTap: () {
-                GoRouter.of(context).push(AppRouter.kAiSessionView);
+                final subscriptionState =
+                    context.read<SubscriptionCubit>().state;
+
+                if (subscriptionState is SubscriptionLoaded &&
+                    subscriptionState.isPro) {
+                  GoRouter.of(context).push(AppRouter.kAiSessionView);
+                } else {
+                  mangePlansMethod(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("subscribe_to_access".tr()),
+                      backgroundColor: Colors.orange,
+                    ),
+                  );
+                }
               },
+
+              // onTap: () {
+              //   //TODO implement subscription UI here
+
+              //   // GoRouter.of(context).push(AppRouter.kAiSessionView);
+              // },
               child: Container(
                 width: double.infinity,
                 height: 200.h,

@@ -12,8 +12,11 @@ import 'package:docdoc_app/features/Mood_History/cubit/MoodeHistoryCubit.dart';
 import 'package:docdoc_app/features/Mood_History/repo/MoodHistoryRepo.dart';
 import 'package:docdoc_app/features/SignUP/presentation/data/Cubit/SignUpCubit.dart';
 import 'package:docdoc_app/features/SignUP/presentation/data/repo/SignUpRepo.dart';
+import 'package:docdoc_app/features/payment/data/remote_data_source/payment_remote_data_source.dart';
 import 'package:docdoc_app/features/payment/domain/repos/payment_repositry.dart';
 import 'package:docdoc_app/features/payment/presentation/manger/bloc/payment_bloc.dart';
+import 'package:docdoc_app/features/payment/presentation/manger/offering_cubit/offering_cubit.dart';
+import 'package:docdoc_app/features/payment/presentation/manger/subscription_cubit/subscription_cubit.dart';
 import 'package:docdoc_app/features/recomendation/domain/repos/recomendation_repo.dart';
 import 'package:docdoc_app/features/recomendation/presentation/manger/bloc/recomendation_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -22,6 +25,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 late List<CameraDescription> cameras;
 
@@ -29,6 +33,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await SharedPrefsHelper.init();
+  await Purchases.configure(
+    PurchasesConfiguration('goog_lUCieNVQuSnYCQXQMsvVWkMTRUc'),
+  );
   final token = SharedPrefsHelper.getString("token");
   try {
     cameras = await availableCameras();
@@ -64,6 +71,17 @@ class DocDocApp extends StatelessWidget {
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
+            BlocProvider(
+              create:
+                  (context) =>
+                      OfferingCubit(getIt.get<PaymentRemoteDataSource>()),
+            ),
+
+            BlocProvider(
+              create:
+                  (context) =>
+                      SubscriptionCubit(getIt.get<PaymentRemoteDataSource>()),
+            ),
             BlocProvider<RecomendationBloc>(
               create:
                   (context) =>

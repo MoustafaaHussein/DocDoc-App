@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:docdoc_app/core/models/emoji_model.dart';
+import 'package:docdoc_app/features/payment/presentation/views/widgets/pro_membership_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Color getDiffcultyLevel(String level) {
   if (level == 'Easy') {
@@ -39,4 +41,20 @@ String convertDataToRaw({
     convertToMap(feedBack, timeTakenToComplete),
   );
   return rawData;
+}
+
+Future<dynamic> mangePlansMethod(BuildContext context) {
+  return showModalBottomSheet(
+    context: context,
+    isScrollControlled: true, // makes it take full height if you want
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+    ),
+    builder: (context) {
+      return SizedBox(
+        height: 600.h, // adjust to your design
+        child: const ProMembershipWidget(),
+      );
+    },
+  );
 }
