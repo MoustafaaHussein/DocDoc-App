@@ -93,7 +93,10 @@
  "Easy":"سهل", 
  "Medium":"متوسط",
  "Hard":"صعب",
-  "Thank you For your feedback": "أحسنت"
+  "Thank you For your feedback": "أحسنت",
+   "ai_face_emotion": "الوصول إلى ميزة الذكاء الاصطناعي لاكتشاف مشاعر الوجه مباشرة",
+    "personalized_recommendations": "الحصول على توصيات مخصصة",
+    "emotion_selection": "الوصول إلى اختيار العاطفة للحصول على توصيات بناءً على المشاعر"
  
 
 

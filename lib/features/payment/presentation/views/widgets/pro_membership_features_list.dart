@@ -2,18 +2,18 @@ import 'package:docdoc_app/features/payment/presentation/views/widgets/pro_membe
 import 'package:flutter/material.dart';
 
 class ProMemberShipFeaturesList extends StatelessWidget {
-  const ProMemberShipFeaturesList({super.key, required this.features});
-  final List<dynamic> features;
+  const ProMemberShipFeaturesList({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: features.length,
-      itemBuilder: (context, index) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: ProMemberShipFeatures(feature: features[index] ?? ''),
-        );
-      },
+    return const Column(
+      children: [
+        ProMemberShipFeatures(feature: "ai_face_emotion"),
+        SizedBox(height: 8),
+        ProMemberShipFeatures(feature: "personalized_recommendations"),
+        SizedBox(height: 8),
+        ProMemberShipFeatures(feature: "emotion_selection"),
+      ],
     );
   }
 }

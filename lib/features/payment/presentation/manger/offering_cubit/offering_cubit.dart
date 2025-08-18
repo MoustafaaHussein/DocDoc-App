@@ -14,18 +14,16 @@ class OfferingCubit extends Cubit<OfferingState> {
     emit(OfferingLoading());
     try {
       final offerings = await paymentRemoteDataSource.getOfferings();
-      if (offerings != null && offerings.current != null) {
-        if (offerings.current!.monthly != null) {
-          packages.add(offerings.current!.monthly!);
-        } else if (offerings.current!.sixMonth != null) {
-          packages.add(offerings.current!.sixMonth!);
-        } else if (offerings.current!.annual != null) {
-          packages.add(offerings.current!.annual!);
-          packages.add(offerings.current!.annual!);
-        }
+
+      if (offerings != null && offerings.all.isNotEmpty) {
+        // Loop through all offerings
+        offerings.all.forEach((key, offering) {
+          packages.addAll(offering.availablePackages);
+        });
+
         emit(OfferingLoaded(packages));
       } else {
-        emit(OfferingLoaded(packages));
+        emit(const OfferingLoaded([]));
       }
     } catch (e) {
       emit(OfferingError(e.toString()));

@@ -1,5 +1,6 @@
 import 'package:docdoc_app/core/helpers/assets.dart';
 import 'package:docdoc_app/core/themes/app_styles.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -12,9 +13,15 @@ class ProMemberShipFeatures extends StatelessWidget {
       children: [
         SvgPicture.asset(Images.imagesImagesCheckMark),
         const SizedBox(width: 10),
-        Text(
-          feature,
-          style: AppStyles.styleMedium16(context).copyWith(color: Colors.grey),
+        Expanded(
+          child: Text(
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+            feature.tr(),
+            style: AppStyles.styleMedium16(
+              context,
+            ).copyWith(color: Colors.grey),
+          ),
         ),
       ],
     );

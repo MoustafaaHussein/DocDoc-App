@@ -91,7 +91,10 @@
    "Easy":"Easy", 
  "Medium":"Medium",
  "Hard":"Hard",
- "Thank you For your feedback":"Thank you For your feedback"
+ "Thank you For your feedback":"Thank you For your feedback",
+  "ai_face_emotion": "Access the AI feature for detecting live face emotions",
+    "personalized_recommendations": "Access personalized recommendations",
+    "emotion_selection": "Get access to emotion-based selection for tailored recommendations"
   
   
  

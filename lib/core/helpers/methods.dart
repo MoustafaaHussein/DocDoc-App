@@ -43,7 +43,7 @@ String convertDataToRaw({
   return rawData;
 }
 
-Future<dynamic> mangePlansMethod(BuildContext context) {
+Future<dynamic> managePlansMethod(BuildContext context) {
   return showModalBottomSheet(
     context: context,
     isScrollControlled: true, // makes it take full height if you want

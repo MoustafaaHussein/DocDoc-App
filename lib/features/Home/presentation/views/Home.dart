@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     subscriptionState.isPro) {
                   GoRouter.of(context).push(AppRouter.kAiSessionView);
                 } else {
-                  mangePlansMethod(context);
+                  managePlansMethod(context);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text("subscribe_to_access".tr()),
@@ -88,11 +88,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 }
               },
 
-              // onTap: () {
-              //   //TODO implement subscription UI here
-
-              //   // GoRouter.of(context).push(AppRouter.kAiSessionView);
-              // },
               child: Container(
                 width: double.infinity,
                 height: 200.h,

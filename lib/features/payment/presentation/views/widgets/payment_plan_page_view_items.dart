@@ -1,16 +1,25 @@
-import 'package:docdoc_app/core/helpers/assets.dart';
 import 'package:docdoc_app/core/styles/app_containers_style.dart';
 import 'package:docdoc_app/core/themes/app_styles.dart';
 import 'package:docdoc_app/core/widgets/custom_button.dart';
-import 'package:docdoc_app/features/payment/data/models/get_pro_plans/datum.dart';
-import 'package:docdoc_app/features/payment/presentation/views/widgets/pro_membership_features_list.dart';
+import 'package:docdoc_app/features/payment/presentation/manger/offering_cubit/offering_cubit.dart';
+import 'package:docdoc_app/features/payment/presentation/manger/subscription_cubit/subscription_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
-class PaymentsPlanPageViewItems extends StatelessWidget {
-  const PaymentsPlanPageViewItems({super.key, required this.proPlans});
+class PaymentsPlanListViewItems extends StatelessWidget {
+  PaymentsPlanListViewItems({super.key, required this.proPlans});
 
-  final ProPlans proPlans;
+  final Package proPlans;
+
+  String get subDuration =>
+      proPlans.identifier.contains("annual")
+          ? "annual"
+          : proPlans.identifier.contains("monthly")
+          ? "monthly"
+          : proPlans.identifier.contains("sixMonths")
+          ? "sixMonths"
+          : proPlans.identifier;
 
   @override
   Widget build(BuildContext context) {
@@ -21,59 +30,59 @@ class PaymentsPlanPageViewItems extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               const SizedBox(height: 20),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                decoration: ShapeDecoration(
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(color: Colors.white),
-                    borderRadius: BorderRadiusGeometry.circular(12),
-                  ),
-                ),
-                child: Text(
-                  proPlans.name!,
-                  style: AppStyles.styleSemiBold24(
-                    context,
-                  ).copyWith(color: Colors.white),
-                ),
-              ),
-              const SizedBox(height: 30),
-              Text(
-                '${proPlans.price} \$',
-                style: AppStyles.styleSemiBold30(
-                  context,
-                ).copyWith(color: Colors.white),
-              ),
-              const SizedBox(height: 30),
-              Text(
-                proPlans.description!,
-                style: AppStyles.styleMedium18(
-                  context,
-                ).copyWith(color: Colors.grey),
-              ),
-              const SizedBox(height: 30),
-              Expanded(
-                child: ProMemberShipFeaturesList(features: proPlans.features!),
-              ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SvgPicture.asset(Images.imagesImagesTime),
-                  const SizedBox(width: 4),
-                  Text(
-                    '${proPlans.durationDays} days',
-                    style: AppStyles.styleMedium13(
-                      context,
-                    ).copyWith(color: Colors.white54),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment:
+                          CrossAxisAlignment.start, // 👈 align left
+                      children: [
+                        Text(
+                          '${getPlanDuration(subDuration)} Plan',
+                          style: AppStyles.styleMedium16(
+                            context,
+                          ).copyWith(color: Colors.white),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          '${getBillingDuration(subDuration)}',
+                          style: AppStyles.styleMedium13(
+                            context,
+                          ).copyWith(color: Colors.grey),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  Expanded(
+                    child: Text(
+                      '${proPlans.storeProduct.currencyCode} ${proPlans.storeProduct.price} / ${getPlanDuration(subDuration)}',
+                      style: AppStyles.styleMedium16(
+                        context,
+                      ).copyWith(color: Colors.white),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      textAlign: TextAlign.end,
+                    ),
                   ),
                 ],
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 30),
+
               CustomButton(
-                onpressed: () {},
-                text: 'SubScribe ',
-                buttonColor: Colors.grey,
+                onpressed: () {
+                  handlePayment(context, proPlans);
+                },
+                text: 'SubScribe',
+                buttonColor: const Color(0xffB4D6D9),
               ),
               const SizedBox(height: 30),
             ],
@@ -81,5 +90,65 @@ class PaymentsPlanPageViewItems extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  double calculateSavedAmount({
+    required double monthlyPrice,
+    required String plan,
+    required double planPrice,
+  }) {
+    switch (plan.toLowerCase()) {
+      case "sixmonths":
+        double expected = monthlyPrice * 6;
+        return expected - planPrice; // saving
+      case "annual":
+        double expected = monthlyPrice * 12;
+        return expected - planPrice;
+      case "monthly":
+      default:
+        return 0.0; // no saving for monthly plan
+    }
+  }
+
+  String getBillingDuration(String plan) {
+    switch (plan.toLowerCase()) {
+      case "monthly":
+        return "billed monthly";
+      case "sixMonths":
+        return "billed every six months";
+      case "annual":
+        return "billed yearly";
+      default:
+        return "billed every six months"; // fallback in case an unknown value comes
+    }
+  }
+
+  String getPlanDuration(String plan) {
+    switch (plan.toLowerCase()) {
+      case "monthly":
+        return "Month";
+      case "sixMonths":
+        return "6 Months";
+      case "annual":
+        return "Year";
+      default:
+        return "6 Months"; // fallback in case an unknown value comes
+    }
+  }
+
+  handlePayment(BuildContext context, Package package) {
+    final offeringCubit = context.read<OfferingCubit>();
+    final subscriptionCubit = context.read<SubscriptionCubit>();
+    offeringCubit.purchasePackage(package, () {
+      subscriptionCubit.checkProStatus();
+      subscriptionCubit.stream
+          .firstWhere(
+            (subState) => subState is SubscriptionLoaded && subState.isPro,
+          )
+          .then((_) {
+            Navigator.pop(context);
+          });
+    });
+    // Implement payment handling logic here
   }
 }

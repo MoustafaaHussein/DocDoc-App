@@ -1,5 +1,5 @@
 import 'package:docdoc_app/core/helpers/assets.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 abstract class AppContainersStyle {
   static const backButtonStyle = ShapeDecoration(
@@ -19,7 +19,7 @@ abstract class AppContainersStyle {
     borderRadius: BorderRadius.circular(20),
   );
   static final proMembershipContainerStyles = BoxDecoration(
-    color: const Color(0xFF034F75),
+    color: const Color(0xff24243B),
     borderRadius: BorderRadius.circular(20),
   );
 }
