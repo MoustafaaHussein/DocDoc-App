@@ -27,8 +27,9 @@ class RecomendationRemoteDataSourceImpl extends RecomendationRemoteDataSource {
   Future<List<PersonalizeRecomendationModel>>
   getPersonalizeRecomendation() async {
     final token = SharedPrefsHelper.getString('token');
+    var language = SharedPrefsHelper.getString(Constants.languageKey);
     var response = await apiService.get(
-      endPoint: '/api/recommendation/personalized',
+      endPoint: '/api/recommendation/personalized&language=$language',
       token: token,
     );
     List<dynamic> list = response as List;
@@ -49,7 +50,7 @@ class RecomendationRemoteDataSourceImpl extends RecomendationRemoteDataSource {
     var language = SharedPrefsHelper.getString(Constants.languageKey);
     var response = await apiService.get(
       endPoint:
-          '/api/recommendation/by-category/$subCategory?limit=10&language=$language',
+          '/api/recommendation/by-category/$subCategory?limit=10&$language',
       token: token,
     );
     List<dynamic> list = response as List;
