@@ -22,21 +22,10 @@ class SignUpCubit extends Cubit<SignUpState> {
       await prefs.setString("userName", "${user.firstName} ${user.lastName}");
       await prefs.setString("userEmail", user.email);
       await prefs.setString("userPhone", user.phoneNumber);
-      await prefs.setString("userGender", user.gender);
 
       emit(SignUpSuccess());
     } catch (e) {
       emit(SignUpFailure(e.toString()));
     }
   }
-
-  //   Future<Widget> checkAuthStatus() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   final token = prefs.getString("token");
-  //   if (token != null && token.isNotEmpty) {
-  //     return MainScreen(); // الشاشة الرئيسية
-  //   } else {
-  //     return LoginScreen();
-  //   }
-  // }
 }

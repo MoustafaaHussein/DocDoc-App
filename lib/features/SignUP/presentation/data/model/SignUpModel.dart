@@ -6,8 +6,6 @@ class SignUpRequestModel {
   final String confirmPassword;
   final String phoneNumber;
 
-  final String gender;
-
   SignUpRequestModel({
     required this.firstName,
     required this.lastName,
@@ -15,8 +13,6 @@ class SignUpRequestModel {
     required this.password,
     required this.confirmPassword,
     required this.phoneNumber,
-
-    required this.gender,
   });
 
   Map<String, dynamic> toJson() => {
@@ -26,8 +22,6 @@ class SignUpRequestModel {
     "password": password,
     "confirmPassword": confirmPassword,
     "phoneNumber": phoneNumber,
-
-    "gender": gender,
   };
 }
 
@@ -38,16 +32,12 @@ class UserModel {
   final String email;
   final String phoneNumber;
 
-  final String gender;
-
   UserModel({
     required this.id,
     required this.firstName,
     required this.lastName,
     required this.email,
     required this.phoneNumber,
-
-    required this.gender,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -57,8 +47,6 @@ class UserModel {
       lastName: json['lastName'],
       email: json['email'],
       phoneNumber: json['phoneNumber'],
-
-      gender: json['gender'],
     );
   }
 }

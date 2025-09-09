@@ -127,23 +127,6 @@ class _SignupFormState extends State<SignupForm> {
                 ),
 
                 CustomTextFormField(
-                  label: "phone_number".tr(),
-                  controller: phoneController,
-                  hinttext: "+201234567890",
-                  icon: Icons.phone,
-                  keyboardType: TextInputType.phone,
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return 'Phone number is required';
-                    }
-                    if (!RegExp(r'^\+?\d{10,15}$').hasMatch(value)) {
-                      return 'Enter a valid phone number';
-                    }
-                    return null;
-                  },
-                ),
-
-                CustomTextFormField(
                   label: "email_address".tr(),
                   controller: emailController,
                   hinttext: "example@example.com",
@@ -204,54 +187,11 @@ class _SignupFormState extends State<SignupForm> {
                 SizedBox(height: 12.h),
 
                 SizedBox(height: 16.h),
-                Text("gender".tr(), style: Textstyles.font14Grey400Weight),
-                SizedBox(height: 8.h),
-                Row(
-                  children: [
-                    Expanded(
-                      child: RadioListTile<String>(
-                        title: Text(
-                          "male".tr(),
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                        value: "male".tr(),
-                        groupValue: selectedGender,
-                        onChanged: (val) {
-                          setState(() => selectedGender = val);
-                        },
-                      ),
-                    ),
-                    Expanded(
-                      child: RadioListTile<String>(
-                        title: Text(
-                          "female".tr(),
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                        value: "female".tr(),
-                        groupValue: selectedGender,
-                        onChanged: (val) {
-                          setState(() => selectedGender = val);
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-
-                SizedBox(height: 16.h),
 
                 CusttomButton(
                   text: "sign_up".tr(),
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
-                      if (selectedGender == null) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Please select your gender'),
-                          ),
-                        );
-                        return;
-                      }
-
                       final model = SignUpRequestModel(
                         firstName: firstNameController.text.trim(),
                         lastName: lastNameController.text.trim(),
@@ -261,7 +201,6 @@ class _SignupFormState extends State<SignupForm> {
                         phoneNumber: phoneController.text.trim(),
 
                         // dateOfBirth: selectedDate!.toUtc().toIso8601String(),
-                        gender: selectedGender!,
                       );
 
                       context.read<SignUpCubit>().userSignUp(model);
