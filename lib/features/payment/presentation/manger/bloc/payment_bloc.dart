@@ -24,15 +24,6 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
         await paymentRepositry.deleteCreditCard(cardId: event.cardId);
         emit(DeleteCreditCardSuccess());
       }
-      if (event is GetProPlansEvent) {
-        emit(GetProPlansLoading());
-        var result = await paymentRepositry.getProPlans();
-        result.fold(
-          (failure) =>
-              emit(GetProPlansFailed(errorMessage: failure.errorMessage)),
-          (proPlans) => emit(GetProPlansSuccess(proPlans: proPlans)),
-        );
-      }
     });
   }
 }

@@ -1,8 +1,4 @@
-import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
-import 'package:docdoc_app/core/errors/failure.dart';
 import 'package:docdoc_app/features/payment/data/local_data_source/payment_local_data_source.dart';
-import 'package:docdoc_app/features/payment/data/models/get_pro_plans/datum.dart';
 import 'package:docdoc_app/features/payment/data/remote_data_source/payment_remote_data_source.dart';
 import 'package:docdoc_app/features/payment/domain/entites/credit_card_entity.dart';
 import 'package:docdoc_app/features/payment/domain/repos/payment_repositry.dart';
@@ -28,19 +24,5 @@ class PaymentRepositryImplementation implements PaymentRepositry {
   @override
   Future<void> deleteCreditCard({required String cardId}) async {
     await paymentLocalDataSource.deleteCreditCard(cardId);
-  }
-
-  @override
-  Future<Either<RequestFailure, List<ProPlans>>> getProPlans() async {
-    try {
-      var result = await paymentRemoteDataSourcel.getProPlans();
-      return right(result);
-    } catch (e) {
-      if (e is DioException) {
-        return left(ServiceFailure.fromDioError(e));
-      } else {
-        return left(ServiceFailure(errorMessage: e.toString()));
-      }
-    }
   }
 }
