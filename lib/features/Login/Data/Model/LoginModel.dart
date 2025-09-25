@@ -29,20 +29,12 @@ class UserModel {
   final String firstName;
   final String lastName;
   final String email;
-  final String phoneNumber;
-  final String dateOfBirth;
-  final String gender;
-  final String? profilePictureUrl;
 
   UserModel({
     required this.id,
     required this.firstName,
     required this.lastName,
     required this.email,
-    required this.phoneNumber,
-    required this.dateOfBirth,
-    required this.gender,
-    this.profilePictureUrl,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -51,10 +43,6 @@ class UserModel {
       firstName: json['firstName'],
       lastName: json['lastName'],
       email: json['email'],
-      phoneNumber: json['phoneNumber'],
-      dateOfBirth: json['dateOfBirth'],
-      gender: json['gender'],
-      profilePictureUrl: json['profilePictureUrl'],
     );
   }
 }

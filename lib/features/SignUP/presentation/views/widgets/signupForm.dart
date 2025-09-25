@@ -198,7 +198,6 @@ class _SignupFormState extends State<SignupForm> {
                         email: emailController.text.trim(),
                         password: passwordController.text,
                         confirmPassword: confirmPasswordController.text,
-                        phoneNumber: phoneController.text.trim(),
 
                         // dateOfBirth: selectedDate!.toUtc().toIso8601String(),
                       );

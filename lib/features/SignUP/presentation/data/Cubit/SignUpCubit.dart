@@ -21,7 +21,6 @@ class SignUpCubit extends Cubit<SignUpState> {
       await prefs.setInt("userId", user.id);
       await prefs.setString("userName", "${user.firstName} ${user.lastName}");
       await prefs.setString("userEmail", user.email);
-      await prefs.setString("userPhone", user.phoneNumber);
 
       emit(SignUpSuccess());
     } catch (e) {

@@ -21,6 +21,7 @@ class PaymentRemoteDataSourceImplementation extends PaymentRemoteDataSource {
   @override
   Future<Offerings?> getOfferings() async {
     Offerings? offers = await Purchases.getOfferings();
+
     return offers;
   }
 

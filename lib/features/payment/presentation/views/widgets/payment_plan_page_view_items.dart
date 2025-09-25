@@ -3,6 +3,7 @@ import 'package:docdoc_app/core/themes/app_styles.dart';
 import 'package:docdoc_app/core/widgets/custom_button.dart';
 import 'package:docdoc_app/features/payment/presentation/manger/offering_cubit/offering_cubit.dart';
 import 'package:docdoc_app/features/payment/presentation/manger/subscription_cubit/subscription_cubit.dart';
+import 'package:docdoc_app/features/payment/presentation/views/widgets/privacy_terms_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
@@ -33,13 +34,25 @@ class PaymentsPlanListViewItems extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               const SizedBox(height: 20),
+              Center(
+                child: Text(
+                  proPlans.presentedOfferingContext.offeringIdentifier,
+                  style: AppStyles.styleMediumLight24(
+                    context,
+                  ).copyWith(color: Colors.white),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+              ),
+              const SizedBox(height: 30),
+
+              // ---------------- Plan & Price ----------------
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: Column(
-                      crossAxisAlignment:
-                          CrossAxisAlignment.start, // 👈 align left
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           '${getPlanDuration(subDuration)} Plan',
@@ -51,12 +64,14 @@ class PaymentsPlanListViewItems extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          '${getBillingDuration(subDuration)}',
+                          proPlans.storeProduct.description.isEmpty
+                              ? "Enjoy full premium access"
+                              : proPlans.storeProduct.description,
                           style: AppStyles.styleMedium13(
                             context,
                           ).copyWith(color: Colors.grey),
                           overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
+                          maxLines: 2,
                         ),
                       ],
                     ),
@@ -75,16 +90,38 @@ class PaymentsPlanListViewItems extends StatelessWidget {
                   ),
                 ],
               ),
+
               const SizedBox(height: 30),
 
+              // ---------------- Subscribe Button ----------------
               CustomButton(
                 onpressed: () {
                   handlePayment(context, proPlans);
                 },
-                text: 'SubScribe',
+                text: 'Subscribe',
                 buttonColor: const Color(0xffB4D6D9),
               ),
-              const SizedBox(height: 30),
+
+              const SizedBox(height: 20),
+
+              // ---------------- Footer with Terms & Privacy ----------------
+              Center(
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const TermsPrivacyScreen(),
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    "Terms & Privacy",
+                    style: TextStyle(color: Colors.white70),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
             ],
           ),
         ),
@@ -92,6 +129,7 @@ class PaymentsPlanListViewItems extends StatelessWidget {
     );
   }
 
+  // ---------------- Helper methods ----------------
   double calculateSavedAmount({
     required double monthlyPrice,
     required String plan,
@@ -100,13 +138,13 @@ class PaymentsPlanListViewItems extends StatelessWidget {
     switch (plan.toLowerCase()) {
       case "sixmonths":
         double expected = monthlyPrice * 6;
-        return expected - planPrice; // saving
+        return expected - planPrice;
       case "annual":
         double expected = monthlyPrice * 12;
         return expected - planPrice;
       case "monthly":
       default:
-        return 0.0; // no saving for monthly plan
+        return 0.0;
     }
   }
 
@@ -119,7 +157,7 @@ class PaymentsPlanListViewItems extends StatelessWidget {
       case "annual":
         return "billed yearly";
       default:
-        return "billed every six months"; // fallback in case an unknown value comes
+        return "billed every six months";
     }
   }
 
@@ -132,7 +170,7 @@ class PaymentsPlanListViewItems extends StatelessWidget {
       case "annual":
         return "Year";
       default:
-        return "6 Months"; // fallback in case an unknown value comes
+        return "6 Months";
     }
   }
 
@@ -149,6 +187,5 @@ class PaymentsPlanListViewItems extends StatelessWidget {
             Navigator.pop(context);
           });
     });
-    // Implement payment handling logic here
   }
 }

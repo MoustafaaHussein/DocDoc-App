@@ -21,7 +21,7 @@ class AuthRepository {
         throw Exception(response.data['message'] ?? 'Sign Up failed');
       }
     } catch (e) {
-      rethrow;
+      throw Exception(e);
     }
   }
 
@@ -38,7 +38,7 @@ class AuthRepository {
         throw Exception(response.data['message'] ?? 'Login failed');
       }
     } catch (e) {
-      rethrow;
+      throw Exception(e);
     }
   }
 

@@ -13,22 +13,14 @@ class LoginCubit extends Cubit<LoginState> {
     emit(LoginLoading());
     try {
       final response = await authRepository.login(model);
-      
+
       final prefs = await SharedPreferences.getInstance();
       await prefs.setInt("userId", response.user.id);
       await prefs.setString("userFirstName", response.user.firstName);
       await prefs.setString("userLastName", response.user.lastName);
       await prefs.setString("userEmail", response.user.email);
-      await prefs.setString("userPhone", response.user.phoneNumber);
-      await prefs.setString("userDob", response.user.dateOfBirth);
-      await prefs.setString("userGender", response.user.gender);
-      await prefs.setString(
-        "profilePicture",
-        response.user.profilePictureUrl ?? '',
 
-        
-      );
-      await prefs.setBool("isLoggedIn", true);
+      prefs.setBool("isLoggedIn", true);
 
       emit(LoginSuccess(response));
     } catch (e) {
