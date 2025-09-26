@@ -41,7 +41,6 @@ class _ProfileHeaderScreenState extends State<ProfileHeaderScreen> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
 
     return Stack(
       children: [

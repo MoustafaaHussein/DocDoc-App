@@ -13,8 +13,7 @@ class AisessionHeader extends StatefulWidget {
 class _AisessionState extends State<AisessionHeader> {
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
+
     return Stack(
       children: [
         SizedBox(

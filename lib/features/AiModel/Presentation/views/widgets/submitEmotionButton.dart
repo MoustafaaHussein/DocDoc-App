@@ -19,7 +19,7 @@ class SubmitEmotionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       onPressed: () async {
-        final success = await EmotionSubmitService.submitEmotion(
+        await EmotionSubmitService.submitEmotion(
           emotionType: emotionType,
           intensityLevel: intensityLevel,
         );
