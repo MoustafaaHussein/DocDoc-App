@@ -91,20 +91,6 @@ class _ProfileHeaderScreenState extends State<ProfileHeaderScreen> {
                 SizedBox(height: 80.h),
 
                 // صورة البروفايل
-                const Center(
-                  child: CircleAvatar(
-                    radius: 48,
-                    backgroundColor: Colors.white,
-                    child: CircleAvatar(
-                      radius: 44,
-                      backgroundImage: AssetImage(
-                        'assets/images/onboard_image1.png',
-                      ),
-                    ),
-                  ),
-                ),
-
-                SizedBox(height: 16.h),
 
                 // الاسم
                 Text(
