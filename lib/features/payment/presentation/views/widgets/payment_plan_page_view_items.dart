@@ -79,7 +79,7 @@ class PaymentsPlanListViewItems extends StatelessWidget {
 
                   Expanded(
                     child: Text(
-                      '${proPlans.storeProduct.currencyCode} ${proPlans.storeProduct.price.toStringAsFixed(2)} / ${getPlanDuration(subDuration)}',
+                      '${proPlans.storeProduct.priceString} ${proPlans.storeProduct.price.toStringAsFixed(2)} / ${getPlanDuration(subDuration)}',
                       style: AppStyles.styleMedium16(
                         context,
                       ).copyWith(color: Colors.white),
