@@ -8,22 +8,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
-class PaymentsPlanListViewItems extends StatelessWidget {
-  PaymentsPlanListViewItems({super.key, required this.proPlans});
+class PaymentsPlanListViewItems extends StatefulWidget {
+  const PaymentsPlanListViewItems({super.key, required this.proPlans});
 
   final Package proPlans;
 
+  @override
+  State<PaymentsPlanListViewItems> createState() =>
+      _PaymentsPlanListViewItemsState();
+}
+
+class _PaymentsPlanListViewItemsState extends State<PaymentsPlanListViewItems> {
+  bool _isPurchasing = false;
+
   String get subDuration =>
-      proPlans.identifier.contains("annual")
+      widget.proPlans.identifier.contains("annual")
           ? "annual"
-          : proPlans.identifier.contains("monthly")
+          : widget.proPlans.identifier.contains("monthly")
           ? "monthly"
-          : proPlans.identifier.contains("sixMonths")
+          : widget.proPlans.identifier.contains("sixMonths")
           ? "sixMonths"
-          : proPlans.identifier;
+          : widget.proPlans.identifier;
+
+  String _getPriceText(Package package) {
+    // Preferred: use the platform-localized price string
+    final storeProduct = package.storeProduct;
+    // priceString is the localized, formatted price (e.g. $4.99)
+    if (storeProduct.priceString.trim().isNotEmpty) {
+      return storeProduct.priceString;
+    }
+    // Fallback: keep the numeric style you used previously (keeps Android look)
+    return '${storeProduct.price.toStringAsFixed(2)} / ${getPlanDuration(subDuration)}';
+  }
 
   @override
   Widget build(BuildContext context) {
+    final package = widget.proPlans;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
       child: Container(
@@ -36,7 +57,7 @@ class PaymentsPlanListViewItems extends StatelessWidget {
               const SizedBox(height: 20),
               Center(
                 child: Text(
-                  proPlans.presentedOfferingContext.offeringIdentifier,
+                  package.presentedOfferingContext.offeringIdentifier,
                   style: AppStyles.styleMediumLight24(
                     context,
                   ).copyWith(color: Colors.white),
@@ -64,9 +85,9 @@ class PaymentsPlanListViewItems extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          proPlans.storeProduct.description.isEmpty
+                          package.storeProduct.description.isEmpty
                               ? "Enjoy full premium access"
-                              : proPlans.storeProduct.description,
+                              : package.storeProduct.description,
                           style: AppStyles.styleMedium13(
                             context,
                           ).copyWith(color: Colors.grey),
@@ -77,9 +98,10 @@ class PaymentsPlanListViewItems extends StatelessWidget {
                     ),
                   ),
 
+                  // Price text — prefer localized priceString, fallback to numeric to keep your Android look
                   Expanded(
                     child: Text(
-                      '${proPlans.storeProduct.priceString} ${proPlans.storeProduct.price.toStringAsFixed(2)} / ${getPlanDuration(subDuration)}',
+                      _getPriceText(package),
                       style: AppStyles.styleMedium16(
                         context,
                       ).copyWith(color: Colors.white),
@@ -96,18 +118,49 @@ class PaymentsPlanListViewItems extends StatelessWidget {
               // ---------------- Subscribe Button ----------------
               CustomButton(
                 onpressed: () {
-                  handlePayment(context, proPlans);
+                  handlePayment(context, package);
                 },
-                text: 'Subscribe',
-                buttonColor: const Color(0xffB4D6D9),
+                text: _isPurchasing ? 'Processing…' : 'Subscribe',
+                buttonColor:
+                    _isPurchasing
+                        ? Colors.grey.shade400
+                        : const Color(0xffB4D6D9),
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 12),
+
+              // Restore purchases (required for App Store)
+              Center(
+                child: TextButton(
+                  onPressed: () async {
+                    try {
+                      setState(() => _isPurchasing = true);
+                      await Purchases.restorePurchases();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Restore completed')),
+                      );
+                    } catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Restore failed: $e')),
+                      );
+                    } finally {
+                      setState(() => _isPurchasing = false);
+                    }
+                  },
+                  child: const Text(
+                    "Restore Purchases",
+                    style: TextStyle(color: Colors.white70),
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 12),
 
               // ---------------- Footer with Terms & Privacy ----------------
               Center(
                 child: TextButton(
                   onPressed: () {
+                    // Ensure TermsPrivacyScreen does NOT include any links to pay or web checkouts.
                     Navigator.push(
                       context,
                       MaterialPageRoute(
