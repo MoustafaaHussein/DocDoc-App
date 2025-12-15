@@ -110,14 +110,7 @@ class _ProfileHeaderScreenState extends State<ProfileHeaderScreen> {
                     GoRouter.of(context).push(AppRouter.kPersonInformationView);
                   },
                 ),
-                SizedBox(height: 8.h),
-                SettingsTile(
-                  icon: Ionicons.wallet_outline,
-                  title: "your_cards".tr(),
-                  onTap: () {
-                    GoRouter.of(context).push(AppRouter.kPaymentMethods);
-                  },
-                ),
+
                 SizedBox(height: 8.h),
                 SettingsTile(
                   icon: Ionicons.language,

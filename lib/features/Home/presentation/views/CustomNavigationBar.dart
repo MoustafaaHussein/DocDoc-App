@@ -3,7 +3,6 @@ import 'package:docdoc_app/core/themes/app_colors.dart';
 import 'package:docdoc_app/features/Home/presentation/views/Home.dart';
 import 'package:docdoc_app/features/Profile/presentation/views/Profile.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_iconly/flutter_iconly.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,14 +23,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screens[_bottomNavIndex],
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: AppColors.kButtonPrimaryColor,
-        elevation: 4,
-        shape: const CircleBorder(),
-        child: const Icon(Icons.add),
-      ),
 
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 

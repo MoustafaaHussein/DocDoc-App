@@ -135,10 +135,29 @@ class _PaymentsPlanListViewItemsState extends State<PaymentsPlanListViewItems> {
                   onPressed: () async {
                     try {
                       setState(() => _isPurchasing = true);
-                      await Purchases.restorePurchases();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Restore completed')),
-                      );
+
+                      // RevenueCat restore
+                      final customerInfo = await Purchases.restorePurchases();
+
+                      // Refresh subscription state
+                      final subscriptionCubit =
+                          context.read<SubscriptionCubit>();
+                      await subscriptionCubit.checkProStatus();
+
+                      if (customerInfo.entitlements.all.isNotEmpty &&
+                          customerInfo.entitlements.active.isNotEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Purchases restored successfully'),
+                          ),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('No previous purchases found'),
+                          ),
+                        );
+                      }
                     } catch (e) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('Restore failed: $e')),
