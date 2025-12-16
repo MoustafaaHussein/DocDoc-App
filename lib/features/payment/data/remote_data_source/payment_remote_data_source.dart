@@ -19,10 +19,6 @@ class PaymentRemoteDataSourceImpl implements PaymentRemoteDataSource {
   Future<List<ProductDetails>> getProducts() async {
     final response = await _iap.queryProductDetails(_productIds);
 
-    if (response.error != null) {
-      throw Exception(response.error!.message);
-    }
-
     return response.productDetails;
   }
 

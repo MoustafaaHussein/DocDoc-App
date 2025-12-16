@@ -1,6 +1,7 @@
 import 'package:docdoc_app/core/styles/app_containers_style.dart';
 import 'package:docdoc_app/core/themes/app_styles.dart';
 import 'package:docdoc_app/core/widgets/custom_button.dart';
+import 'package:docdoc_app/features/payment/domain/entites/subscription_product_entity/subscription_products.dart';
 import 'package:docdoc_app/features/payment/presentation/views/widgets/privacy_terms_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
@@ -8,7 +9,7 @@ import 'package:purchases_flutter/purchases_flutter.dart';
 class PaymentsPlanListViewItems extends StatefulWidget {
   const PaymentsPlanListViewItems({super.key, required this.proPlans});
 
-  final Package proPlans;
+  final SubscriptionPlan proPlans;
 
   @override
   State<PaymentsPlanListViewItems> createState() =>
@@ -19,23 +20,23 @@ class _PaymentsPlanListViewItemsState extends State<PaymentsPlanListViewItems> {
   bool _isPurchasing = false;
 
   String get subDuration =>
-      widget.proPlans.identifier.contains("annual")
+      widget.proPlans.id.contains("annual")
           ? "annual"
-          : widget.proPlans.identifier.contains("monthly")
+          : widget.proPlans.title.contains("monthly")
           ? "monthly"
-          : widget.proPlans.identifier.contains("sixMonths")
+          : widget.proPlans.title.contains("sixMonths")
           ? "sixMonths"
-          : widget.proPlans.identifier;
+          : widget.proPlans.title;
 
-  String _getPriceText(Package package) {
+  String _getPriceText(SubscriptionPlan package) {
     // Preferred: use the platform-localized price string
-    final storeProduct = package.storeProduct;
+    final storeProduct = package.price;
     // priceString is the localized, formatted price (e.g. $4.99)
-    if (storeProduct.priceString.trim().isNotEmpty) {
-      return storeProduct.priceString;
+    if (storeProduct.trim().isNotEmpty) {
+      return storeProduct;
     }
     // Fallback: keep the numeric style you used previously (keeps Android look)
-    return '${storeProduct.price.toStringAsFixed(2)} / ${getPlanDuration(subDuration)}';
+    return '${storeProduct} / ${getPlanDuration(subDuration)}';
   }
 
   @override
@@ -54,7 +55,7 @@ class _PaymentsPlanListViewItemsState extends State<PaymentsPlanListViewItems> {
               const SizedBox(height: 20),
               Center(
                 child: Text(
-                  package.presentedOfferingContext.offeringIdentifier,
+                  package.title,
                   style: AppStyles.styleMediumLight24(
                     context,
                   ).copyWith(color: Colors.white),
@@ -82,9 +83,7 @@ class _PaymentsPlanListViewItemsState extends State<PaymentsPlanListViewItems> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          package.storeProduct.description.isEmpty
-                              ? "Enjoy full premium access"
-                              : package.storeProduct.description,
+                          package.price,
                           style: AppStyles.styleMedium13(
                             context,
                           ).copyWith(color: Colors.grey),
@@ -135,11 +134,6 @@ class _PaymentsPlanListViewItemsState extends State<PaymentsPlanListViewItems> {
 
                       // RevenueCat restore
                       final customerInfo = await Purchases.restorePurchases();
-
-                      // Refresh subscription state
-                      // final subscriptionCubit =
-                      //     context.read<SubscriptionCubit>();
-                      // await subscriptionCubit.checkProStatus();
 
                       if (customerInfo.entitlements.all.isNotEmpty &&
                           customerInfo.entitlements.active.isNotEmpty) {

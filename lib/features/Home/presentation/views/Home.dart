@@ -6,6 +6,7 @@ import 'package:docdoc_app/features/Home/presentation/views/widgets/SpecialAppBa
 import 'package:docdoc_app/features/Home/presentation/views/widgets/custom_excercise_scrollable_widget.dart';
 import 'package:docdoc_app/features/payment/presentation/manger/cubit/payment_cubit.dart';
 import 'package:docdoc_app/features/payment/presentation/manger/cubit/payment_state.dart';
+import 'package:docdoc_app/features/payment/presentation/views/widgets/payment_plans_page_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -97,25 +98,26 @@ class _HomeScreenState extends State<HomeScreen> {
                       showModalBottomSheet(
                         context: context,
                         builder: (_) {
-                          return ListView(
-                            shrinkWrap: true,
-                            children:
-                                state.plans.map((plan) {
-                                  return ListTile(
-                                    title: Text(plan.title),
-                                    subtitle: Text(plan.price),
-                                    trailing: ElevatedButton(
-                                      onPressed: () {
-                                        context.read<PaymentCubit>().buy(
-                                          plan.id,
-                                        );
-                                        Navigator.pop(context);
-                                      },
-                                      child: const Text('Subscribe'),
-                                    ),
-                                  );
-                                }).toList(),
-                          );
+                          // return ListView(
+                          //   shrinkWrap: true,
+                          //   children:
+                          //       state.plans.map((plan) {
+                          //         return ListTile(
+                          //           title: Text(plan.title),
+                          //           subtitle: Text(plan.price),
+                          //           trailing: ElevatedButton(
+                          //             onPressed: () {
+                          //               context.read<PaymentCubit>().buy(
+                          //                 plan.id,
+                          //               );
+                          //               Navigator.pop(context);
+                          //             },
+                          //             child: const Text('Subscribe'),
+                          //           ),
+                          //         );
+                          //       }).toList(),
+                          // );
+                          return PaymentsPlansPageView(proPlans: state.plans);
                         },
                       );
                     } else if (state is PaymentLoaded && state.plans.isEmpty) {
@@ -126,16 +128,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           backgroundColor: Colors.orange,
                         ),
                       );
-                    }
-                    // } else if (state is PaymentLoading) {
-                    //   ScaffoldMessenger.of(context).showSnackBar(
-                    //     SnackBar(
-                    //       content: Text("loading_plans".tr()),
-                    //       backgroundColor: Colors.blue,
-                    //     ),
-                    //   );
-                    // }
-                    else {
+                    } else if (state is PaymentLoading) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("loading_plans".tr()),
+                          backgroundColor: Colors.blue,
+                        ),
+                      );
+                    } else {
                       context.read<PaymentCubit>().loadPlans();
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(

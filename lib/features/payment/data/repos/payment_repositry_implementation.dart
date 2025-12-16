@@ -12,7 +12,12 @@ class PaymentRepositoryImpl implements PaymentRepositry {
   Future<List<SubscriptionPlan>> getPlans() async {
     final products = await remote.getProducts();
     return products.map((p) {
-      return SubscriptionPlan(id: p.id, title: p.title, price: p.price);
+      return SubscriptionPlan(
+        id: p.id,
+        title: p.title,
+        price: p.price,
+        description: p.description,
+      );
     }).toList();
   }
 

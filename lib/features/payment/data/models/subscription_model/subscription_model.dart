@@ -6,7 +6,7 @@ class SubscriptionProductModel extends SubscriptionPlan {
   SubscriptionProductModel({
     required super.id,
     required super.title,
-
+    required super.description,
     required super.price,
   });
 
@@ -14,7 +14,7 @@ class SubscriptionProductModel extends SubscriptionPlan {
     return SubscriptionProductModel(
       id: product.id,
       title: product.title,
-
+      description: product.description,
       price: product.price,
     );
   }
