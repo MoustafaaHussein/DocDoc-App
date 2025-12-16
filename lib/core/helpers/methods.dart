@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:docdoc_app/core/models/emoji_model.dart';
-import 'package:docdoc_app/features/payment/presentation/views/widgets/pro_membership_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -53,7 +52,7 @@ Future<dynamic> managePlansMethod(BuildContext context) {
     builder: (context) {
       return SizedBox(
         height: 600.h, // adjust to your design
-        child: const ProMembershipWidget(),
+        child: const SizedBox(),
       );
     },
   );

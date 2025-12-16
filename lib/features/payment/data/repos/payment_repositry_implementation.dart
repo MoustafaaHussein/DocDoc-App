@@ -1,28 +1,27 @@
-import 'package:docdoc_app/features/payment/data/local_data_source/payment_local_data_source.dart';
 import 'package:docdoc_app/features/payment/data/remote_data_source/payment_remote_data_source.dart';
-import 'package:docdoc_app/features/payment/domain/entites/credit_card_entity.dart';
+import 'package:docdoc_app/features/payment/domain/entites/subscription_product_entity/subscription_products.dart';
 import 'package:docdoc_app/features/payment/domain/repos/payment_repositry.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
-class PaymentRepositryImplementation implements PaymentRepositry {
-  final PaymentLocalDataSource paymentLocalDataSource;
-  final PaymentRemoteDataSource paymentRemoteDataSourcel;
+class PaymentRepositoryImpl implements PaymentRepositry {
+  final PaymentRemoteDataSource remote;
 
-  PaymentRepositryImplementation(
-    this.paymentLocalDataSource,
-    this.paymentRemoteDataSourcel,
-  );
+  PaymentRepositoryImpl(this.remote);
+
   @override
-  Future<List<CreditCardEntity>> getAllCards() async {
-    return await paymentLocalDataSource.getAllCards();
+  Future<List<SubscriptionPlan>> getPlans() async {
+    final products = await remote.getProducts();
+    return products.map((p) {
+      return SubscriptionPlan(id: p.id, title: p.title, price: p.price);
+    }).toList();
   }
 
   @override
-  Future<void> addNewCreditCard({required CreditCardEntity creditCard}) async {
-    await paymentLocalDataSource.addCreditCard(creditCard);
+  Future<void> buyPlan(String productId) {
+    return remote.buy(productId);
   }
 
   @override
-  Future<void> deleteCreditCard({required String cardId}) async {
-    await paymentLocalDataSource.deleteCreditCard(cardId);
-  }
+  Stream<PurchaseDetails> get purchaseUpdates =>
+      remote.purchaseStream.expand((e) => e);
 }

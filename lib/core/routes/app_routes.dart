@@ -11,11 +11,9 @@ import 'package:docdoc_app/features/Mood_History/Screens/MoodHistoryScreen.dart'
 import 'package:docdoc_app/features/PersonInformation/presentation/views/PersonInformation.dart';
 import 'package:docdoc_app/features/SignUP/presentation/views/SignUP_Screen.dart';
 import 'package:docdoc_app/features/onboard/presentation/views/on_board_view.dart';
-import 'package:docdoc_app/features/payment/domain/entites/credit_card_entity.dart';
 import 'package:docdoc_app/features/payment/domain/repos/payment_repositry.dart';
-import 'package:docdoc_app/features/payment/presentation/manger/bloc/payment_bloc.dart';
+import 'package:docdoc_app/features/payment/presentation/manger/cubit/payment_cubit.dart';
 import 'package:docdoc_app/features/payment/presentation/views/add_payment_method_view.dart';
-import 'package:docdoc_app/features/payment/presentation/views/credit_card_details_view.dart';
 import 'package:docdoc_app/features/payment/presentation/views/payment_view.dart';
 import 'package:docdoc_app/features/recomendation/data/models/category_model.dart/category_model.dart';
 import 'package:docdoc_app/features/recomendation/data/models/recomendation_by_emoitions_model/recomendation_by_emoitions_model.dart';
@@ -125,7 +123,7 @@ class AppRouter {
               (context, state) => CustomTransitionPage(
                 child: BlocProvider(
                   create:
-                      (context) => PaymentBloc(getIt.get<PaymentRepositry>()),
+                      (context) => PaymentCubit(getIt.get<PaymentRepositry>()),
                   child: const AddPaymentMethodView(),
                 ),
                 transitionsBuilder:
@@ -139,7 +137,7 @@ class AppRouter {
               (context, state) => CustomTransitionPage(
                 child: BlocProvider(
                   create:
-                      (context) => PaymentBloc(getIt.get<PaymentRepositry>()),
+                      (context) => PaymentCubit(getIt.get<PaymentRepositry>()),
                   child: const PaymentView(),
                 ),
                 transitionsBuilder:
@@ -147,23 +145,23 @@ class AppRouter {
                         FadeTransition(opacity: animation, child: child),
               ),
         ),
-        GoRoute(
-          path: kPaymentDetails,
-          pageBuilder:
-              (context, state) => CustomTransitionPage(
-                child: BlocProvider(
-                  create:
-                      (context) => PaymentBloc(getIt.get<PaymentRepositry>()),
-                  child: CreditCardDetailsView(
-                    creditCardEntity: state.extra as CreditCardEntity,
-                  ),
-                ),
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) =>
-                        FadeTransition(opacity: animation, child: child),
-              ),
-        ),
 
+        // GoRoute(
+        //   path: kPaymentDetails,
+        //   pageBuilder:
+        //       (context, state) => CustomTransitionPage(
+        //         child: BlocProvider(
+        //           create:
+        //               (context) => PaymentCubit(getIt.get<PaymentRepositry>()),
+        //           child: CreditCardDetailsView(
+        //             creditCardEntity: state.extra as CreditCardEntity,
+        //           ),
+        //         ),
+        //         transitionsBuilder:
+        //             (context, animation, secondaryAnimation, child) =>
+        //                 FadeTransition(opacity: animation, child: child),
+        //       ),
+        // ),
         GoRoute(
           path: kPersonalizeRecomendation,
           pageBuilder:

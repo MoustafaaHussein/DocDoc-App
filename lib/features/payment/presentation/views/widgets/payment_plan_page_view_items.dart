@@ -1,11 +1,8 @@
 import 'package:docdoc_app/core/styles/app_containers_style.dart';
 import 'package:docdoc_app/core/themes/app_styles.dart';
 import 'package:docdoc_app/core/widgets/custom_button.dart';
-import 'package:docdoc_app/features/payment/presentation/manger/offering_cubit/offering_cubit.dart';
-import 'package:docdoc_app/features/payment/presentation/manger/subscription_cubit/subscription_cubit.dart';
 import 'package:docdoc_app/features/payment/presentation/views/widgets/privacy_terms_view_body.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 class PaymentsPlanListViewItems extends StatefulWidget {
@@ -118,7 +115,7 @@ class _PaymentsPlanListViewItemsState extends State<PaymentsPlanListViewItems> {
               // ---------------- Subscribe Button ----------------
               CustomButton(
                 onpressed: () {
-                  handlePayment(context, package);
+                  // handlePayment(context, package);
                 },
                 text: _isPurchasing ? 'Processing…' : 'Subscribe',
                 buttonColor:
@@ -140,9 +137,9 @@ class _PaymentsPlanListViewItemsState extends State<PaymentsPlanListViewItems> {
                       final customerInfo = await Purchases.restorePurchases();
 
                       // Refresh subscription state
-                      final subscriptionCubit =
-                          context.read<SubscriptionCubit>();
-                      await subscriptionCubit.checkProStatus();
+                      // final subscriptionCubit =
+                      //     context.read<SubscriptionCubit>();
+                      // await subscriptionCubit.checkProStatus();
 
                       if (customerInfo.entitlements.all.isNotEmpty &&
                           customerInfo.entitlements.active.isNotEmpty) {
@@ -246,18 +243,18 @@ class _PaymentsPlanListViewItemsState extends State<PaymentsPlanListViewItems> {
     }
   }
 
-  handlePayment(BuildContext context, Package package) {
-    final offeringCubit = context.read<OfferingCubit>();
-    final subscriptionCubit = context.read<SubscriptionCubit>();
-    offeringCubit.purchasePackage(package, () {
-      subscriptionCubit.checkProStatus();
-      subscriptionCubit.stream
-          .firstWhere(
-            (subState) => subState is SubscriptionLoaded && subState.isPro,
-          )
-          .then((_) {
-            Navigator.pop(context);
-          });
-    });
-  }
+  // handlePayment(BuildContext context, Package package) {
+  //   final offeringCubit = context.read<OfferingCubit>();
+  //   final subscriptionCubit = context.read<SubscriptionCubit>();
+  //   offeringCubit.purchasePackage(package, () {
+  //     subscriptionCubit.checkProStatus();
+  //     subscriptionCubit.stream
+  //         .firstWhere(
+  //           (subState) => subState is SubscriptionLoaded && subState.isPro,
+  //         )
+  //         .then((_) {
+  //           Navigator.pop(context);
+  //         });
+  //   });
+  // }
 }

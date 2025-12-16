@@ -1,4 +1,5 @@
-import 'package:docdoc_app/features/payment/presentation/manger/subscription_cubit/subscription_cubit.dart';
+import 'package:docdoc_app/features/payment/presentation/manger/cubit/payment_cubit.dart';
+import 'package:docdoc_app/features/payment/presentation/manger/cubit/payment_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
@@ -21,10 +22,10 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
     final formattedDate = DateFormat.yMMMMd('en_US').format(now);
     bool isPro = false;
 
-    return BlocListener<SubscriptionCubit, SubscriptionState>(
+    return BlocListener<PaymentCubit, PaymentState>(
       listener: (context, state) {
-        if (state is SubscriptionLoaded) {
-          isPro = state.isPro;
+        if (state is PaymentSuccess) {
+          isPro = true;
         }
       },
       child: Container(

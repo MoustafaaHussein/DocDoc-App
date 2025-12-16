@@ -1,40 +1,42 @@
-import 'package:docdoc_app/core/helpers/api_service.dart';
-import 'package:purchases_flutter/purchases_flutter.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 abstract class PaymentRemoteDataSource {
-  Future<void> configureRevenueCat(String apiKey);
-  Future<Offerings?> getOfferings();
-  Future<bool> getCustomerInfo();
-  Future<PurchaseResult> PurchesPackage(Package package);
+  Future<List<ProductDetails>> getProducts();
+  Future<void> buy(String productId);
+  Stream<List<PurchaseDetails>> get purchaseStream;
 }
 
-class PaymentRemoteDataSourceImplementation extends PaymentRemoteDataSource {
-  final ApiService apiService;
+class PaymentRemoteDataSourceImpl implements PaymentRemoteDataSource {
+  final InAppPurchase _iap = InAppPurchase.instance;
 
-  PaymentRemoteDataSourceImplementation({required this.apiService});
+  static const Set<String> _productIds = {
+    'mymood_32_99_1Y',
+    'mymood_15_99_6M',
+    'mymood_2_99_1M',
+  };
+
   @override
-  @override
-  Future<void> configureRevenueCat(String apiKey) async {
-    await Purchases.configure(PurchasesConfiguration(apiKey));
+  Future<List<ProductDetails>> getProducts() async {
+    final response = await _iap.queryProductDetails(_productIds);
+
+    if (response.error != null) {
+      throw Exception(response.error!.message);
+    }
+
+    return response.productDetails;
   }
 
   @override
-  Future<Offerings?> getOfferings() async {
-    Offerings? offers = await Purchases.getOfferings();
+  Future<void> buy(String productId) async {
+    final response = await _iap.queryProductDetails({productId});
 
-    return offers;
+    final product = response.productDetails.first;
+
+    final param = PurchaseParam(productDetails: product);
+
+    await _iap.buyNonConsumable(purchaseParam: param);
   }
 
   @override
-  Future<bool> getCustomerInfo() async {
-    CustomerInfo customerInfo = await Purchases.getCustomerInfo();
-    bool isPro = customerInfo.entitlements.active.containsKey("pro membership");
-    return isPro;
-  }
-
-  @override
-  Future<PurchaseResult> PurchesPackage(Package package) async {
-    PurchaseResult result = await Purchases.purchasePackage(package);
-    return result;
-  }
+  Stream<List<PurchaseDetails>> get purchaseStream => _iap.purchaseStream;
 }

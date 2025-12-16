@@ -1,4 +1,3 @@
-import 'package:docdoc_app/features/payment/presentation/views/widgets/payment_bloc_consumer.dart';
 import 'package:flutter/widgets.dart';
 
 class PaymentView extends StatelessWidget {
@@ -6,6 +5,6 @@ class PaymentView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const PaymentsBlocConsumer();
+    return const SizedBox();
   }
 }

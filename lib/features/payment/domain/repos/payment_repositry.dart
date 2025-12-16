@@ -1,7 +1,8 @@
-import 'package:docdoc_app/features/payment/domain/entites/credit_card_entity.dart';
+import 'package:docdoc_app/features/payment/domain/entites/subscription_product_entity/subscription_products.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 abstract class PaymentRepositry {
-  Future<List<CreditCardEntity>> getAllCards();
-  Future<void> addNewCreditCard({required CreditCardEntity creditCard});
-  Future<void> deleteCreditCard({required String cardId});
+  Future<List<SubscriptionPlan>> getPlans();
+  Future<void> buyPlan(String productId);
+  Stream<PurchaseDetails> get purchaseUpdates;
 }
