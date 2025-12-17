@@ -17,6 +17,8 @@ class PaymentRepositoryImpl implements PaymentRepositry {
         title: p.title,
         price: p.price,
         description: p.description,
+        rawPrice: p.rawPrice,
+        currencyCode: p.currencyCode,
       );
     }).toList();
   }

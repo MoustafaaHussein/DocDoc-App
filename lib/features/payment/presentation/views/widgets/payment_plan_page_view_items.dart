@@ -4,7 +4,6 @@ import 'package:docdoc_app/core/widgets/custom_button.dart';
 import 'package:docdoc_app/features/payment/domain/entites/subscription_product_entity/subscription_products.dart';
 import 'package:docdoc_app/features/payment/presentation/views/widgets/privacy_terms_view_body.dart';
 import 'package:flutter/material.dart';
-import 'package:purchases_flutter/purchases_flutter.dart';
 
 class PaymentsPlanListViewItems extends StatefulWidget {
   const PaymentsPlanListViewItems({super.key, required this.proPlans});
@@ -28,16 +27,16 @@ class _PaymentsPlanListViewItemsState extends State<PaymentsPlanListViewItems> {
           ? "sixMonths"
           : widget.proPlans.title;
 
-  String _getPriceText(SubscriptionPlan package) {
-    // Preferred: use the platform-localized price string
-    final storeProduct = package.price;
-    // priceString is the localized, formatted price (e.g. $4.99)
-    if (storeProduct.trim().isNotEmpty) {
-      return storeProduct;
-    }
-    // Fallback: keep the numeric style you used previously (keeps Android look)
-    return '${storeProduct} / ${getPlanDuration(subDuration)}';
-  }
+  // String _getPriceText(SubscriptionPlan package) {
+  //   // Preferred: use the platform-localized price string
+  //   final storeProduct = package.price;
+  //   // priceString is the localized, formatted price (e.g. $4.99)
+  //   if (storeProduct.trim().isNotEmpty) {
+  //     return storeProduct;
+  //   }
+  //   // Fallback: keep the numeric style you used previously (keeps Android look)
+  //   return '${storeProduct} / ${getPlanDuration(subDuration)}';
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +73,7 @@ class _PaymentsPlanListViewItemsState extends State<PaymentsPlanListViewItems> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${getPlanDuration(subDuration)} Plan',
+                          '${package.rawPrice} Plan',
                           style: AppStyles.styleMedium16(
                             context,
                           ).copyWith(color: Colors.white),
@@ -97,7 +96,7 @@ class _PaymentsPlanListViewItemsState extends State<PaymentsPlanListViewItems> {
                   // Price text — prefer localized priceString, fallback to numeric to keep your Android look
                   Expanded(
                     child: Text(
-                      _getPriceText(package),
+                      package.price,
                       style: AppStyles.styleMedium16(
                         context,
                       ).copyWith(color: Colors.white),
@@ -113,9 +112,7 @@ class _PaymentsPlanListViewItemsState extends State<PaymentsPlanListViewItems> {
 
               // ---------------- Subscribe Button ----------------
               CustomButton(
-                onpressed: () {
-                  // handlePayment(context, package);
-                },
+                onpressed: () {},
                 text: _isPurchasing ? 'Processing…' : 'Subscribe',
                 buttonColor:
                     _isPurchasing
@@ -128,35 +125,7 @@ class _PaymentsPlanListViewItemsState extends State<PaymentsPlanListViewItems> {
               // Restore purchases (required for App Store)
               Center(
                 child: TextButton(
-                  onPressed: () async {
-                    try {
-                      setState(() => _isPurchasing = true);
-
-                      // RevenueCat restore
-                      final customerInfo = await Purchases.restorePurchases();
-
-                      if (customerInfo.entitlements.all.isNotEmpty &&
-                          customerInfo.entitlements.active.isNotEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Purchases restored successfully'),
-                          ),
-                        );
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('No previous purchases found'),
-                          ),
-                        );
-                      }
-                    } catch (e) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Restore failed: $e')),
-                      );
-                    } finally {
-                      setState(() => _isPurchasing = false);
-                    }
-                  },
+                  onPressed: () {},
                   child: const Text(
                     "Restore Purchases",
                     style: TextStyle(color: Colors.white70),
@@ -192,50 +161,50 @@ class _PaymentsPlanListViewItemsState extends State<PaymentsPlanListViewItems> {
     );
   }
 
-  // ---------------- Helper methods ----------------
-  double calculateSavedAmount({
-    required double monthlyPrice,
-    required String plan,
-    required double planPrice,
-  }) {
-    switch (plan.toLowerCase()) {
-      case "sixmonths":
-        double expected = monthlyPrice * 6;
-        return expected - planPrice;
-      case "annual":
-        double expected = monthlyPrice * 12;
-        return expected - planPrice;
-      case "monthly":
-      default:
-        return 0.0;
-    }
-  }
+  // // ---------------- Helper methods ----------------
+  // double calculateSavedAmount({
+  //   required double monthlyPrice,
+  //   required String plan,
+  //   required double planPrice,
+  // }) {
+  //   switch (plan.toLowerCase()) {
+  //     case "sixmonths":
+  //       double expected = monthlyPrice * 6;
+  //       return expected - planPrice;
+  //     case "annual":
+  //       double expected = monthlyPrice * 12;
+  //       return expected - planPrice;
+  //     case "monthly":
+  //     default:
+  //       return 0.0;
+  //   }
+  // }
 
-  String getBillingDuration(String plan) {
-    switch (plan.toLowerCase()) {
-      case "monthly":
-        return "billed monthly";
-      case "sixMonths":
-        return "billed every six months";
-      case "annual":
-        return "billed yearly";
-      default:
-        return "billed every six months";
-    }
-  }
+  // String getBillingDuration(String plan) {
+  //   switch (plan.toLowerCase()) {
+  //     case "monthly":
+  //       return "billed monthly";
+  //     case "sixMonths":
+  //       return "billed every six months";
+  //     case "annual":
+  //       return "billed yearly";
+  //     default:
+  //       return "billed every six months";
+  //   }
+  // }
 
-  String getPlanDuration(String plan) {
-    switch (plan.toLowerCase()) {
-      case "monthly":
-        return "Month";
-      case "sixMonths":
-        return "6 Months";
-      case "annual":
-        return "Year";
-      default:
-        return "6 Months";
-    }
-  }
+  // String getPlanDuration(String plan) {
+  //   switch (plan.toLowerCase()) {
+  //     case "monthly":
+  //       return "Month";
+  //     case "sixMonths":
+  //       return "6 Months";
+  //     case "annual":
+  //       return "Year";
+  //     default:
+  //       return "6 Months";
+  //   }
+  // }
 
   // handlePayment(BuildContext context, Package package) {
   //   final offeringCubit = context.read<OfferingCubit>();

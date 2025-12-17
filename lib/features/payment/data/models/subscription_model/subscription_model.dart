@@ -8,6 +8,8 @@ class SubscriptionProductModel extends SubscriptionPlan {
     required super.title,
     required super.description,
     required super.price,
+    required super.rawPrice,
+    required super.currencyCode,
   });
 
   factory SubscriptionProductModel.fromProductDetails(ProductDetails product) {
@@ -16,6 +18,8 @@ class SubscriptionProductModel extends SubscriptionPlan {
       title: product.title,
       description: product.description,
       price: product.price,
+      rawPrice: product.rawPrice,
+      currencyCode: product.currencyCode,
     );
   }
 }

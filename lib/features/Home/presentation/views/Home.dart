@@ -32,7 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
     // Start listening to purchases and load plans
     final cubit = context.read<PaymentCubit>();
     cubit.loadPlans();
-    cubit.listenToPurchases();
   }
 
   void getUserName() async {
@@ -95,31 +94,32 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     if (state is PaymentLoaded && state.plans.isNotEmpty) {
                       // Show bottom sheet with plans
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (_) {
-                          // return ListView(
-                          //   shrinkWrap: true,
-                          //   children:
-                          //       state.plans.map((plan) {
-                          //         return ListTile(
-                          //           title: Text(plan.title),
-                          //           subtitle: Text(plan.price),
-                          //           trailing: ElevatedButton(
-                          //             onPressed: () {
-                          //               context.read<PaymentCubit>().buy(
-                          //                 plan.id,
-                          //               );
-                          //               Navigator.pop(context);
-                          //             },
-                          //             child: const Text('Subscribe'),
-                          //           ),
-                          //         );
-                          //       }).toList(),
-                          // );
-                          return PaymentsPlansPageView(proPlans: state.plans);
-                        },
-                      );
+                      PaymentsPlansPageView(proPlans: state.plans);
+                      // showModalBottomSheet(
+                      //   context: context,
+                      //   builder: (_) {
+                      //     // return ListView(
+                      //     //   shrinkWrap: true,
+                      //     //   children:
+                      //     //       state.plans.map((plan) {
+                      //     //         return ListTile(
+                      //     //           title: Text(plan.title),
+                      //     //           subtitle: Text(plan.price),
+                      //     //           trailing: ElevatedButton(
+                      //     //             onPressed: () {
+                      //     //               context.read<PaymentCubit>().buy(
+                      //     //                 plan.id,
+                      //     //               );
+                      //     //               Navigator.pop(context);
+                      //     //             },
+                      //     //             child: const Text('Subscribe'),
+                      //     //           ),
+                      //     //         );
+                      //     //       }).toList(),
+                      //     // );
+
+                      //   },
+                      // );
                     } else if (state is PaymentLoaded && state.plans.isEmpty) {
                       context.read<PaymentCubit>().loadPlans();
                       ScaffoldMessenger.of(context).showSnackBar(
