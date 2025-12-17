@@ -30,8 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
     getUserName();
 
     // Start listening to purchases and load plans
-    final cubit = context.read<PaymentCubit>();
-    cubit.loadPlans();
+    // final cubit = context.read<PaymentCubit>();
+    // cubit.loadPlans();
   }
 
   void getUserName() async {
@@ -58,6 +58,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(state.message), backgroundColor: Colors.red),
           );
+        } else if (state is PaymentLoaded) {
+          PaymentsPlansPageView(proPlans: state.plans);
         }
       },
       builder: (context, state) {
@@ -92,58 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 // 1-on-1 session premium feature
                 InkWell(
                   onTap: () {
-                    if (state is PaymentLoaded && state.plans.isNotEmpty) {
-                      // Show bottom sheet with plans
-                      PaymentsPlansPageView(proPlans: state.plans);
-                      // showModalBottomSheet(
-                      //   context: context,
-                      //   builder: (_) {
-                      //     // return ListView(
-                      //     //   shrinkWrap: true,
-                      //     //   children:
-                      //     //       state.plans.map((plan) {
-                      //     //         return ListTile(
-                      //     //           title: Text(plan.title),
-                      //     //           subtitle: Text(plan.price),
-                      //     //           trailing: ElevatedButton(
-                      //     //             onPressed: () {
-                      //     //               context.read<PaymentCubit>().buy(
-                      //     //                 plan.id,
-                      //     //               );
-                      //     //               Navigator.pop(context);
-                      //     //             },
-                      //     //             child: const Text('Subscribe'),
-                      //     //           ),
-                      //     //         );
-                      //     //       }).toList(),
-                      //     // );
-
-                      //   },
-                      // );
-                    } else if (state is PaymentLoaded && state.plans.isEmpty) {
-                      context.read<PaymentCubit>().loadPlans();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("subscribe_to_access".tr()),
-                          backgroundColor: Colors.orange,
-                        ),
-                      );
-                    } else if (state is PaymentLoading) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("loading_plans".tr()),
-                          backgroundColor: Colors.blue,
-                        ),
-                      );
-                    } else {
-                      context.read<PaymentCubit>().loadPlans();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("subscribe_to_access".tr()),
-                          backgroundColor: Colors.orange,
-                        ),
-                      );
-                    }
+                    BlocProvider.of<PaymentCubit>(context).loadPlans();
                   },
                   child: Container(
                     width: double.infinity,

@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:docdoc_app/features/payment/data/remote_data_source/payment_remote_data_source.dart';
 import 'package:docdoc_app/features/payment/domain/entites/subscription_product_entity/subscription_products.dart';
 import 'package:docdoc_app/features/payment/domain/repos/payment_repositry.dart';
@@ -9,18 +10,24 @@ class PaymentRepositoryImpl implements PaymentRepositry {
   PaymentRepositoryImpl(this.remote);
 
   @override
-  Future<List<SubscriptionPlan>> getPlans() async {
-    final products = await remote.getProducts();
-    return products.map((p) {
-      return SubscriptionPlan(
-        id: p.id,
-        title: p.title,
-        price: p.price,
-        description: p.description,
-        rawPrice: p.rawPrice,
-        currencyCode: p.currencyCode,
+  Future<Either<String, List<SubscriptionPlan>>> getPlans() async {
+    try {
+      final products = await remote.getProducts();
+      return right(
+        products.map((p) {
+          return SubscriptionPlan(
+            id: p.id,
+            title: p.title,
+            price: p.price,
+            description: p.description,
+            rawPrice: p.rawPrice,
+            currencyCode: p.currencyCode,
+          );
+        }).toList(),
       );
-    }).toList();
+    } catch (e) {
+      return left(e.toString());
+    }
   }
 
   @override

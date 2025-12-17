@@ -13,12 +13,15 @@ class PaymentCubit extends Cubit<PaymentState> {
 
   Future<void> loadPlans() async {
     emit(PaymentLoading());
-    try {
-      final plans = await repository.getPlans();
-      emit(PaymentLoaded(plans)); // Correct state
-    } catch (e) {
-      emit(PaymentError(e.toString()));
-    }
+    var result = await repository.getPlans();
+    result.fold(
+      (errorMessage) {
+        emit(PaymentError(errorMessage));
+      },
+      (plans) {
+        emit(PaymentLoaded(plans));
+      },
+    );
   }
 
   Future<void> buy(String productId) async {

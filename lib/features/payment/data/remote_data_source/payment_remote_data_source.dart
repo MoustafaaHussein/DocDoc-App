@@ -10,12 +10,9 @@ class PaymentRemoteDataSourceImpl implements PaymentRemoteDataSource {
   final InAppPurchase _iap = InAppPurchase.instance;
 
   static const Set<String> _productIds = {
-    // 'mymood_32_99_1Y',
-    // 'mymood_15_99_6M',
-    // 'mymood_2_99_1M',
-    '1_month_plan'
-        '1_year_plan'
-        '6_months_plan',
+    'mymood_32_99_1Y',
+    'mymood_15_99_6M',
+    'mymood_2_99_1M',
   };
 
   @override
