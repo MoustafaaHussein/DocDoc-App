@@ -1,4 +1,4 @@
-import 'package:docdoc_app/core/helpers/service_locator.dart';
+import 'package:docdoc_app/core/services/service_locator.dart';
 import 'package:docdoc_app/features/AiModel/Presentation/views/EmotionDetectorScreen.dart';
 import 'package:docdoc_app/features/AiSession/presentation/views/Ai_View.dart';
 import 'package:docdoc_app/features/Analytics/screens/AnalyticsScreen.dart';
@@ -6,15 +6,17 @@ import 'package:docdoc_app/features/Analytics/screens/demo.dart';
 import 'package:docdoc_app/features/Home/presentation/views/CustomNavigationBar.dart';
 import 'package:docdoc_app/features/Home/presentation/views/Home.dart';
 import 'package:docdoc_app/features/Home/presentation/views/widgets/emojySwitcher.dart';
+import 'package:docdoc_app/features/Home/presentation/views/widgets/paywall.dart';
 import 'package:docdoc_app/features/Login/presentation/views/LoginScreen.dart';
 import 'package:docdoc_app/features/Mood_History/Screens/MoodHistoryScreen.dart';
 import 'package:docdoc_app/features/PersonInformation/presentation/views/PersonInformation.dart';
 import 'package:docdoc_app/features/SignUP/presentation/views/SignUP_Screen.dart';
 import 'package:docdoc_app/features/onboard/presentation/views/on_board_view.dart';
-import 'package:docdoc_app/features/payment/domain/repos/payment_repositry.dart';
+import 'package:docdoc_app/features/payment/domain/repos/payment_repo.dart';
 import 'package:docdoc_app/features/payment/presentation/manger/cubit/payment_cubit.dart';
-import 'package:docdoc_app/features/payment/presentation/views/add_payment_method_view.dart';
 import 'package:docdoc_app/features/payment/presentation/views/payment_view.dart';
+import 'package:docdoc_app/features/payment/presentation/views/privacy_policy_view.dart';
+import 'package:docdoc_app/features/payment/presentation/views/terms_of_service.dart';
 import 'package:docdoc_app/features/recomendation/data/models/category_model.dart/category_model.dart';
 import 'package:docdoc_app/features/recomendation/data/models/recomendation_by_emoitions_model/recomendation_by_emoitions_model.dart';
 import 'package:docdoc_app/features/recomendation/domain/repos/recomendation_repo.dart';
@@ -54,12 +56,23 @@ class AppRouter {
   static const kRecomendationByEmotions = '/RecomenadtionByEmotions';
   static const kRecomendationByEmotionsDetails =
       '/RecomenadtionByEmotionsDetails';
+  static const kSubscriptionView = '/SubscriptionView';
+  static const kPrivacyPolicyView = '/PrivacyPolicyView';
+  static const kTermsOfServiceView = '/TermsOfServiceView';
 
   static GoRouter initRouter({required bool isLoggedIn}) {
     return GoRouter(
       initialLocation: kSplashView,
       //isLoggedIn ? kHomePage : kLoginView,
       routes: [
+        GoRoute(
+          path: kPrivacyPolicyView,
+          builder: (context, state) => const PrivacyPolicyScreen(),
+        ),
+        GoRoute(
+          path: kTermsOfServiceView,
+          builder: (context, state) => const TermsOfServiceScreen(),
+        ),
         GoRoute(
           path: kHistoryView,
           builder: (context, state) => const MoodHistoryScreen(),
@@ -72,7 +85,21 @@ class AppRouter {
           path: kAnalyticsView,
           builder: (context, state) => const WeeklyMoodScreen(),
         ),
-        GoRoute(path: kHomePage, builder: (context, state) => const HomePage()),
+        GoRoute(
+          path: kSubscriptionView,
+          builder: (context, state) => const PaywallScreen(),
+        ),
+        GoRoute(
+          path: kHomePage,
+          builder:
+              (context, state) => BlocProvider(
+                create:
+                    (context) =>
+                        SubscriptionCubit(getIt.get<PaymentRepo>())
+                          ..initialize(),
+                child: const HomePage(),
+              ),
+        ),
         GoRoute(
           path: kEmotiomDetectorView,
           builder: (context, state) => const EmotionDetectorScreen(),
@@ -118,26 +145,12 @@ class AppRouter {
         ),
 
         GoRoute(
-          path: kAddNewPaymentMethod,
-          pageBuilder:
-              (context, state) => CustomTransitionPage(
-                child: BlocProvider(
-                  create:
-                      (context) => PaymentCubit(getIt.get<PaymentRepositry>()),
-                  child: const AddPaymentMethodView(),
-                ),
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) =>
-                        FadeTransition(opacity: animation, child: child),
-              ),
-        ),
-        GoRoute(
           path: kPaymentMethods,
           pageBuilder:
               (context, state) => CustomTransitionPage(
                 child: BlocProvider(
                   create:
-                      (context) => PaymentCubit(getIt.get<PaymentRepositry>()),
+                      (context) => SubscriptionCubit(getIt.get<PaymentRepo>()),
                   child: const PaymentView(),
                 ),
                 transitionsBuilder:
@@ -146,22 +159,6 @@ class AppRouter {
               ),
         ),
 
-        // GoRoute(
-        //   path: kPaymentDetails,
-        //   pageBuilder:
-        //       (context, state) => CustomTransitionPage(
-        //         child: BlocProvider(
-        //           create:
-        //               (context) => PaymentCubit(getIt.get<PaymentRepositry>()),
-        //           child: CreditCardDetailsView(
-        //             creditCardEntity: state.extra as CreditCardEntity,
-        //           ),
-        //         ),
-        //         transitionsBuilder:
-        //             (context, animation, secondaryAnimation, child) =>
-        //                 FadeTransition(opacity: animation, child: child),
-        //       ),
-        // ),
         GoRoute(
           path: kPersonalizeRecomendation,
           pageBuilder:

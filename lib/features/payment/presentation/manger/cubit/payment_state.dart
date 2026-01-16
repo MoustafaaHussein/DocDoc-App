@@ -1,24 +1,30 @@
-import 'package:docdoc_app/features/payment/domain/entites/subscription_product_entity/subscription_products.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
-abstract class PaymentState {}
+abstract class SubscriptionState {}
 
-class PaymentInitial extends PaymentState {}
+class SubscriptionInitial extends SubscriptionState {}
 
-class PaymentLoading extends PaymentState {}
+class SubscriptionLoading extends SubscriptionState {}
 
-class PaymentLoaded extends PaymentState {
-  final List<SubscriptionPlan> plans; // Domain model for your UI
-  PaymentLoaded(this.plans);
-}
+class SubscriptionActive extends SubscriptionState {}
 
-class PaymentPurchasing extends PaymentState {}
+class SubscriptionInactive extends SubscriptionState {}
 
-class PaymentSuccess extends PaymentState {
-  final SubscriptionPlan? purchasedPlan;
-  PaymentSuccess({this.purchasedPlan});
-}
-
-class PaymentError extends PaymentState {
+class SubscriptionError extends SubscriptionState {
   final String message;
-  PaymentError(this.message);
+  SubscriptionError(this.message);
 }
+
+class ProductsLoaded extends SubscriptionState {
+  final List<ProductDetails> products;
+  ProductsLoaded(this.products);
+}
+
+class SubscriptionSuccess extends SubscriptionState {
+  final String message;
+  SubscriptionSuccess([this.message = 'Subscription Successful! 🎉']);
+}
+
+class SubscriptionPremiumAccessGranted extends SubscriptionState {}
+
+class SubscriptionPremiumAccessDenied extends SubscriptionState {}

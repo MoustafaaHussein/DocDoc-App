@@ -1,9 +1,9 @@
 import 'package:camera/camera.dart';
 import 'package:dio/dio.dart';
-import 'package:docdoc_app/core/helpers/secure_storage.dart';
-import 'package:docdoc_app/core/helpers/service_locator.dart';
 import 'package:docdoc_app/core/helpers/shared_prefs_helper.dart';
 import 'package:docdoc_app/core/routes/app_routes.dart';
+import 'package:docdoc_app/core/services/in_app_purches_service.dart';
+import 'package:docdoc_app/core/services/service_locator.dart';
 import 'package:docdoc_app/core/themes/app_colors.dart';
 import 'package:docdoc_app/features/Analytics/cubit/AnalyticsCubit.dart';
 import 'package:docdoc_app/features/Analytics/repo/AnalyticsRepo.dart';
@@ -12,7 +12,7 @@ import 'package:docdoc_app/features/Mood_History/cubit/MoodeHistoryCubit.dart';
 import 'package:docdoc_app/features/Mood_History/repo/MoodHistoryRepo.dart';
 import 'package:docdoc_app/features/SignUP/presentation/data/Cubit/SignUpCubit.dart';
 import 'package:docdoc_app/features/SignUP/presentation/data/repo/SignUpRepo.dart';
-import 'package:docdoc_app/features/payment/domain/repos/payment_repositry.dart';
+import 'package:docdoc_app/features/payment/domain/repos/payment_repo.dart';
 import 'package:docdoc_app/features/payment/presentation/manger/cubit/payment_cubit.dart';
 import 'package:docdoc_app/features/recomendation/domain/repos/recomendation_repo.dart';
 import 'package:docdoc_app/features/recomendation/presentation/manger/bloc/recomendation_bloc.dart';
@@ -40,7 +40,8 @@ void main() async {
     print('Error accessing cameras: $e');
   }
 
-  await SecureStorage.init();
+  final iapService = InAppPurchaseService();
+  iapService.initialize();
   serviceLocator();
 
   final router = AppRouter.initRouter(isLoggedIn: token != null);
@@ -68,16 +69,13 @@ class DocDocApp extends StatelessWidget {
       builder: (context, child) {
         return MultiBlocProvider(
           providers: [
-          
-
-           
             BlocProvider<RecomendationBloc>(
               create:
                   (context) =>
                       RecomendationBloc(getIt.get<RecomendationRepo>()),
             ),
-            BlocProvider<PaymentCubit>(
-              create: (context) => PaymentCubit(getIt.get<PaymentRepositry>()),
+            BlocProvider<SubscriptionCubit>(
+              create: (context) => SubscriptionCubit(getIt.get<PaymentRepo>()),
             ),
             BlocProvider<WeeklyMoodCubit>(
               create: (context) => WeeklyMoodCubit(WeeklyMoodRepo(Dio())),

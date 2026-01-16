@@ -22,9 +22,9 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
     final formattedDate = DateFormat.yMMMMd('en_US').format(now);
     bool isPro = false;
 
-    return BlocListener<PaymentCubit, PaymentState>(
+    return BlocListener<SubscriptionCubit, SubscriptionState>(
       listener: (context, state) {
-        if (state is PaymentSuccess) {
+        if (state is SubscriptionActive) {
           isPro = true;
         }
       },

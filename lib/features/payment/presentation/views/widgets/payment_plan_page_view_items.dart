@@ -27,17 +27,6 @@ class _PaymentsPlanListViewItemsState extends State<PaymentsPlanListViewItems> {
           ? "sixMonths"
           : widget.proPlans.title;
 
-  // String _getPriceText(SubscriptionPlan package) {
-  //   // Preferred: use the platform-localized price string
-  //   final storeProduct = package.price;
-  //   // priceString is the localized, formatted price (e.g. $4.99)
-  //   if (storeProduct.trim().isNotEmpty) {
-  //     return storeProduct;
-  //   }
-  //   // Fallback: keep the numeric style you used previously (keeps Android look)
-  //   return '${storeProduct} / ${getPlanDuration(subDuration)}';
-  // }
-
   @override
   Widget build(BuildContext context) {
     final package = widget.proPlans;
@@ -160,64 +149,4 @@ class _PaymentsPlanListViewItemsState extends State<PaymentsPlanListViewItems> {
       ),
     );
   }
-
-  // // ---------------- Helper methods ----------------
-  // double calculateSavedAmount({
-  //   required double monthlyPrice,
-  //   required String plan,
-  //   required double planPrice,
-  // }) {
-  //   switch (plan.toLowerCase()) {
-  //     case "sixmonths":
-  //       double expected = monthlyPrice * 6;
-  //       return expected - planPrice;
-  //     case "annual":
-  //       double expected = monthlyPrice * 12;
-  //       return expected - planPrice;
-  //     case "monthly":
-  //     default:
-  //       return 0.0;
-  //   }
-  // }
-
-  // String getBillingDuration(String plan) {
-  //   switch (plan.toLowerCase()) {
-  //     case "monthly":
-  //       return "billed monthly";
-  //     case "sixMonths":
-  //       return "billed every six months";
-  //     case "annual":
-  //       return "billed yearly";
-  //     default:
-  //       return "billed every six months";
-  //   }
-  // }
-
-  // String getPlanDuration(String plan) {
-  //   switch (plan.toLowerCase()) {
-  //     case "monthly":
-  //       return "Month";
-  //     case "sixMonths":
-  //       return "6 Months";
-  //     case "annual":
-  //       return "Year";
-  //     default:
-  //       return "6 Months";
-  //   }
-  // }
-
-  // handlePayment(BuildContext context, Package package) {
-  //   final offeringCubit = context.read<OfferingCubit>();
-  //   final subscriptionCubit = context.read<SubscriptionCubit>();
-  //   offeringCubit.purchasePackage(package, () {
-  //     subscriptionCubit.checkProStatus();
-  //     subscriptionCubit.stream
-  //         .firstWhere(
-  //           (subState) => subState is SubscriptionLoaded && subState.isPro,
-  //         )
-  //         .then((_) {
-  //           Navigator.pop(context);
-  //         });
-  //   });
-  // }
 }
