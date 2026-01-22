@@ -27,4 +27,19 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginFailure(e.toString()));
     }
   }
+  Future<void> deleteAccount(String password) async {
+    emit(LoginLoading());
+    try {
+      // Here you would call the delete account method from your repository
+      // For example: await authRepository.deleteAccount(userId);
+
+      // Simulating a successful account deletion
+      await Future.delayed(const Duration(seconds: 2));
+      await authRepository.deleteAccount(password);
+
+      emit(DeleteAccountSuccess("Account deleted successfully."));
+    } catch (e) {
+      emit(DeleteAccountFailure(e.toString()));
+    }
+  }
 }

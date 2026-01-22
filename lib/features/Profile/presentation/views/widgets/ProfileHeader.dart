@@ -1,11 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:docdoc_app/core/routes/app_routes.dart';
 import 'package:docdoc_app/core/themes/app_colors.dart';
+import 'package:docdoc_app/features/Login/Data/Cubit/LoginCubit.dart';
 import 'package:docdoc_app/features/Profile/presentation/views/widgets/LanguageBottomShhet.dart';
 import 'package:docdoc_app/features/Profile/presentation/views/widgets/SettingTile.dart';
 import 'package:docdoc_app/features/SignUP/presentation/data/repo/SignUpRepo.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
@@ -167,6 +169,78 @@ class _ProfileHeaderScreenState extends State<ProfileHeaderScreen> {
                       if (context.mounted) {
                         context.go(AppRouter.kLoginView);
                       }
+                    }
+                  },
+                ),
+                SizedBox(height: 8.h),
+                SettingsTile(
+                  icon: Icons.delete_outline,
+                  title: "delete_account".tr(),
+
+                  onTap: () async {
+                    final shouldDelete = await showDialog<bool>(
+                      context: context,
+                      builder:
+                          (context) => AlertDialog(
+                            title: const Text(
+                              "هل أنت متأكد من حذف الحساب الخاص بك",
+                            ),
+                            content: const Text(
+                              "This action cannot be undone.",
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed:
+                                    () => Navigator.of(context).pop(false),
+                                child: Text("لا".tr()),
+                              ),
+                              TextButton(
+                                onPressed:
+                                    () => Navigator.of(context).pop(true),
+                                child: Text("نعم".tr()),
+                              ),
+                            ],
+                          ),
+                    );
+
+                    if (shouldDelete == true) {
+                      String? password;
+                      await showDialog(
+                        context: context,
+                        builder:
+                            (context) => AlertDialog(
+                              title: const Text("Confirm Password"),
+                              content: TextField(
+                                obscureText: true,
+                                decoration: const InputDecoration(
+                                  hintText: "Enter your password",
+                                ),
+                                onChanged: (value) {
+                                  password = value;
+                                },
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.of(context).pop(),
+                                  child: Text("Cancel".tr()),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    if (password != null &&
+                                        password!.isNotEmpty) {
+                                      BlocProvider.of<LoginCubit>(
+                                        context,
+                                      ).deleteAccount(password!);
+                                      GoRouter.of(
+                                        context,
+                                      ).pushReplacement(AppRouter.kLoginView);
+                                    }
+                                  },
+                                  child: Text("Confirm".tr()),
+                                ),
+                              ],
+                            ),
+                      );
                     }
                   },
                 ),

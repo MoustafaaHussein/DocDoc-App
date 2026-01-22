@@ -17,3 +17,15 @@ class LoginFailure extends LoginState {
 
   LoginFailure(this.message);
 }
+
+class DeleteAccountSuccess extends LoginState {
+  final String message;
+
+  DeleteAccountSuccess(this.message);
+}
+
+class DeleteAccountFailure extends LoginState {
+  final String message;
+
+  DeleteAccountFailure(this.message);
+}

@@ -64,4 +64,21 @@ class AuthRepository {
 
   //   context.go(AppRouter.kLoginView);
   // }
+  Future<void> deleteAccount(String password) async {
+    try {
+      final response = await dio.delete(
+        "https://mood-api-8urg.onrender.com/api/auth/delete-account",
+        data: {"password": password},
+      );
+
+      if (response.statusCode == 200) {
+        // Account deleted successfully
+        return;
+      } else {
+        throw Exception(response.data['message'] ?? 'Account deletion failed');
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }
