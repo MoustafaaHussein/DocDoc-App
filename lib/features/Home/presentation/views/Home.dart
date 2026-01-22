@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return BlocListener<SubscriptionCubit, SubscriptionState>(
       listener: (context, state) {
         if (state is SubscriptionPremiumAccessGranted) {
-          GoRouter.of(context).push(AppRouter.kAiSessionView);
+          GoRouter.of(context).push(AppRouter.kSubscriptionView);
         }
 
         if (state is SubscriptionPremiumAccessDenied) {
