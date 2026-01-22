@@ -2,7 +2,6 @@ import 'package:docdoc_app/core/styles/app_containers_style.dart';
 import 'package:docdoc_app/core/themes/app_styles.dart';
 import 'package:docdoc_app/core/widgets/custom_button.dart';
 import 'package:docdoc_app/features/payment/domain/entites/subscription_product_entity/subscription_products.dart';
-import 'package:docdoc_app/features/payment/presentation/views/widgets/privacy_terms_view_body.dart';
 import 'package:flutter/material.dart';
 
 class PaymentsPlanListViewItems extends StatefulWidget {
@@ -16,7 +15,7 @@ class PaymentsPlanListViewItems extends StatefulWidget {
 }
 
 class _PaymentsPlanListViewItemsState extends State<PaymentsPlanListViewItems> {
-  bool _isPurchasing = false;
+  final bool _isPurchasing = false;
 
   String get subDuration =>
       widget.proPlans.id.contains("annual")
@@ -129,12 +128,12 @@ class _PaymentsPlanListViewItemsState extends State<PaymentsPlanListViewItems> {
                 child: TextButton(
                   onPressed: () {
                     // Ensure TermsPrivacyScreen does NOT include any links to pay or web checkouts.
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const TermsPrivacyScreen(),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) =>{}
+                    //   ),
+                    // );
                   },
                   child: const Text(
                     "Terms & Privacy",
