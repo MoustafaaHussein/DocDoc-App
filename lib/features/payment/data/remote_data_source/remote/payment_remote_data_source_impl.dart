@@ -8,9 +8,9 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 class PaymentRemoteDataSourceImpl implements PaymentRemoteDataSource {
   final InAppPurchaseService inAppPurchaseService;
   // ALL your subscription product IDs
-  static const String monthlySubId = 'mymood_2_99_1M';
-  static const String yearlySubId = 'mymood_32_99_1Y';
-  static const String sixMonthlySubId = 'mymood_15_99_6M';
+  static const String monthlySubId = 'mymood_2_99_1m';
+  static const String yearlySubId = 'mymood_32_99_1y';
+  static const String sixMonthlySubId = 'mymood_15_99_6m';
 
   static const Set<String> _allSubscriptionIds = {
     monthlySubId,
@@ -41,19 +41,11 @@ class PaymentRemoteDataSourceImpl implements PaymentRemoteDataSource {
 
   @override
   Future<bool> isUserSubscribed() async {
-    print("🔍 Checking subscription status...");
-
     // Step 1: Check local storage (fast)
     final isSubscribedLocally =
         await SecureSubscriptionStorage().isSubscribed();
 
-    if (isSubscribedLocally) {
-      print("✅ Found local subscription");
-      return true;
-    }
-
     // Step 2: If not found locally, verify with store
-    print("🔄 Not found locally, verifying with store...");
 
     final completer = Completer<bool>();
     late final StreamSubscription<PurchaseDetails> sub;
