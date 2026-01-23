@@ -174,10 +174,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
             _buildSection(
               '15. Contact Us',
               'If you have questions about this Privacy Policy or our data practices:\n\n'
-                  'Email: privacy@yourapp.com\n'
-                  'Website: www.yourapp.com/privacy\n'
-                  'Address: [Your Company Address]\n\n'
-                  'For data protection inquiries (EU): dpo@yourapp.com',
+                  'Email: Khalid314@hotmail.com\n',
             ),
 
             const SizedBox(height: 40),

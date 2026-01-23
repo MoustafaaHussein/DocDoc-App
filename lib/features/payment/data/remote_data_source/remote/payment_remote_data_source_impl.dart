@@ -11,11 +11,13 @@ class PaymentRemoteDataSourceImpl implements PaymentRemoteDataSource {
   static const String monthlySubId = 'mymood_2_99_1m';
   static const String yearlySubId = 'mymood_32_99_1y';
   static const String sixMonthlySubId = 'mymood_15_99_6m';
+  static const String groupSubId = 'pro_plans';
 
   static const Set<String> _allSubscriptionIds = {
     monthlySubId,
     yearlySubId,
     sixMonthlySubId,
+    groupSubId,
   };
 
   PaymentRemoteDataSourceImpl({required this.inAppPurchaseService});
@@ -42,8 +44,8 @@ class PaymentRemoteDataSourceImpl implements PaymentRemoteDataSource {
   @override
   Future<bool> isUserSubscribed() async {
     // Step 1: Check local storage (fast)
-    final isSubscribedLocally =
-        await SecureSubscriptionStorage().isSubscribed();
+
+    await SecureSubscriptionStorage().isSubscribed();
 
     // Step 2: If not found locally, verify with store
 
@@ -51,13 +53,9 @@ class PaymentRemoteDataSourceImpl implements PaymentRemoteDataSource {
     late final StreamSubscription<PurchaseDetails> sub;
 
     sub = inAppPurchaseService.purchaseStream.listen((purchase) async {
-      print("📦 Received: ${purchase.productID}, Status: ${purchase.status}");
-
       if (_allSubscriptionIds.contains(purchase.productID) &&
           (purchase.status == PurchaseStatus.purchased ||
               purchase.status == PurchaseStatus.restored)) {
-        print("✅ Valid subscription found in store!");
-
         // Restore to local storage
         await SecureSubscriptionStorage().saveSubscription(purchase.productID);
 
@@ -74,7 +72,6 @@ class PaymentRemoteDataSourceImpl implements PaymentRemoteDataSource {
     // Timeout after 5 seconds
     Timer(const Duration(seconds: 5), () {
       if (!completer.isCompleted) {
-        print("❌ No subscription found in store");
         sub.cancel();
         completer.complete(false);
       }
