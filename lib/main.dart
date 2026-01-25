@@ -13,6 +13,9 @@ import 'package:docdoc_app/features/Mood_History/repo/MoodHistoryRepo.dart';
 import 'package:docdoc_app/features/SignUP/presentation/data/Cubit/SignUpCubit.dart';
 import 'package:docdoc_app/features/SignUP/presentation/data/repo/SignUpRepo.dart';
 import 'package:docdoc_app/features/payment/domain/repos/payment_repo.dart';
+import 'package:docdoc_app/features/payment/domain/repos/subscription_repo.dart';
+import 'package:docdoc_app/features/payment/presentation/manger/bloc/subcription_bloc.dart';
+import 'package:docdoc_app/features/payment/presentation/manger/bloc/subcription_event.dart';
 import 'package:docdoc_app/features/payment/presentation/manger/cubit/payment_cubit.dart';
 import 'package:docdoc_app/features/recomendation/domain/repos/recomendation_repo.dart';
 import 'package:docdoc_app/features/recomendation/presentation/manger/bloc/recomendation_bloc.dart';
@@ -42,7 +45,7 @@ void main() async {
 
   final iapService = InAppPurchaseService();
   iapService.initialize();
-  serviceLocator();
+  await serviceLocator();
 
   final router = AppRouter.initRouter(isLoggedIn: token != null);
 
@@ -88,6 +91,12 @@ class DocDocApp extends StatelessWidget {
             BlocProvider(create: (_) => LoginCubit(AuthRepository(dio: Dio()))),
             BlocProvider(
               create: (_) => SignUpCubit(AuthRepository(dio: Dio())),
+            ),
+            BlocProvider(
+              create:
+                  (context) =>
+                      SubscriptionBloc(getIt<SubscriptionRepository>())
+                        ..add(const InitializeSubscription()),
             ),
           ],
           child: MaterialApp.router(

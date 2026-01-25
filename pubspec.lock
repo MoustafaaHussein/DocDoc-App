@@ -809,10 +809,10 @@ packages:
     dependency: "direct main"
     description:
       name: purchases_flutter
-      sha256: "4f1252889958695744c3d024abd2b233530fde63c75307bc0a3607bf66ea4476"
+      sha256: "682ddb80213bf1f9c214aca23becf004fb81120196d9b53966743ca044606690"
       url: "https://pub.dev"
     source: hosted
-    version: "9.1.0"
+    version: "9.10.7"
   quiver:
     dependency: "direct main"
     description:
