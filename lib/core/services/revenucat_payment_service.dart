@@ -44,9 +44,7 @@ class RevenueCatService {
 
   /// Restore previous purchases
   Future<CustomerInfo> restorePurchases() async {
-    print("🔄 Restoring purchases...");
     final customerInfo = await Purchases.restorePurchases();
-    print("✅ Purchases restored");
     return customerInfo;
   }
 
@@ -56,7 +54,7 @@ class RevenueCatService {
     final isPremium = customerInfo.entitlements.active.containsKey(
       entitlementID,
     );
-    print("🔍 Premium status: $isPremium");
+
     return isPremium;
   }
 
@@ -73,14 +71,12 @@ class RevenueCatService {
 
   /// Set user ID (optional - for cross-device syncing)
   Future<CustomerInfo> setUserId(String userId) async {
-    print("👤 Setting user ID: $userId");
     final result = await Purchases.logIn(userId);
     return result.customerInfo;
   }
 
   /// Logout user (clears user ID)
   Future<CustomerInfo> logout() async {
-    print("👋 Logging out user");
     final result = await Purchases.logOut();
     return result;
   }

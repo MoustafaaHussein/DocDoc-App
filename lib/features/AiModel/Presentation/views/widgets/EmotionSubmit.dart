@@ -10,7 +10,6 @@ class EmotionSubmitService {
     final token = prefs.getString('token');
 
     if (token == null) {
-      print("🔒 No token found");
       return false;
     }
 
@@ -29,14 +28,11 @@ class EmotionSubmitService {
       );
 
       if (response.statusCode == 200 && response.data['success'] == true) {
-        print("✅ Emotion submitted successfully: ${response.data}");
         return true;
       } else {
-        print("❌ Submission failed: ${response.data}");
         return false;
       }
     } catch (e) {
-      print("⚠️ Error submitting emotion: $e");
       return false;
     }
   }

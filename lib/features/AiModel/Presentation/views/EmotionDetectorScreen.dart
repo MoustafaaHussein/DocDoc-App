@@ -104,7 +104,6 @@ class _EmotionDetectorScreenState extends State<EmotionDetectorScreen>
         });
       }
     } on CameraException catch (e) {
-      print("خطأ في تهيئة الكاميرا: $e");
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('خطأ في تهيئة الكاميرا: ${e.description}')),
@@ -128,7 +127,6 @@ class _EmotionDetectorScreenState extends State<EmotionDetectorScreen>
               .where((e) => e.isNotEmpty)
               .toList();
     } catch (e) {
-      print("خطأ في تحميل النموذج أو اللابلز: $e");
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -149,7 +147,6 @@ class _EmotionDetectorScreenState extends State<EmotionDetectorScreen>
     }
 
     if (cameraImage.format.group != ImageFormatGroup.yuv420) {
-      print("تنسيق الصورة غير مدعوم: ${cameraImage.format.group}");
       isDetecting = false;
       return;
     }
@@ -220,9 +217,8 @@ class _EmotionDetectorScreenState extends State<EmotionDetectorScreen>
     // إيقاف بث الكاميرا قبل الانتقال
     try {
       await cameraController?.stopImageStream();
-    } on CameraException catch (e) {
-      print("خطأ أثناء إيقاف بث الكاميرا: ${e.description}");
-    }
+      // ignore: unused_catch_clause
+    } on CameraException catch (e) {}
 
     // هنا نقوم بإغلاق الكاميرا والـ Interpreter قبل الانتقال
     // لضمان أنها ليست نشطة عند العودة
