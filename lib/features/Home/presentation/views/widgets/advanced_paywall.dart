@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:purchases_flutter/models/package_wrapper.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../payment/presentation/manger/bloc/subcription_state.dart';
 
@@ -455,20 +456,13 @@ class _PaywallContentState extends State<_PaywallContent> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        // Links to Apple's Standard EULA (external link)
         TextButton(
-          onPressed: () {
-            // TODO: Navigate to Terms
-            GoRouter.of(context).push(AppRouter.kTermsOfServiceView);
-          },
-          child: Text(
-            'Terms of Service',
-            style: TextStyle(
-              fontSize: isTablet ? 14 : 12,
-              color: Colors.white60,
-              decoration: TextDecoration.underline,
-            ),
-          ),
+          onPressed: () => _openAppleEULA(),
+          child: const Text("Terms of Use (EULA)"),
         ),
+
+        // Opens: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
         const SizedBox(width: 12),
         TextButton(
           onPressed: () {
@@ -513,6 +507,30 @@ class _PaywallContentState extends State<_PaywallContent> {
         ),
       ),
     );
+  }
+
+  Future<void> _openAppleEULA() async {
+    final Uri eulaUrl = Uri.parse(
+      'https://www.apple.com/legal/internet-services/itunes/dev/stdeula/',
+    );
+
+    try {
+      if (await canLaunchUrl(eulaUrl)) {
+        await launchUrl(eulaUrl, mode: LaunchMode.externalApplication);
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Could not open Terms of Use')),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Error: ${e.toString()}')));
+      }
+    }
   }
 }
 
