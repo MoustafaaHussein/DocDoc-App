@@ -456,17 +456,9 @@ class _PaywallContentState extends State<_PaywallContent> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // Links to Apple's Standard EULA (external link)
-        TextButton(
-          onPressed: () => _openAppleEULA(),
-          child: const Text("Terms of Use (EULA)"),
-        ),
-
-        // Opens: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/
-        const SizedBox(width: 12),
+        // Privacy Policy
         TextButton(
           onPressed: () {
-            // TODO: Navigate to Privacy
             GoRouter.of(context).push(AppRouter.kPrivacyPolicyView);
           },
           child: Text(
@@ -475,6 +467,29 @@ class _PaywallContentState extends State<_PaywallContent> {
               fontSize: isTablet ? 14 : 12,
               color: Colors.white60,
               decoration: TextDecoration.underline,
+            ),
+          ),
+        ),
+
+        // Separator
+        Text(
+          ' • ',
+          style: TextStyle(
+            fontSize: isTablet ? 14 : 12,
+            color: Colors.white.withOpacity(0.3),
+          ),
+        ),
+
+        // Terms of Use (EULA) - NOW PROPERLY STYLED
+        TextButton(
+          onPressed: () => _openAppleEULA(),
+          child: Text(
+            'Terms of Use (EULA)',
+            style: TextStyle(
+              fontSize: isTablet ? 14 : 12,
+              color: Colors.white60,
+              decoration:
+                  TextDecoration.underline, // ✅ Makes it look like a link!
             ),
           ),
         ),
