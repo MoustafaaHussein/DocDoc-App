@@ -317,7 +317,8 @@ class _PaywallContentState extends State<_PaywallContent> {
                   SizedBox(height: isTablet ? 8 : 6),
                   if (package.storeProduct.introductoryPrice != null)
                     Text(
-                      '${package.storeProduct.introductoryPrice!.periodNumberOfUnits} days free, then ${package.storeProduct.priceString}',
+                      '${package.storeProduct.introductoryPrice!.periodNumberOfUnits} days free, then '
+                      '${package.storeProduct.priceString} / ${package.storeProduct.subscriptionPeriod}',
                       style: TextStyle(
                         fontSize: isTablet ? 16 : 14,
                         color: Colors.white70,
@@ -439,9 +440,9 @@ class _PaywallContentState extends State<_PaywallContent> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Text(
-        'After your 3-day free trial, payment will be charged to your Apple ID account. '
-        'Subscription automatically renews unless auto-renew is turned off at least 24 hours '
-        'before the end of the current period. Manage subscriptions in your App Store account settings.',
+        'Payment will be charged to your Apple ID account after the free trial. '
+        'Subscription automatically renews unless canceled at least 24 hours before the end of the current period. '
+        'You can cancel anytime in your App Store account settings.',
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: isTablet ? 13 : 11,
