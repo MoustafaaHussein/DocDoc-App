@@ -315,23 +315,63 @@ class _PaywallContentState extends State<_PaywallContent> {
                     ),
                   ),
                   SizedBox(height: isTablet ? 8 : 6),
-                  if (package.storeProduct.introductoryPrice != null)
-                    Text(
-                      '${package.storeProduct.introductoryPrice!.periodNumberOfUnits} days free, then '
-                      '${package.storeProduct.priceString} / ${package.storeProduct.subscriptionPeriod}',
-                      style: TextStyle(
-                        fontSize: isTablet ? 16 : 14,
-                        color: Colors.white70,
-                      ),
-                    )
-                  else
-                    Text(
-                      package.storeProduct.priceString,
-                      style: TextStyle(
-                        fontSize: isTablet ? 16 : 14,
-                        color: Colors.white70,
-                      ),
-                    ),
+                  Builder(
+                    builder: (_) {
+                      final period = package.storeProduct.subscriptionPeriod;
+
+                      // Fallback if no subscription period (e.g., non‑sub product)
+                      if (period == null) {
+                        return Text(
+                          package.storeProduct.priceString,
+                          style: TextStyle(
+                            fontSize: isTablet ? 16 : 14,
+                            color: Colors.white70,
+                          ),
+                        );
+                      }
+
+                      final unit = period.unit.name; // day, week, month, year
+                      final numberOfUnits = period.numberOfUnits;
+
+                      String humanReadablePeriod;
+                      if (unit == 'month' && numberOfUnits == 1) {
+                        humanReadablePeriod = 'per month';
+                      } else if (unit == 'year' && numberOfUnits == 1) {
+                        humanReadablePeriod = 'per year';
+                      } else if (unit == 'week' && numberOfUnits == 1) {
+                        humanReadablePeriod = 'per week';
+                      } else if (unit == 'day' && numberOfUnits == 1) {
+                        humanReadablePeriod = 'per day';
+                      } else {
+                        humanReadablePeriod = 'every $numberOfUnits ${unit}s';
+                      }
+
+                      final hasIntro = package.storeProduct.introductoryPrice != null;
+
+                      if (hasIntro) {
+                        final introUnits =
+                            package.storeProduct.introductoryPrice!.periodNumberOfUnits;
+                        final introText =
+                            '$introUnits days free, then ${package.storeProduct.priceString} $humanReadablePeriod';
+
+                        return Text(
+                          introText,
+                          style: TextStyle(
+                            fontSize: isTablet ? 16 : 14,
+                            color: Colors.white70,
+                          ),
+                        );
+                      }
+
+                      return Text(
+                        '${package.storeProduct.priceString} $humanReadablePeriod',
+                        style: TextStyle(
+                          fontSize: isTablet ? 16 : 14,
+                          color: Colors.white70,
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
@@ -441,8 +481,9 @@ class _PaywallContentState extends State<_PaywallContent> {
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Text(
         'Payment will be charged to your Apple ID account after the free trial. '
-        'Subscription automatically renews unless canceled at least 24 hours before the end of the current period. '
-        'You can cancel anytime in your App Store account settings.',
+        'Your subscription will automatically renew for the selected period '
+        'unless canceled at least 24 hours before the end of the current period. '
+        'You can manage or cancel your subscription at any time in your App Store account settings.',
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: isTablet ? 13 : 11,
@@ -454,45 +495,58 @@ class _PaywallContentState extends State<_PaywallContent> {
   }
 
   Widget _buildLegalLinks(BuildContext context, bool isTablet) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
       children: [
-        // Privacy Policy
-        TextButton(
-          onPressed: () {
-            GoRouter.of(context).push(AppRouter.kPrivacyPolicyView);
-          },
-          child: Text(
-            'Privacy Policy',
-            style: TextStyle(
-              fontSize: isTablet ? 14 : 12,
-              color: Colors.white60,
-              decoration: TextDecoration.underline,
-            ),
-          ),
-        ),
-
-        // Separator
         Text(
-          ' • ',
+          'DocDoc Premium is an auto-renewable subscription. '
+          'The selected plan renews for the same price and duration unless '
+          'canceled at least 24 hours before the end of the current period.',
+          textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: isTablet ? 14 : 12,
-            color: Colors.white.withOpacity(0.3),
+            fontSize: isTablet ? 13 : 11,
+            color: Colors.white.withOpacity(0.6),
+            height: 1.4,
           ),
         ),
-
-        // Terms of Use (EULA) - NOW PROPERLY STYLED
-        TextButton(
-          onPressed: () => _openAppleEULA(),
-          child: Text(
-            'Terms of Use (EULA)',
-            style: TextStyle(
-              fontSize: isTablet ? 14 : 12,
-              color: Colors.white60,
-              decoration:
-                  TextDecoration.underline, // ✅ Makes it look like a link!
+        const SizedBox(height: 8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextButton(
+              onPressed: () async {
+                final uri = Uri.parse(
+                  'https://moustafaahussein.github.io/moodak-privacy-policy/',
+                );
+                await launchUrl(uri, mode: LaunchMode.externalApplication);
+              },
+              child: Text(
+                'Privacy Policy',
+                style: TextStyle(
+                  fontSize: isTablet ? 14 : 12,
+                  color: Colors.white60,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
             ),
-          ),
+            Text(
+              ' • ',
+              style: TextStyle(
+                fontSize: isTablet ? 14 : 12,
+                color: Colors.white.withOpacity(0.3),
+              ),
+            ),
+            TextButton(
+              onPressed: () => _openAppleEULA(),
+              child: Text(
+                'Terms of Use (EULA)',
+                style: TextStyle(
+                  fontSize: isTablet ? 14 : 12,
+                  color: Colors.white60,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+          ],
         ),
       ],
     );
